@@ -7,6 +7,7 @@ import java.util.*;
 
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
+@State(Scope.Thread)
 public class ClashOfLambdas {
 
     public static final int N = 10000000;
