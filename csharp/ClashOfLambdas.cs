@@ -11,7 +11,6 @@ namespace benchmarks
 {
     class ClashOfLambdas
     {
-        static int Iterations = 10;
         static void Main(string[] args)
         {
 
@@ -122,23 +121,45 @@ namespace benchmarks
 	    // Measure("groupSeq", () => groupLinq());
 	    // Measure("groupSeqOpt", () => groupLinqOpt());
         }
+      
+      static int Iterations = 10;
+      static T Consume<T>(T dummy) {
+	return dummy;
+      }
+      static void Measure<T>(string title, Func<T> action) {
+	List<double> measurements = new List<double>(Iterations);
 
-        static void Measure<T>(string title, Func<T> action)
-        {
-            var sw = new Stopwatch();
+	var sw = new Stopwatch();
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
+	GC.Collect();
+	GC.WaitForPendingFinalizers();
+	GC.Collect();
+	
+	double st = 0.0, sst = 0.0;
+           
+	// First invocation.
+	Consume(action());
+
+	for (int i = 0; i < Iterations; i++)
+	  {
+	    sw.Restart();
+	      
+	    Consume(action());
+
+	    sw.Stop();
+
+	    measurements.Add(sw.ElapsedMilliseconds);
+	  }
+
+	measurements.ForEach((m) => { 
+	    st += m;
+	    sst += Math.Pow(m,2);
+	});
 	    
-            sw.Start();
-            for (int i = 0; i < Iterations; i++)
-            {
-	      action();
-            }
-            sw.Stop();
+	double mean = st / (float) Iterations;
+	double sdev = Math.Sqrt(sst/(float) Iterations - Math.Pow(mean, 2));
 
-            Console.WriteLine("{0,-25}\t{1,10} ms/op", title, sw.ElapsedMilliseconds / (float) Iterations);
-        }
+	Console.WriteLine("{0,-25}\t{1,10} ms/op  +/- {2:#.##}", title, mean, sdev);
+      }
     }
 }
