@@ -25,10 +25,6 @@ Setting up on Windows
 * Extract [Maven](http://maven.apache.org/download.cgi) and put the ```bin``` directory to ```PATH```
 * Install the C#, F# compilers (if you have Visual Studio 2013 you already have them)
 * Update the paths in ```Makefile```
-<!-- * The java/scala microbenchmark suites run via ```jmh```. The ```scala``` archetype was still [under-test](http://mail.openjdk.java.net/pipermail/jmh-dev/2014-March/000556.html) from the jmh team, so until the final version makes it up to the repositories we have to generate the archetype ourselves. -->
-<!--    * ```hg clone http://hg.openjdk.java.net/code-tools/jmh/ jmh``` -->
-<!--    * ```cd jmh/``` -->
-<!--    * ```mvn clean install archetype:update-local-catalog -DskipTests``` -->
 
 Setting up on Ubuntu
 --------------------
@@ -36,10 +32,6 @@ Setting up on Ubuntu
 * ```sudo apt-get install make```
 * ```sudo apt-get install maven```
 * Follow the [instructions](http://fsharp.org/use/linux/) on [fsharp.org](http://fsharp.org)
-<!-- * The java/scala microbenchmark suites run via ```jmh```. The ```scala``` archetype was still [under-test](http://mail.openjdk.java.net/pipermail/jmh-dev/2014-March/000556.html) from the jmh team, so until the final version makes it up to the repositories we have to generate the archetype ourselves. -->
-<!--    * ```hg clone http://hg.openjdk.java.net/code-tools/jmh/ jmh``` -->
-<!--    * ```cd jmh/``` -->
-<!--    * ```mvn clean install archetype:update-local-catalog -DskipTests``` -->
 
 Running the microbenchmarks
 ---------------------------
