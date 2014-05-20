@@ -15,7 +15,7 @@ public class ClashOfLambdas {
     static long[] v, valuesLo, valuesHi;
 
     static {
-        v = IntStream.range(0, N).mapToLong(i -> i).toArray();
+        v = IntStream.range(0, N).mapToLong(i -> i % 1000).toArray();
         valuesHi = IntStream.range(0, 10000).mapToLong(i -> i).toArray();
         valuesLo = IntStream.range(0, 1000).mapToLong(i -> i).toArray();
     }

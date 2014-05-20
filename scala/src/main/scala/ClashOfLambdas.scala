@@ -26,7 +26,7 @@ package benchmarks {
     @Setup
     def prepare() : Unit = {
       N = 10000000
-      v = (0 until N).map(i => i.toLong).toArray
+      v = (0 until N).map(i => i.toLong % 1000).toArray
       vLo = (0 until 10000).map(i => i.toLong).toArray
       vHi = (0 until 1000).map(i => i.toLong).toArray
     }

@@ -17,7 +17,7 @@ namespace benchmarks
             // Input initialization //
             //////////////////////////
             var N = 10000000;
-            var v = Enumerable.Range(1, N).Select(x => (long)x).ToArray();
+            var v = Enumerable.Range(1, N).Select(x => (long) x % 1000).ToArray();
             var vHi = Enumerable.Range(1, 10000).Select(x => (long)x).ToArray();
             var vLow = Enumerable.Range(1, 1000).Select(x => (long)x).ToArray();
 
