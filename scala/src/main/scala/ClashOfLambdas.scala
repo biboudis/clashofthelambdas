@@ -19,22 +19,22 @@ package benchmarks {
   class ClashOfLambdas {
 
     var N : Int = _
-    var v : Array[Double] = _
-    var vHi : Array[Double] = _
-    var vLo : Array[Double] = _
+    var v : Array[Long] = _
+    var vHi : Array[Long] = _
+    var vLo : Array[Long] = _
 
     @Setup
     def prepare() : Unit = {
       N = 10000000
-      v = (0 until N).map(i => i.toDouble).toArray
-      vLo = (0 until 10000).map(i => i.toDouble).toArray
-      vHi = (0 until 1000).map(i => i.toDouble).toArray
+      v = (0 until N).map(i => i.toLong).toArray
+      vLo = (0 until 10000).map(i => i.toLong).toArray
+      vHi = (0 until 1000).map(i => i.toLong).toArray
     }
 
     @GenerateMicroBenchmark
-    def sumBaseline () : Double = {
+    def sumBaseline () : Long = {
       var i=0
-      var sum=0.0
+      var sum=0L
       while (i < v.length) {
         sum += v(i)
         i += 1
@@ -43,9 +43,9 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresBaseline () : Double = {
+    def sumOfSquaresBaseline () : Long = {
       var i=0
-      var sum=0.0
+      var sum=0L
       while (i < v.length) {
         sum += v(i) *  v(i)
         i += 1
@@ -54,9 +54,9 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenBaseline () : Double = {
+    def sumOfSquaresEvenBaseline () : Long = {
       var i=0
-      var sum=0.0
+      var sum=0L
       while (i < v.length) {
 	       if (v(i) % 2 == 0)
           sum += v(i) * v(i)
@@ -66,9 +66,9 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartBaseline () : Double = {
+    def cartBaseline () : Long = {
       var d, dp=0
-      var sum=0.0
+      var sum=0L
       while (d < vHi.length) {
 	dp = 0
 	while (dp < vLo.length) {
@@ -81,15 +81,15 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumSeq () : Double = {
-      val sum : Double = v
+    def sumSeq () : Long = {
+      val sum : Long = v
 	.sum
       sum
     }
 
     @GenerateMicroBenchmark
-    def sumPar () : Double = {
-      val sum : Double = v
+    def sumPar () : Long = {
+      val sum : Long = v
 	.par
 	.view
 	.sum
@@ -97,8 +97,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresSeq () : Double = {
-      val sum : Double = v
+    def sumOfSquaresSeq () : Long = {
+      val sum : Long = v
       .view
       .map(d => d * d)
       .sum
@@ -106,8 +106,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresPar () : Double = {
-      val sum : Double = v
+    def sumOfSquaresPar () : Long = {
+      val sum : Long = v
 	.par
 	.view
 	.map(d => d * d)
@@ -116,8 +116,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartSeq () : Double = {
-      val sum : Double = vHi
+    def cartSeq () : Long = {
+      val sum : Long = vHi
 	.view
 	.flatMap(d => vLo.view.map (dp => dp * d))
 	.sum
@@ -125,8 +125,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartPar () : Double = {
-      val sum : Double = vHi
+    def cartPar () : Long = {
+      val sum : Long = vHi
 	.par
 	.view
 	.flatMap(d => vLo.view.map (dp => dp * d))
@@ -135,8 +135,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenSeq () : Double = {
-      val res : Double = v
+    def sumOfSquaresEvenSeq () : Long = {
+      val res : Long = v
 	.filter(x => x % 2 == 0)
 	.map(x => x * x)
 	.sum
@@ -144,8 +144,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenPar () : Double = {
-      val res : Double = v
+    def sumOfSquaresEvenPar () : Long = {
+      val res : Long = v
 	.par
 	.view
 	.filter(x => x % 2 == 0)
@@ -155,18 +155,18 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumSeqBlitz () : Double = {
+    def sumSeqBlitz () : Long = {
       optimize {
-	val sum : Double = v
+	val sum : Long = v
 	  .sum
 	sum
       }
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresSeqBlitz () : Double = {
+    def sumOfSquaresSeqBlitz () : Long = {
       optimize {
-	val sum : Double = v
+	val sum : Long = v
 	  .map(d => d * d)
 	  .sum
 	sum
@@ -174,9 +174,9 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartSeqBlitz () : Double = {
+    def cartSeqBlitz () : Long = {
       optimize {
-	val sum : Double = vHi
+	val sum : Long = vHi
 	  .flatMap(d => vLo.view.map (dp => dp * d))
 	  .sum
 	sum
@@ -184,9 +184,9 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenSeqBlitz () : Double = {
+    def sumOfSquaresEvenSeqBlitz () : Long = {
       optimize {
-	val res : Double = v
+	val res : Long = v
 	  .filter(x => x % 2 == 0)
 	  .map(x => x * x)
 	  .sum
@@ -195,22 +195,22 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumParBlitz () : Double = {
+    def sumParBlitz () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
 
-      val sum : Double = v
+      val sum : Long = v
 	.toPar
 	.sum
       sum
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresParBlitz () : Double = {
+    def sumOfSquaresParBlitz () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
 
-      val sum : Double = v
+      val sum : Long = v
 	.toPar
 	.map(d => d * d)
 	.sum
@@ -218,11 +218,11 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartParBlitz () : Double = {
+    def cartParBlitz () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
 
-      val sum : Double = vHi
+      val sum : Long = vHi
 	.toPar
 	.flatMap(d => vLo.map (dp => dp * d))
 	.sum
@@ -230,12 +230,12 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenParBlitz () : Double = {
+    def sumOfSquaresEvenParBlitz () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
       import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
 
-      val res : Double = v
+      val res : Long = v
 	.toPar
 	.filter(x => x % 2 == 0)
 	.map(x => x * x)
