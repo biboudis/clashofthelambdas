@@ -4,7 +4,7 @@ BENCH := $(LANGS:%=bench-%)
 ####################
 # General Settings #
 ####################
-JVM = java -Xmx1024m #-XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation
+JVM = java -Xms769m -Xmx769m -XX:-TieredCompilation #-XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation
 
 #########
 # Paths #
