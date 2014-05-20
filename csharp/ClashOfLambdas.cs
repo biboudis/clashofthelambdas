@@ -78,6 +78,8 @@ namespace benchmarks
 	    //////////////////////////
             // Benchmarks execution //
             //////////////////////////
+	    Console.WriteLine("{0,-25} \t{1,10} {2,6:0.00} {3}", "Benchmark", "Mean", "Sdev", "Units");
+
             Measure("sumBaseline", () => sumBaseline());
             Measure("sumSeq", () => sumLinq());
 	    Measure("sumSeqOpt", () => sumLinqOpt());
@@ -128,40 +130,39 @@ namespace benchmarks
       static void Measure<T>(string title, Func<T> action) {
 	double[] measurements = new double[Iterations];
 
-	var sw = new Stopwatch();
-
 	//Force Full GC prior to execution
 	GC.Collect();
 	GC.WaitForPendingFinalizers();
 	GC.Collect();
 	
 	double st = 0.0, sst = 0.0;
-           
+
+	var sw = new Stopwatch();
+
 	// First invocation to compile method.
 	Consume(action());
 
-	for (int i = 0; i < Iterations; i++)
-	  {
-	    sw.Restart();
+	for (int i = 0; i < Iterations; i++) {
+	  sw.Restart();
 	      
-	    //Avoid dead-code.
-	    Consume(action());
+	  //Avoid dead-code.
+	  Consume(action());
 
-	    sw.Stop();
+	  sw.Stop();
 
-	    measurements[i]= sw.ElapsedMilliseconds;
-	  }
+	  measurements[i]= sw.ElapsedMilliseconds;
+	}
 
 	//Add-Up invocation stats
 	foreach(double m in measurements) {
 	    st += m;
-	    sst += Math.Pow(m,2);
+	    sst += Math.Pow(m, 2);
 	}
 	    
-	double mean = st / (float) Iterations;
-	double sdev = Math.Sqrt(sst/(float) Iterations - Math.Pow(mean, 2));
+	double mean = st / (double) Iterations;
+	double sdev = Math.Sqrt(sst/(double) Iterations - Math.Pow(mean, 2));
 
-	Console.WriteLine("{0,-25}\t{1,10} ms/op +/- {2:#.##}", title, mean, sdev);
+	Console.WriteLine("{0,-25}\t{1,10} {2,6:0.00} {3}", title, mean, sdev, "ms/op");
       }
     }
 }
