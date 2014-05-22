@@ -56,7 +56,7 @@ endif
 # Commands to run the benchmarks #
 ##################################
 
-jmh_ARGS	= -gc true -f 1 -i 10 -wi 10 -tu ms ".*"
+jmh_ARGS	= -gc true -f 1 -i 10 -wi 10 -tu ms ".*" 
 java_RUN 	= $(JVM) -jar $(java_OUT)/microbenchmarks.jar $(jmh_ARGS)
 scala_RUN	= $(JVM) -jar $(scala_OUT)/microbenchmarks.jar $(jmh_ARGS)
 csharp_RUN 	= $(MONO) $(csharp_OUT)/ClashOfLambdas.exe
@@ -69,8 +69,9 @@ fsharp_RUN 	= $(MONO) $(fsharp_OUT)/ClashOfLambdas.exe
 all: $(LANGS)
 
 .csharp.ph : csharp/ClashOfLambdas.cs
-	@echo "Compiling C#"
+	@echo "# Compiling C#"
 	@mkdir -p $(csharp_OUT)
+	@echo -n "# Command: "
 	$(csharp_COMPILE)
 	@cp $(csharp_SRC)/lib/*.dll $(csharp_OUT)/.
 	@touch .csharp.ph
@@ -78,8 +79,9 @@ all: $(LANGS)
 csharp : .csharp.ph
 
 .fsharp.ph : fsharp/ClashOfLambdas.fs
-	@echo "Compiling F#"
+	@echo "# Compiling F#"
 	@mkdir -p $(fsharp_OUT)
+	@echo -n "# Command: "
 	$(fsharp_COMPILE)
 	@cp $(fsharp_SRC)/lib/*.dll $(fsharp_OUT)/.	
 	@cp $(fsharp_SRC)/lib/*.config $(fsharp_OUT)/.
@@ -87,19 +89,21 @@ csharp : .csharp.ph
 
 fsharp : .fsharp.ph
 
-.java.ph : java/src/main/java/ClashOfLambdas.java
-	@echo "Compiling Java"
+.java.ph : java/src/main/java/benchmarks/ClashOfLambdas.java
+	@echo "# Compiling Java"
 	@mkdir -p $(java_OUT)	
-	@mvn -q -f $(java_SRC)/pom.xml clean install
+	@echo -n "# Command: "
+	mvn -q -f $(java_SRC)/pom.xml clean install -Dmaven.test.skip=true
 	@cp $(java_SRC)/target/microbenchmarks.jar $(java_OUT)
 	@touch .java.ph
 
 java : .java.ph
 
 .scala.ph : scala/src/main/scala/ClashOfLambdas.scala
-	@echo "Compiling Scala"
+	@echo "# Compiling Scala"
 	@mkdir -p $(scala_OUT)
-	@mvn -q -f $(scala_SRC)/pom.xml clean install
+	@echo -n "# Command: "
+	mvn -q -f $(scala_SRC)/pom.xml clean install -Dmaven.test.skip=true
 	@cp $(scala_SRC)/target/microbenchmarks.jar $(scala_OUT)
 	@touch .scala.ph
 
@@ -110,7 +114,8 @@ scala : .scala.ph
 ########################
 
 $(BENCH): bench-% : %
-	@echo "Benchmarking $* version:"
+	@echo "# Benchmarking $* version"
+	@echo -n "# Command: "
 	$($*_RUN)
 
 bench : $(BENCH)
