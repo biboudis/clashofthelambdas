@@ -68,30 +68,42 @@ fsharp_RUN 	= $(MONO) $(fsharp_OUT)/ClashOfLambdas.exe
 
 all: $(LANGS)
 
-csharp : 
+.csharp.ph : csharp/ClashOfLambdas.cs
 	@echo "Compiling C#"
 	@mkdir -p $(csharp_OUT)
 	$(csharp_COMPILE)
 	@cp $(csharp_SRC)/lib/*.dll $(csharp_OUT)/.
+	@touch .csharp.ph
 
-fsharp : 
+csharp : .csharp.ph
+
+.fsharp.ph : fsharp/ClashOfLambdas.fs
 	@echo "Compiling F#"
 	@mkdir -p $(fsharp_OUT)
 	$(fsharp_COMPILE)
 	@cp $(fsharp_SRC)/lib/*.dll $(fsharp_OUT)/.	
 	@cp $(fsharp_SRC)/lib/*.config $(fsharp_OUT)/.
+	@touch .fsharp.ph
 
-java : 	
+fsharp : .fsharp.ph
+
+.java.ph : java/src/main/java/ClashOfLambdas.java
 	@echo "Compiling Java"
 	@mkdir -p $(java_OUT)	
 	@mvn -q -f $(java_SRC)/pom.xml clean install
 	@cp $(java_SRC)/target/microbenchmarks.jar $(java_OUT)
+	@touch .java.ph
 
-scala : 
+java : .java.ph
+
+.scala.ph : scala/src/main/scala/ClashOfLambdas.scala
 	@echo "Compiling Scala"
 	@mkdir -p $(scala_OUT)
 	@mvn -q -f $(scala_SRC)/pom.xml clean install
 	@cp $(scala_SRC)/target/microbenchmarks.jar $(scala_OUT)
+	@touch .scala.ph
+
+scala : .scala.ph
 
 ########################
 # Run Benchmarks Rules #
@@ -101,7 +113,9 @@ $(BENCH): bench-% : %
 	@echo "Benchmarking $* version:"
 	$($*_RUN)
 
+bench : $(BENCH)
+
 .PHONY: $(LANGS) $(BENCH) clean
 
 clean:
-	rm -rf $(GEN)/
+	rm -rf $(GEN)/ .*.ph

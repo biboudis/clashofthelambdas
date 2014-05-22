@@ -98,3 +98,5 @@ _ReSharper*/
 /.~lock.results-scala.xlsx#
 /~java-disassembled
 /.~lock.measurements.ods#
+
+*.ph
