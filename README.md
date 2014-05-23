@@ -20,7 +20,7 @@ Microbenchmarking collection functional APIs of Java 8, Scala, C#, F# on Windows
 
 Setting up on Windows
 --------------------
-* Install [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and create the ```JAVA_HOME``` env variable (for maven to work)
+* Install [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Create the ```JAVA_HOME``` env variable (for maven to work) and add to ```Path``` the ```JAVA_HOME\bin``` director
 * Install [Gnu Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm) and put the ```bin``` directory to ```PATH```
 * Extract [Maven](http://maven.apache.org/download.cgi) and put the ```bin``` directory to ```PATH```
 * Install the C#, F# compilers (if you have Visual Studio 2013 you already have them)
