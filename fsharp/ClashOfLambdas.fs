@@ -5,40 +5,7 @@ open System.Collections.Generic
 open System.Diagnostics
 open Nessos.LinqOptimizer.FSharp
 open Nessos.LinqOptimizer.Base
-
-let Iterations = 10
-let measuref<'T>(title, action : unit -> 'T) =
-  let measurements = Array.create Iterations 0.0
-
-  let sw = new Stopwatch()
-
-  GC.Collect()
-  GC.WaitForPendingFinalizers()
-  GC.Collect()
-
-  let mutable st = 0.0
-  let mutable sst = 0.0
-
-  action() |> ignore
-
-  for i = 1 to Iterations-1 do
-    sw.Restart()
-    
-    action() |> ignore
-
-    sw.Stop()
-
-    measurements.[i] <- (float sw.ElapsedMilliseconds)
-    ()
-
-  for m in measurements do
-    st <- st + m
-    sst <- sst + Math.Pow(m, 2.0)
-
-  let mean = st / (float Iterations)
-  let sdev = Math.Sqrt(sst / (float Iterations) - Math.Pow(mean, 2.0))
-    
-  Console.WriteLine("{0,-25}\t{1,10} ms/op +/- {2:#.##}", title, mean, sdev);
+open LambdaMicrobenchmarking
 
 [<EntryPoint>]
 let main argv =
@@ -100,28 +67,29 @@ let main argv =
   //////////////////////////
   // Benchmarks execution //
   //////////////////////////
-  measuref("sumBaseline", (fun () -> sumBaseline()))
-  measuref("sumSeq", (fun () -> sumLinq()))
-  measuref("sumSeqOpt", (fun () -> sumLinqOpt()))
-  measuref("sumPar", (fun () -> parallelSumLinq ()))
-  measuref("sumParOpt", (fun () -> parallelSumLinqOpt ()))
 
-  measuref("sumOfSquaresBaseline", (fun () -> sumofSquaresBaseline()))
-  measuref("sumOfSquaresSeq", (fun () -> sumSqLinq ()))
-  measuref("sumOfSquaresSeqOpt", (fun () -> sumSqLinqOpt ()))
-  measuref("sumOfSquaresPar", (fun () -> parallelSumSqLinq ()))
-  measuref("sumOfSquaresParOpt", (fun () -> parallelSumSqLinqOpt ()))
-  
-  measuref("sumOfSquaresEvenBaseline", (fun () -> sumofSquaresEvenBaseline()))
-  measuref("sumOfSquaresEvenSeq", (fun () -> sumSqEvenLinq ()))
-  measuref("sumOfSquaresEvenSeqOpt", (fun () -> sumSqEvenLinqOpt ()))
-  measuref("sumOfSquaresEvenPar", (fun () -> parallelSumSqEvenLinq ()))
-  measuref("sumOfSquaresEvenParOpt", (fun () -> parallelSumSqEvenLinqOpt ()))
-    
-  measuref("cartBaseline", (fun () -> cartBaseline()))
-  measuref("cartSeq", (fun () -> cartLinq()))
-  measuref("cartSeqOpt", (fun () -> cartLinqOpt()))
-  measuref("cartPar", (fun () -> parallelCartLinq()))
-  measuref("cartParOpt", (fun () -> parallelCartLinqOpt()))
+  let script = [|
+    ("sumBaseline",  Func<int64>  sumBaseline);
+    ("sumSeq",  Func<int64>  sumLinq);
+    ("sumSeqOpt",  Func<int64>  sumLinqOpt);
+    ("sumPar",  Func<int64>  parallelSumLinq );
+    ("sumParOpt",  Func<int64>  parallelSumLinqOpt );
+    ("sumOfSquaresBaseline",  Func<int64>  sumofSquaresBaseline);
+    ("sumOfSquaresSeq",  Func<int64>  sumSqLinq );
+    ("sumOfSquaresSeqOpt",  Func<int64>  sumSqLinqOpt );
+    ("sumOfSquaresPar",  Func<int64>  parallelSumSqLinq );
+    ("sumOfSquaresParOpt",  Func<int64>  parallelSumSqLinqOpt );
+    ("sumOfSquaresEvenBaseline",  Func<int64>  sumofSquaresEvenBaseline);
+    ("sumOfSquaresEvenSeq",  Func<int64>  sumSqEvenLinq );
+    ("sumOfSquaresEvenSeqOpt",  Func<int64>  sumSqEvenLinqOpt );
+    ("sumOfSquaresEvenPar",  Func<int64>  parallelSumSqEvenLinq );
+    ("sumOfSquaresEvenParOpt",  Func<int64>  parallelSumSqEvenLinqOpt );
+    ("cartBaseline",  Func<int64>  cartBaseline);
+    ("cartSeq",  Func<int64>  cartLinq);
+    ("cartSeqOpt",  Func<int64>  cartLinqOpt);
+    ("cartPar",  Func<int64>  parallelCartLinq);
+    ("cartParOpt",  Func<int64>  parallelCartLinqOpt)|] |> fun x -> Script.Of x
+
+  script.RunAll() |> ignore
 
   0 

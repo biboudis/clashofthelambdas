@@ -32,25 +32,27 @@ MONO = mono
 csharp_COMPILE = mcs /optimize+ /checked- /out:$(csharp_OUT)/ClashOfLambdas.exe  \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.CSharp.dll \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.Base.dll \
-	/r:$(csharp_SRC)/lib/LinqOptimizer.Core.dll \
-	/r:$(csharp_SRC)/lib/MathNet.Numerics.dll \
+	/r:$(csharp_SRC)/lib/LinqOptimizer.Core.dll  \
+	/r:$(csharp_SRC)/lib/LambdaMicrobenchmarking.dll \
 	$(csharp_SRC)/ClashOfLambdas.cs
 fsharp_COMPILE = fsharpc --optimize+ --checked- -r $(fsharp_SRC)/lib/LinqOptimizer.Base.dll  --nologo -r \
 	$(fsharp_SRC)/lib/LinqOptimizer.Core.dll -r \
-	$(fsharp_SRC)/lib/LinqOptimizer.FSharp.dll \
+	$(fsharp_SRC)/lib/LinqOptimizer.FSharp.dll -r \
+	$(fsharp_SRC)/lib/LambdaMicrobenchmarking.dll \
 	--out:$(fsharp_OUT)/ClashOfLambdas.exe $(fsharp_SRC)/ClashOfLambdas.fs
 endif
 ifeq ($(UNAME), MINGW32_NT-6.2)
 fsharp_COMPILE = C:\"Program\ Files\ \(x86\)"\"Microsoft\ SDKs"\F\#\\3.1\\Framework\\v4.0\\fsc.exe --optimize+ --checked- --nologo -r \
 	$(fsharp_SRC)/lib/LinqOptimizer.Base.dll -r \
 	$(fsharp_SRC)/lib/LinqOptimizer.Core.dll -r	\
-	$(fsharp_SRC)/lib/LinqOptimizer.FSharp.dll \
+	$(fsharp_SRC)/lib/LinqOptimizer.FSharp.dll -r \
+	$(fsharp_SRC)/lib/LambdaMicrobenchmarking.dll \
 	--out:$(fsharp_OUT)/ClashOfLambdas.exe $(fsharp_SRC)/ClashOfLambdas.fs
 csharp_COMPILE = csc /out:$(csharp_OUT)/ClashOfLambdas.exe -nologo /optimize+ /checked- \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.CSharp.dll \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.Base.dll \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.Core.dll \
-	/r:$(csharp_SRC)/lib/MathNet.Numerics.dll \
+	/r:$(csharp_SRC)/lib/LambdaMicrobenchmarking.dll \
 	$(csharp_SRC)\ClashOfLambdas.cs
 endif
 
