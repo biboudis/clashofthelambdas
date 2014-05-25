@@ -38,6 +38,5 @@ Running the microbenchmarks
 * Compile all tests with ```make```
 * Clean with ```make clean```
 * Compile a specific suite with ```make {java, csharp, fsharp, scala}```
-* Run microbenchmarks with ```make bench-{java, csharp, fsharp, scala}``` each
-  time to get a fresh compilation followed by a run (e.g., ```make
+* Run microbenchmarks with ```make bench-{java, csharp, fsharp, scala}``` (e.g., ```make
   bench-java```).

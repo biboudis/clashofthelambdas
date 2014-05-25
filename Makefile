@@ -49,6 +49,8 @@ csharp_COMPILE = csc /out:$(csharp_OUT)/ClashOfLambdas.exe -nologo /optimize+ /c
 	/r:$(csharp_SRC)/lib/LinqOptimizer.CSharp.dll \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.Base.dll \
 	/r:$(csharp_SRC)/lib/LinqOptimizer.Core.dll \
+	/r:$(csharp_SRC)/lib/MathNet.Numerics.dll \
+	/r:$(csharp_SRC)/lib/MathNet.Numerics.IO.dll \
 	$(csharp_SRC)\ClashOfLambdas.cs
 endif
 
