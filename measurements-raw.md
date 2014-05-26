@@ -92,12 +92,88 @@ Linux
 =====
 Java
 ----
+Benchmark                                     Mode   Samples         Mean   Mean error    Units
+b.ClashOfLambdas.cartBaseline                 avgt        10        4.699        0.084    ms/op
+b.ClashOfLambdas.cartPar                      avgt        10        3.215        0.042    ms/op
+b.ClashOfLambdas.cartSeq                      avgt        10        5.593        0.116    ms/op
+b.ClashOfLambdas.sumBaseline                  avgt        10       13.117        0.158    ms/op
+b.ClashOfLambdas.sumOfSquaresBaseline         avgt        10       13.540        0.195    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenBaseline     avgt        10       19.224        0.446    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenPar          avgt        10       17.548        0.203    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeq          avgt        10       26.916        0.564    ms/op
+b.ClashOfLambdas.sumOfSquaresPar              avgt        10       11.938        0.221    ms/op
+b.ClashOfLambdas.sumOfSquaresSeq              avgt        10       13.548        0.503    ms/op
+b.ClashOfLambdas.sumPar                       avgt        10       11.778        0.293    ms/op
+b.ClashOfLambdas.sumSeq                       avgt        10       13.446        0.529    ms/op
 
 Scala
 ------
+Benchmark                                     Mode   Samples         Mean   Mean error    Units
+b.ClashOfLambdas.cartBaseline                 avgt        10        4.667        0.113    ms/op
+b.ClashOfLambdas.cartPar                      avgt        10     4065.581       65.469    ms/op
+b.ClashOfLambdas.cartParBlitz                 avgt        10      388.181        4.301    ms/op
+b.ClashOfLambdas.cartSeq                      avgt        10      252.805        3.582    ms/op
+b.ClashOfLambdas.cartSeqBlitz                 avgt        10      311.149        5.949    ms/op
+b.ClashOfLambdas.sumBaseline                  avgt        10       11.807        0.104    ms/op
+b.ClashOfLambdas.sumOfSquaresBaseline         avgt        10       11.907        0.148    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenBaseline     avgt        10       16.472        0.316    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenPar          avgt        10     8292.391      420.132    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenParBlitz     avgt        10      127.203        5.710    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeq          avgt        10      580.509       11.480    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeqBlitz     avgt        10      136.363        2.950    ms/op
+b.ClashOfLambdas.sumOfSquaresPar              avgt        10     1423.887       86.170    ms/op
+b.ClashOfLambdas.sumOfSquaresParBlitz         avgt        10       72.547        0.966    ms/op
+b.ClashOfLambdas.sumOfSquaresSeq              avgt        10      291.827        3.107    ms/op
+b.ClashOfLambdas.sumOfSquaresSeqBlitz         avgt        10       89.058        1.742    ms/op
+b.ClashOfLambdas.sumPar                       avgt        10     1346.200       66.932    ms/op
+b.ClashOfLambdas.sumParBlitz                  avgt        10       12.217        0.357    ms/op
+b.ClashOfLambdas.sumSeq                       avgt        10      187.238       13.277    ms/op
+b.ClashOfLambdas.sumSeqBlitz                  avgt        10       14.496        0.312    ms/op
 
 C#
 --
+Benchmark                 	      Mean Mean-Error   Sdev  Unit
+sumBaseline              	      14.3       1.02   0.67 ms/op
+sumSeq                   	     111.8       0.96   0.63 ms/op
+sumSeqOpt                	      16.8       0.96   0.63 ms/op
+sumPar                   	     427.3     105.74  69.94 ms/op
+sumParOpt                	      12.2       3.40   2.25 ms/op
+sumOfSquaresBaseline     	      20.1       2.07   1.37 ms/op
+sumOfSquaresSeq          	     247.5       2.17   1.43 ms/op
+sumOfSquaresSeqOpt       	      17.8       1.19   0.79 ms/op
+sumOfSquaresPar          	       478      56.49  37.37 ms/op
+sumOfSquaresParOpt       	      12.4       2.28   1.51 ms/op
+sumOfSquaresEvenBaseline 	     110.9       3.06   2.02 ms/op
+sumOfSquaresEvenSeq      	     301.2      12.84   8.50 ms/op
+sumOfSquaresEvenSeqOpt   	     109.4       3.20   2.12 ms/op
+sumOfSquaresEvenPar      	     495.9      71.74  47.45 ms/op
+sumOfSquaresEvenParOpt   	        58       2.57   1.70 ms/op
+cartBaseline             	        15       0.00   0.00 ms/op
+cartSeq                  	     287.6       6.10   4.03 ms/op
+cartSeqOpt               	      15.6       0.78   0.52 ms/op
+cartPar                  	     286.8      24.85  16.44 ms/op
+cartParOpt               	      10.5       2.05   1.35 ms/op
 
 F#
 --
+Benchmark                 	      Mean Mean-Error   Sdev  Unit
+sumBaseline              	        17       2.25   1.49 ms/op
+sumSeq                   	     124.1       2.30   1.52 ms/op
+sumSeqOpt                	      21.1       2.19   1.45 ms/op
+sumPar                   	     437.1      85.99  56.88 ms/op
+sumParOpt                	      13.2       2.23   1.48 ms/op
+sumOfSquaresBaseline     	      25.2       3.62   2.39 ms/op
+sumOfSquaresSeq          	     249.9       9.41   6.23 ms/op
+sumOfSquaresSeqOpt       	      21.9       2.41   1.60 ms/op
+sumOfSquaresPar          	     556.6      65.82  43.54 ms/op
+sumOfSquaresParOpt       	      14.5       3.98   2.64 ms/op
+sumOfSquaresEvenBaseline 	     114.8       3.48   2.30 ms/op
+sumOfSquaresEvenSeq      	     399.1      32.42  21.44 ms/op
+sumOfSquaresEvenSeqOpt   	     118.6       1.63   1.07 ms/op
+sumOfSquaresEvenPar      	     564.5      46.87  31.00 ms/op
+sumOfSquaresEvenParOpt   	        60       2.36   1.56 ms/op
+cartBaseline             	      13.1       1.12   0.74 ms/op
+cartSeq                  	     355.6       3.85   2.55 ms/op
+cartSeqOpt               	      15.7       1.24   0.82 ms/op
+cartPar                  	     385.9      21.11  13.96 ms/op
+cartParOpt               	        10       1.75   1.15 ms/op
