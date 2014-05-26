@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using System.Text;
 using Nessos.LinqOptimizer.Base;
 using Nessos.LinqOptimizer.CSharp;
-using MathNet.Numerics.Distributions;
 using LambdaMicrobenchmarking;
 
 namespace benchmarks
