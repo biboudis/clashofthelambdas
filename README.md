@@ -9,11 +9,11 @@ Microbenchmarking collection functional APIs of Java 8, Scala, C#, F# on Windows
   * sequential
   * parallel
   * optimized sequential/parallel with [Scala-Blitz](http://scala-blitz.github.io/)
-* C# (mono / (custom iterative measure))
+* C# (clr & mono / ([Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking))
   * sequential
   * parallel
   * optimized sequential/parallel with [LinqOptimizer](https://github.com/nessos/LinqOptimizer)
-* F# (mono / (custom iterative measure))
+* F# (clr & mono / [Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking))
   * sequential
   * parallel
   * optimized sequential/parallel with [LinqOptimizer](https://github.com/nessos/LinqOptimizer)
