@@ -9,11 +9,11 @@ Microbenchmarking collection functional APIs of Java 8, Scala, C#, F# on Windows
   * sequential
   * parallel
   * optimized sequential/parallel with [Scala-Blitz](http://scala-blitz.github.io/)
-* C# (clr & mono / ([Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking))
+* C# (clr & mono / [Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking)<sup>1</sup>)
   * sequential
   * parallel
   * optimized sequential/parallel with [LinqOptimizer](https://github.com/nessos/LinqOptimizer)
-* F# (clr & mono / [Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking))
+* F# (clr & mono / [Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking)<sup>1</sup>)
   * sequential
   * parallel
   * optimized sequential/parallel with [LinqOptimizer](https://github.com/nessos/LinqOptimizer)
@@ -40,3 +40,7 @@ Running the microbenchmarks
 * Compile a specific suite with ```make {java, csharp, fsharp, scala}```
 * Run microbenchmarks with ```make bench-{java, csharp, fsharp, scala}``` (e.g., ```make
   bench-java```).
+
+**Footnotes:**
+
+1. A small utility that was factored out as a seperate project.
