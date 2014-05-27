@@ -41,6 +41,19 @@ Running the microbenchmarks
 * Run microbenchmarks with ```make bench-{java, csharp, fsharp, scala}``` (e.g., ```make
   bench-java```).
 
+Processing the results
+----------------------
+
+If you want to process the unified results we offer a gawk script that make use
+of the dos2unix command to convert windows result file.
+
+* Run the benchmark suite with on both windows and linux with ```make bench >
+  results.{windows, linux}``` (any filename).
+* See the unified results for all languages, platforms and benchmarks (the comma
+  separated values are benchmark, mean, mean error, sdev) by running
+  ```./process results.linux results.windows > results.processed``` (make
+  process executable first).
+
 **Footnotes:**
 
 1. A small utility that was factored out as a seperate project.
