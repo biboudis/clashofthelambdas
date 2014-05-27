@@ -2,6 +2,10 @@ Clash of the Lambdas
 ====================
 Microbenchmarking collection functional APIs of Java 8, Scala, C#, F# on Windows and Linux.
 
+To run the benchmarking suite as is, you will need a system with approximately
+769mb of free space for heap allocation. Regarding execution time, a run on a
+single platform takes approximately 15-20 minutes on an Intel Core i5.
+
 * Java 8 (jvm / [jmh](http://openjdk.java.net/projects/code-tools/jmh/))
   * sequential
   * parallel
