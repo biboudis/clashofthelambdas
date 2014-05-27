@@ -2,57 +2,73 @@
 
 # multidimentional arrays are essentially of single dimention.
 # here we parse effectively e.g., results[c#@sumBaseline].
-function printBenchOfLang (lang, bench) {
-    print bench ";" results[lang "\034" bench]
+function printBenchOfLang (filename, lang, bench) {
+    print bench "," results[filename, lang, bench]
 }
 
 #enforcing ordering.
-function printLang (lang) {
+function printLang (filename, lang) {
     print lang 
-    printBenchOfLang(lang,"sumBaseline")
-    printBenchOfLang(lang,"sumSeq")
-    printBenchOfLang(lang,"sumSeqOpt")
-    printBenchOfLang(lang,"sumPar")
-    printBenchOfLang(lang,"sumParOpt") 
-    printBenchOfLang(lang,"sumOfSquaresBaseline")
-    printBenchOfLang(lang,"sumOfSquaresSeq")
-    printBenchOfLang(lang,"sumOfSquaresSeqOpt") 
-    printBenchOfLang(lang,"sumOfSquaresPar")
-    printBenchOfLang(lang,"sumOfSquaresParOpt")
-    printBenchOfLang(lang,"sumOfSquaresEvenBaseline")
-    printBenchOfLang(lang,"sumOfSquaresEvenSeq")
-    printBenchOfLang(lang,"sumOfSquaresEvenSeqOpt")
-    printBenchOfLang(lang,"sumOfSquaresEvenPar")
-    printBenchOfLang(lang,"sumOfSquaresEvenParOpt") 
-    printBenchOfLang(lang,"cartBaseline")
-    printBenchOfLang(lang,"cartSeq")
-    printBenchOfLang(lang,"cartSeqOpt")
-    printBenchOfLang(lang,"cartPar")   
-    printBenchOfLang(lang,"cartParOpt")
+    printBenchOfLang(filename, lang,"sumBaseline")
+    printBenchOfLang(filename, lang,"sumSeq")
+    printBenchOfLang(filename, lang,"sumSeqOpt")
+    printBenchOfLang(filename, lang,"sumPar")
+    printBenchOfLang(filename, lang,"sumParOpt") 
+    printBenchOfLang(filename, lang,"sumOfSquaresBaseline")
+    printBenchOfLang(filename, lang,"sumOfSquaresSeq")
+    printBenchOfLang(filename, lang,"sumOfSquaresSeqOpt") 
+    printBenchOfLang(filename, lang,"sumOfSquaresPar")
+    printBenchOfLang(filename, lang,"sumOfSquaresParOpt")
+    printBenchOfLang(filename, lang,"sumOfSquaresEvenBaseline")
+    printBenchOfLang(filename, lang,"sumOfSquaresEvenSeq")
+    printBenchOfLang(filename, lang,"sumOfSquaresEvenSeqOpt")
+    printBenchOfLang(filename, lang,"sumOfSquaresEvenPar")
+    printBenchOfLang(filename, lang,"sumOfSquaresEvenParOpt") 
+    printBenchOfLang(filename, lang,"cartBaseline")
+    printBenchOfLang(filename, lang,"cartSeq")
+    printBenchOfLang(filename, lang,"cartSeqOpt")
+    printBenchOfLang(filename, lang,"cartPar")   
+    printBenchOfLang(filename, lang,"cartParOpt")
 }
 
+BEGIN {
+    for (i = 1; i < ARGC; i++) {
+	command = "dos2unix " ARGV[i];
+	system(command)
+    }
+
+    print "benchmark,mean,mean error,sdev" 
+}
 /Compiling/ { lang = $3 }
 /\# Benchmark:/ { split($3, fname,"."); name = fname[3] }
-/Result:/ { mean = $2; meanerr = $4 }
+/Result:/ { mean = $2; meanerr = $4}
 /Statistics:/ { 
-    sdev = $11; 
-    stats =  mean ";" meanerr ";" sdev
-    results[lang, name] = stats
+    sdev = $11
+    sub(/,/, ".", mean) 
+    sub(/,/, ".", meanerr)
+    sub(/,/, ".", sdev)
+    stats =  mean "," meanerr "," sdev
+    results[FILENAME, lang, name] = stats
 }
 /^sum|^cart/ {
-    name = $1;
-    mean = $2;
-    meanerr = $3;
-    sdev = $4;
-    stats =  mean ";" meanerr ";" sdev
-    results[lang, name] = stats
+    name = $1
+    mean = $2
+    meanerr = $3
+    sdev = $4
+    sub(/,/, ".", mean) 
+    sub(/,/, ".", meanerr)
+    sub(/,/, ".", sdev)
+    stats =  mean "," meanerr "," sdev
+    results[FILENAME, lang, name] = stats
 }
 END {
-    split(FILENAME, filename, ".")
-    sub(".", substr(toupper(filename[2]), 1,1) , filename[2])
-    print filename[2]
-    printLang("Java")
-    printLang("Scala")
-    printLang("C#")
-    printLang("F#")
+    for (i = 1; i < ARGC; i++) {
+	split(ARGV[i], filename, ".")
+	sub(".", substr(toupper(filename[2]), 1,1) , filename[2])
+	print filename[2]
+	printLang(ARGV[i], "Java")
+	printLang(ARGV[i], "Scala")
+	printLang(ARGV[i], "C#")
+	printLang(ARGV[i], "F#")
+    }
 }
