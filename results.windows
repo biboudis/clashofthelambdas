@@ -1,0 +1,1216 @@
+﻿# Compiling C#
+# Command: csc /out:build/csharp/ClashOfLambdas.exe -nologo /optimize+ /checked- /r:csharp/lib/LinqOptimizer.CSharp.dll /r:csharp/lib/LinqOptimizer.Base.dll /r:csharp/lib/LinqOptimizer.Core.dll /r:csharp/lib/LambdaMicrobenchmarking.dll csharp\ClashOfLambdas.cs
+# Benchmarking csharp version
+# Command: build/csharp/ClashOfLambdas.exe
+Benchmark                 	      Mean Mean-Error   Sdev  Unit
+sumBaseline              	         7       0,00   0,00 ms/op
+sumSeq                   	      67,8       4,88   3,22 ms/op
+sumSeqOpt                	         9       0,71   0,47 ms/op
+sumPar                   	      22,2       0,64   0,42 ms/op
+sumParOpt                	         6       0,00   0,00 ms/op
+sumOfSquaresBaseline     	         7       0,00   0,00 ms/op
+sumOfSquaresSeq          	      98,4       5,20   3,44 ms/op
+sumOfSquaresSeqOpt       	      11,5       0,80   0,53 ms/op
+sumOfSquaresPar          	      58,2       0,64   0,42 ms/op
+sumOfSquaresParOpt       	       6,1       0,48   0,32 ms/op
+sumOfSquaresEvenBaseline 	        11       0,00   0,00 ms/op
+sumOfSquaresEvenSeq      	      81,5       1,92   1,27 ms/op
+sumOfSquaresEvenSeqOpt   	      52,8       2,45   1,62 ms/op
+sumOfSquaresEvenPar      	      51,7       2,37   1,57 ms/op
+sumOfSquaresEvenParOpt   	       8,2       0,96   0,63 ms/op
+cartBaseline             	         6       0,00   0,00 ms/op
+cartSeq                  	     167,8       4,72   3,12 ms/op
+cartSeqOpt               	      11,4       0,78   0,52 ms/op
+cartPar                  	      74,1      32,16  21,27 ms/op
+cartParOpt               	         6       0,00   0,00 ms/op
+# Compiling Java
+# Command: mvn -q -f java/pom.xml clean install -Dmaven.test.skip=true
+# Benchmarking java version
+# Command: java -Xms769m -Xmx769m -XX:-TieredCompilation  -jar build/java/microbenchmarks.jar -gc true -f 1 -i 10 -wi 10 -tu ms ".*" 
+# Run progress: 0,00% complete, ETA 00:04:00
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartBaseline
+# Warmup Iteration   1: 4,220 ms/op
+# Warmup Iteration   2: 4,275 ms/op
+# Warmup Iteration   3: 4,224 ms/op
+# Warmup Iteration   4: 4,225 ms/op
+# Warmup Iteration   5: 4,221 ms/op
+# Warmup Iteration   6: 4,191 ms/op
+# Warmup Iteration   7: 4,208 ms/op
+# Warmup Iteration   8: 4,220 ms/op
+# Warmup Iteration   9: 4,193 ms/op
+# Warmup Iteration  10: 4,235 ms/op
+Iteration   1: 4,198 ms/op
+Iteration   2: 4,204 ms/op
+Iteration   3: 4,216 ms/op
+Iteration   4: 4,215 ms/op
+Iteration   5: 4,218 ms/op
+Iteration   6: 4,234 ms/op
+Iteration   7: 4,203 ms/op
+Iteration   8: 4,222 ms/op
+Iteration   9: 4,190 ms/op
+Iteration  10: 4,209 ms/op
+
+Result : 4,211 ▒(99.9%) 0,019 ms/op
+  Statistics: (min, avg, max) = (4,190, 4,211, 4,234), stdev = 0,013
+  Confidence interval (99.9%): [4,192, 4,230]
+
+
+# Run progress: 8,33% complete, ETA 00:04:33
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartPar
+# Warmup Iteration   1: 3,077 ms/op
+# Warmup Iteration   2: 2,475 ms/op
+# Warmup Iteration   3: 2,332 ms/op
+# Warmup Iteration   4: 2,324 ms/op
+# Warmup Iteration   5: 2,317 ms/op
+# Warmup Iteration   6: 2,327 ms/op
+# Warmup Iteration   7: 2,306 ms/op
+# Warmup Iteration   8: 2,329 ms/op
+# Warmup Iteration   9: 2,307 ms/op
+# Warmup Iteration  10: 2,309 ms/op
+Iteration   1: 2,320 ms/op
+Iteration   2: 2,307 ms/op
+Iteration   3: 2,318 ms/op
+Iteration   4: 2,308 ms/op
+Iteration   5: 2,318 ms/op
+Iteration   6: 2,322 ms/op
+Iteration   7: 2,304 ms/op
+Iteration   8: 2,320 ms/op
+Iteration   9: 2,304 ms/op
+Iteration  10: 2,316 ms/op
+
+Result : 2,314 ▒(99.9%) 0,011 ms/op
+  Statistics: (min, avg, max) = (2,304, 2,314, 2,322), stdev = 0,007
+  Confidence interval (99.9%): [2,303, 2,325]
+
+
+# Run progress: 16,67% complete, ETA 00:04:06
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartSeq
+# Warmup Iteration   1: 5,679 ms/op
+# Warmup Iteration   2: 4,731 ms/op
+# Warmup Iteration   3: 4,799 ms/op
+# Warmup Iteration   4: 4,794 ms/op
+# Warmup Iteration   5: 4,739 ms/op
+# Warmup Iteration   6: 4,746 ms/op
+# Warmup Iteration   7: 4,742 ms/op
+# Warmup Iteration   8: 4,757 ms/op
+# Warmup Iteration   9: 4,802 ms/op
+# Warmup Iteration  10: 4,722 ms/op
+Iteration   1: 4,782 ms/op
+Iteration   2: 4,737 ms/op
+Iteration   3: 4,753 ms/op
+Iteration   4: 4,815 ms/op
+Iteration   5: 4,714 ms/op
+Iteration   6: 4,762 ms/op
+Iteration   7: 4,753 ms/op
+Iteration   8: 4,771 ms/op
+Iteration   9: 4,763 ms/op
+Iteration  10: 4,712 ms/op
+
+Result : 4,756 ▒(99.9%) 0,047 ms/op
+  Statistics: (min, avg, max) = (4,712, 4,756, 4,815), stdev = 0,031
+  Confidence interval (99.9%): [4,709, 4,803]
+
+
+# Run progress: 25,00% complete, ETA 00:03:41
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumBaseline
+# Warmup Iteration   1: 6,906 ms/op
+# Warmup Iteration   2: 6,876 ms/op
+# Warmup Iteration   3: 6,871 ms/op
+# Warmup Iteration   4: 6,878 ms/op
+# Warmup Iteration   5: 6,866 ms/op
+# Warmup Iteration   6: 6,879 ms/op
+# Warmup Iteration   7: 6,873 ms/op
+# Warmup Iteration   8: 6,865 ms/op
+# Warmup Iteration   9: 6,874 ms/op
+# Warmup Iteration  10: 6,886 ms/op
+Iteration   1: 6,897 ms/op
+Iteration   2: 7,062 ms/op
+Iteration   3: 6,945 ms/op
+Iteration   4: 6,961 ms/op
+Iteration   5: 6,976 ms/op
+Iteration   6: 7,007 ms/op
+Iteration   7: 6,917 ms/op
+Iteration   8: 6,940 ms/op
+Iteration   9: 6,996 ms/op
+Iteration  10: 6,969 ms/op
+
+Result : 6,967 ▒(99.9%) 0,072 ms/op
+  Statistics: (min, avg, max) = (6,897, 6,967, 7,062), stdev = 0,047
+  Confidence interval (99.9%): [6,895, 7,039]
+
+
+# Run progress: 33,33% complete, ETA 00:03:16
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresBaseline
+# Warmup Iteration   1: 7,073 ms/op
+# Warmup Iteration   2: 7,109 ms/op
+# Warmup Iteration   3: 7,151 ms/op
+# Warmup Iteration   4: 7,065 ms/op
+# Warmup Iteration   5: 7,069 ms/op
+# Warmup Iteration   6: 7,046 ms/op
+# Warmup Iteration   7: 7,040 ms/op
+# Warmup Iteration   8: 7,022 ms/op
+# Warmup Iteration   9: 7,092 ms/op
+# Warmup Iteration  10: 7,109 ms/op
+Iteration   1: 7,073 ms/op
+Iteration   2: 7,045 ms/op
+Iteration   3: 7,051 ms/op
+Iteration   4: 7,054 ms/op
+Iteration   5: 7,046 ms/op
+Iteration   6: 7,061 ms/op
+Iteration   7: 7,049 ms/op
+Iteration   8: 7,066 ms/op
+Iteration   9: 7,079 ms/op
+Iteration  10: 7,048 ms/op
+
+Result : 7,057 ▒(99.9%) 0,018 ms/op
+  Statistics: (min, avg, max) = (7,045, 7,057, 7,079), stdev = 0,012
+  Confidence interval (99.9%): [7,039, 7,075]
+
+
+# Run progress: 41,67% complete, ETA 00:02:52
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenBaseline
+# Warmup Iteration   1: 10,450 ms/op
+# Warmup Iteration   2: 10,537 ms/op
+# Warmup Iteration   3: 10,553 ms/op
+# Warmup Iteration   4: 10,461 ms/op
+# Warmup Iteration   5: 10,546 ms/op
+# Warmup Iteration   6: 10,455 ms/op
+# Warmup Iteration   7: 10,585 ms/op
+# Warmup Iteration   8: 10,455 ms/op
+# Warmup Iteration   9: 10,432 ms/op
+# Warmup Iteration  10: 10,559 ms/op
+Iteration   1: 10,452 ms/op
+Iteration   2: 10,618 ms/op
+Iteration   3: 10,450 ms/op
+Iteration   4: 10,428 ms/op
+Iteration   5: 10,565 ms/op
+Iteration   6: 10,459 ms/op
+Iteration   7: 10,568 ms/op
+Iteration   8: 10,434 ms/op
+Iteration   9: 10,419 ms/op
+Iteration  10: 10,645 ms/op
+
+Result : 10,504 ▒(99.9%) 0,130 ms/op
+  Statistics: (min, avg, max) = (10,419, 10,504, 10,645), stdev = 0,086
+  Confidence interval (99.9%): [10,374, 10,634]
+
+
+# Run progress: 50,00% complete, ETA 00:02:27
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenPar
+# Warmup Iteration   1: 11,579 ms/op
+# Warmup Iteration   2: 12,669 ms/op
+# Warmup Iteration   3: 11,727 ms/op
+# Warmup Iteration   4: 10,611 ms/op
+# Warmup Iteration   5: 10,496 ms/op
+# Warmup Iteration   6: 10,334 ms/op
+# Warmup Iteration   7: 10,379 ms/op
+# Warmup Iteration   8: 10,347 ms/op
+# Warmup Iteration   9: 10,236 ms/op
+# Warmup Iteration  10: 10,266 ms/op
+Iteration   1: 10,197 ms/op
+Iteration   2: 10,390 ms/op
+Iteration   3: 10,252 ms/op
+Iteration   4: 10,301 ms/op
+Iteration   5: 10,262 ms/op
+Iteration   6: 10,291 ms/op
+Iteration   7: 10,269 ms/op
+Iteration   8: 10,203 ms/op
+Iteration   9: 10,183 ms/op
+Iteration  10: 10,381 ms/op
+
+Result : 10,273 ▒(99.9%) 0,108 ms/op
+  Statistics: (min, avg, max) = (10,183, 10,273, 10,390), stdev = 0,071
+  Confidence interval (99.9%): [10,165, 10,381]
+
+
+# Run progress: 58,33% complete, ETA 00:02:02
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenSeq
+# Warmup Iteration   1: 17,079 ms/op
+# Warmup Iteration   2: 16,607 ms/op
+# Warmup Iteration   3: 16,717 ms/op
+# Warmup Iteration   4: 16,944 ms/op
+# Warmup Iteration   5: 16,775 ms/op
+# Warmup Iteration   6: 16,649 ms/op
+# Warmup Iteration   7: 16,549 ms/op
+# Warmup Iteration   8: 16,847 ms/op
+# Warmup Iteration   9: 16,531 ms/op
+# Warmup Iteration  10: 16,717 ms/op
+Iteration   1: 16,643 ms/op
+Iteration   2: 16,553 ms/op
+Iteration   3: 16,766 ms/op
+Iteration   4: 16,533 ms/op
+Iteration   5: 16,684 ms/op
+Iteration   6: 16,826 ms/op
+Iteration   7: 16,619 ms/op
+Iteration   8: 16,859 ms/op
+Iteration   9: 16,670 ms/op
+Iteration  10: 16,782 ms/op
+
+Result : 16,693 ▒(99.9%) 0,169 ms/op
+  Statistics: (min, avg, max) = (16,533, 16,693, 16,859), stdev = 0,112
+  Confidence interval (99.9%): [16,525, 16,862]
+
+
+# Run progress: 66,67% complete, ETA 00:01:38
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresPar
+# Warmup Iteration   1: 7,627 ms/op
+# Warmup Iteration   2: 6,823 ms/op
+# Warmup Iteration   3: 6,918 ms/op
+# Warmup Iteration   4: 6,768 ms/op
+# Warmup Iteration   5: 6,764 ms/op
+# Warmup Iteration   6: 6,729 ms/op
+# Warmup Iteration   7: 6,709 ms/op
+# Warmup Iteration   8: 6,752 ms/op
+# Warmup Iteration   9: 6,705 ms/op
+# Warmup Iteration  10: 6,704 ms/op
+Iteration   1: 6,719 ms/op
+Iteration   2: 6,705 ms/op
+Iteration   3: 6,712 ms/op
+Iteration   4: 6,701 ms/op
+Iteration   5: 6,716 ms/op
+Iteration   6: 6,708 ms/op
+Iteration   7: 6,693 ms/op
+Iteration   8: 6,710 ms/op
+Iteration   9: 6,694 ms/op
+Iteration  10: 6,704 ms/op
+
+Result : 6,706 ▒(99.9%) 0,013 ms/op
+  Statistics: (min, avg, max) = (6,693, 6,706, 6,719), stdev = 0,009
+  Confidence interval (99.9%): [6,693, 6,719]
+
+
+# Run progress: 75,00% complete, ETA 00:01:13
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresSeq
+# Warmup Iteration   1: 7,111 ms/op
+# Warmup Iteration   2: 7,013 ms/op
+# Warmup Iteration   3: 7,020 ms/op
+# Warmup Iteration   4: 7,021 ms/op
+# Warmup Iteration   5: 7,005 ms/op
+# Warmup Iteration   6: 7,039 ms/op
+# Warmup Iteration   7: 7,015 ms/op
+# Warmup Iteration   8: 7,020 ms/op
+# Warmup Iteration   9: 7,010 ms/op
+# Warmup Iteration  10: 7,013 ms/op
+Iteration   1: 7,024 ms/op
+Iteration   2: 7,014 ms/op
+Iteration   3: 7,024 ms/op
+Iteration   4: 7,019 ms/op
+Iteration   5: 7,014 ms/op
+Iteration   6: 7,015 ms/op
+Iteration   7: 7,007 ms/op
+Iteration   8: 7,016 ms/op
+Iteration   9: 7,007 ms/op
+Iteration  10: 7,009 ms/op
+
+Result : 7,015 ▒(99.9%) 0,010 ms/op
+  Statistics: (min, avg, max) = (7,007, 7,015, 7,024), stdev = 0,006
+  Confidence interval (99.9%): [7,005, 7,024]
+
+
+# Run progress: 83,33% complete, ETA 00:00:49
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumPar
+# Warmup Iteration   1: 7,515 ms/op
+# Warmup Iteration   2: 6,857 ms/op
+# Warmup Iteration   3: 6,862 ms/op
+# Warmup Iteration   4: 6,934 ms/op
+# Warmup Iteration   5: 6,840 ms/op
+# Warmup Iteration   6: 6,776 ms/op
+# Warmup Iteration   7: 6,722 ms/op
+# Warmup Iteration   8: 6,723 ms/op
+# Warmup Iteration   9: 6,691 ms/op
+# Warmup Iteration  10: 6,694 ms/op
+Iteration   1: 6,711 ms/op
+Iteration   2: 6,694 ms/op
+Iteration   3: 6,704 ms/op
+Iteration   4: 6,686 ms/op
+Iteration   5: 6,678 ms/op
+Iteration   6: 6,692 ms/op
+Iteration   7: 6,711 ms/op
+Iteration   8: 6,726 ms/op
+Iteration   9: 6,675 ms/op
+Iteration  10: 6,696 ms/op
+
+Result : 6,697 ▒(99.9%) 0,024 ms/op
+  Statistics: (min, avg, max) = (6,675, 6,697, 6,726), stdev = 0,016
+  Confidence interval (99.9%): [6,673, 6,722]
+
+
+# Run progress: 91,67% complete, ETA 00:00:24
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumSeq
+# Warmup Iteration   1: 6,986 ms/op
+# Warmup Iteration   2: 6,890 ms/op
+# Warmup Iteration   3: 6,893 ms/op
+# Warmup Iteration   4: 6,898 ms/op
+# Warmup Iteration   5: 6,896 ms/op
+# Warmup Iteration   6: 6,899 ms/op
+# Warmup Iteration   7: 6,880 ms/op
+# Warmup Iteration   8: 6,891 ms/op
+# Warmup Iteration   9: 6,888 ms/op
+# Warmup Iteration  10: 6,893 ms/op
+Iteration   1: 6,884 ms/op
+Iteration   2: 6,884 ms/op
+Iteration   3: 7,197 ms/op
+Iteration   4: 7,083 ms/op
+Iteration   5: 7,107 ms/op
+Iteration   6: 7,030 ms/op
+Iteration   7: 6,908 ms/op
+Iteration   8: 6,900 ms/op
+Iteration   9: 6,899 ms/op
+Iteration  10: 6,902 ms/op
+
+Result : 6,979 ▒(99.9%) 0,174 ms/op
+  Statistics: (min, avg, max) = (6,884, 6,979, 7,197), stdev = 0,115
+  Confidence interval (99.9%): [6,806, 7,153]
+
+
+Benchmark                                     Mode   Samples         Mean   Mean error    Units
+b.ClashOfLambdas.cartBaseline                 avgt        10        4.211        0.019    ms/op
+b.ClashOfLambdas.cartPar                      avgt        10        2.314        0.011    ms/op
+b.ClashOfLambdas.cartSeq                      avgt        10        4.756        0.047    ms/op
+b.ClashOfLambdas.sumBaseline                  avgt        10        6.967        0.072    ms/op
+b.ClashOfLambdas.sumOfSquaresBaseline         avgt        10        7.057        0.018    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenBaseline     avgt        10       10.504        0.130    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenPar          avgt        10       10.273        0.108    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeq          avgt        10       16.693        0.169    ms/op
+b.ClashOfLambdas.sumOfSquaresPar              avgt        10        6.706        0.013    ms/op
+b.ClashOfLambdas.sumOfSquaresSeq              avgt        10        7.015        0.010    ms/op
+b.ClashOfLambdas.sumPar                       avgt        10        6.697        0.024    ms/op
+b.ClashOfLambdas.sumSeq                       avgt        10        6.979        0.174    ms/op
+# Compiling Scala
+# Command: mvn -q -f scala/pom.xml clean install -Dmaven.test.skip=true
+Processing 38 classes from C:\Users\bibou\Documents\GitHub\clashofthelambdas\scala\target\classes
+Writing out Java source to C:\Users\bibou\Documents\GitHub\clashofthelambdas\scala\target\generated-sources\jmh and resources to C:\Users\bibou\Documents\GitHub\clashofthelambdas\scala\target\classes
+# Benchmarking scala version
+# Command: java -Xms769m -Xmx769m -XX:-TieredCompilation  -jar build/scala/microbenchmarks.jar -gc true -f 1 -i 10 -wi 10 -tu ms ".*" 
+# Run progress: 0,00% complete, ETA 00:06:40
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartBaseline
+# Warmup Iteration   1: 4,442 ms/op
+# Warmup Iteration   2: 4,389 ms/op
+# Warmup Iteration   3: 4,376 ms/op
+# Warmup Iteration   4: 4,322 ms/op
+# Warmup Iteration   5: 4,329 ms/op
+# Warmup Iteration   6: 4,342 ms/op
+# Warmup Iteration   7: 4,341 ms/op
+# Warmup Iteration   8: 4,329 ms/op
+# Warmup Iteration   9: 4,308 ms/op
+# Warmup Iteration  10: 4,309 ms/op
+Iteration   1: 4,336 ms/op
+Iteration   2: 4,339 ms/op
+Iteration   3: 4,317 ms/op
+Iteration   4: 4,327 ms/op
+Iteration   5: 4,311 ms/op
+Iteration   6: 4,303 ms/op
+Iteration   7: 4,295 ms/op
+Iteration   8: 4,314 ms/op
+Iteration   9: 4,297 ms/op
+Iteration  10: 4,306 ms/op
+
+Result: 4,315 ▒(99.9%) 0,023 ms/op
+  Statistics: (min, avg, max) = (4,295, 4,315, 4,339), stdev = 0,015
+  Confidence interval (99.9%): [4,291, 4,338]
+
+
+# Run progress: 5,00% complete, ETA 00:09:18
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartPar
+# Warmup Iteration   1: 5378,267 ms/op
+# Warmup Iteration   2: 3971,512 ms/op
+# Warmup Iteration   3: 4006,541 ms/op
+# Warmup Iteration   4: 4071,487 ms/op
+# Warmup Iteration   5: 4007,112 ms/op
+# Warmup Iteration   6: 4070,944 ms/op
+# Warmup Iteration   7: 4070,821 ms/op
+# Warmup Iteration   8: 4086,927 ms/op
+# Warmup Iteration   9: 4095,510 ms/op
+# Warmup Iteration  10: 4051,702 ms/op
+Iteration   1: 4053,642 ms/op
+Iteration   2: 4089,808 ms/op
+Iteration   3: 4034,262 ms/op
+Iteration   4: 4049,259 ms/op
+Iteration   5: 4071,582 ms/op
+Iteration   6: 4039,633 ms/op
+Iteration   7: 4040,003 ms/op
+Iteration   8: 4014,761 ms/op
+Iteration   9: 4056,186 ms/op
+Iteration  10: 4040,395 ms/op
+
+Result: 4048,953 ▒(99.9%) 31,394 ms/op
+  Statistics: (min, avg, max) = (4014,761, 4048,953, 4089,808), stdev = 20,765
+  Confidence interval (99.9%): [4017,560, 4080,347]
+
+
+# Run progress: 10,00% complete, ETA 00:17:40
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartParOpt
+# Warmup Iteration   1: 323,877 ms/op
+# Warmup Iteration   2: 252,409 ms/op
+# Warmup Iteration   3: 242,810 ms/op
+# Warmup Iteration   4: 241,587 ms/op
+# Warmup Iteration   5: 263,231 ms/op
+# Warmup Iteration   6: 245,598 ms/op
+# Warmup Iteration   7: 241,008 ms/op
+# Warmup Iteration   8: 240,734 ms/op
+# Warmup Iteration   9: 240,772 ms/op
+# Warmup Iteration  10: 241,870 ms/op
+Iteration   1: 239,794 ms/op
+Iteration   2: 241,171 ms/op
+Iteration   3: 241,199 ms/op
+Iteration   4: 239,377 ms/op
+Iteration   5: 240,658 ms/op
+Iteration   6: 239,160 ms/op
+Iteration   7: 240,301 ms/op
+Iteration   8: 239,513 ms/op
+Iteration   9: 240,534 ms/op
+Iteration  10: 239,362 ms/op
+
+Result: 240,107 ▒(99.9%) 1,158 ms/op
+  Statistics: (min, avg, max) = (239,160, 240,107, 241,199), stdev = 0,766
+  Confidence interval (99.9%): [238,949, 241,265]
+
+
+# Run progress: 15,00% complete, ETA 00:13:59
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartSeq
+# Warmup Iteration   1: 158,367 ms/op
+# Warmup Iteration   2: 143,203 ms/op
+# Warmup Iteration   3: 137,329 ms/op
+# Warmup Iteration   4: 139,660 ms/op
+# Warmup Iteration   5: 137,494 ms/op
+# Warmup Iteration   6: 138,252 ms/op
+# Warmup Iteration   7: 137,100 ms/op
+# Warmup Iteration   8: 138,267 ms/op
+# Warmup Iteration   9: 136,728 ms/op
+# Warmup Iteration  10: 137,822 ms/op
+Iteration   1: 137,511 ms/op
+Iteration   2: 137,665 ms/op
+Iteration   3: 137,132 ms/op
+Iteration   4: 138,286 ms/op
+Iteration   5: 139,152 ms/op
+Iteration   6: 137,612 ms/op
+Iteration   7: 137,843 ms/op
+Iteration   8: 138,444 ms/op
+Iteration   9: 138,051 ms/op
+Iteration  10: 139,053 ms/op
+
+Result: 138,075 ▒(99.9%) 1,000 ms/op
+  Statistics: (min, avg, max) = (137,132, 138,075, 139,152), stdev = 0,662
+  Confidence interval (99.9%): [137,074, 139,075]
+
+
+# Run progress: 20,00% complete, ETA 00:11:56
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartSeqOpt
+# Warmup Iteration   1: 257,249 ms/op
+# Warmup Iteration   2: 176,671 ms/op
+# Warmup Iteration   3: 168,062 ms/op
+# Warmup Iteration   4: 167,377 ms/op
+# Warmup Iteration   5: 167,683 ms/op
+# Warmup Iteration   6: 168,666 ms/op
+# Warmup Iteration   7: 167,563 ms/op
+# Warmup Iteration   8: 166,925 ms/op
+# Warmup Iteration   9: 167,580 ms/op
+# Warmup Iteration  10: 167,819 ms/op
+Iteration   1: 167,158 ms/op
+Iteration   2: 167,549 ms/op
+Iteration   3: 166,646 ms/op
+Iteration   4: 166,871 ms/op
+Iteration   5: 167,644 ms/op
+Iteration   6: 167,046 ms/op
+Iteration   7: 167,708 ms/op
+Iteration   8: 167,959 ms/op
+Iteration   9: 167,011 ms/op
+Iteration  10: 166,560 ms/op
+
+Result: 167,215 ▒(99.9%) 0,719 ms/op
+  Statistics: (min, avg, max) = (166,560, 167,215, 167,959), stdev = 0,476
+  Confidence interval (99.9%): [166,496, 167,935]
+
+
+# Run progress: 25,00% complete, ETA 00:10:25
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumBaseline
+# Warmup Iteration   1: 7,004 ms/op
+# Warmup Iteration   2: 6,883 ms/op
+# Warmup Iteration   3: 6,972 ms/op
+# Warmup Iteration   4: 6,876 ms/op
+# Warmup Iteration   5: 6,874 ms/op
+# Warmup Iteration   6: 6,890 ms/op
+# Warmup Iteration   7: 6,889 ms/op
+# Warmup Iteration   8: 6,872 ms/op
+# Warmup Iteration   9: 6,886 ms/op
+# Warmup Iteration  10: 6,877 ms/op
+Iteration   1: 6,871 ms/op
+Iteration   2: 6,877 ms/op
+Iteration   3: 6,899 ms/op
+Iteration   4: 6,876 ms/op
+Iteration   5: 6,873 ms/op
+Iteration   6: 6,883 ms/op
+Iteration   7: 6,882 ms/op
+Iteration   8: 6,871 ms/op
+Iteration   9: 6,884 ms/op
+Iteration  10: 6,891 ms/op
+
+Result: 6,881 ▒(99.9%) 0,014 ms/op
+  Statistics: (min, avg, max) = (6,871, 6,881, 6,899), stdev = 0,009
+  Confidence interval (99.9%): [6,867, 6,894]
+
+
+# Run progress: 30,00% complete, ETA 00:09:15
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresBaseline
+# Warmup Iteration   1: 7,121 ms/op
+# Warmup Iteration   2: 6,963 ms/op
+# Warmup Iteration   3: 7,041 ms/op
+# Warmup Iteration   4: 6,963 ms/op
+# Warmup Iteration   5: 6,973 ms/op
+# Warmup Iteration   6: 6,965 ms/op
+# Warmup Iteration   7: 6,967 ms/op
+# Warmup Iteration   8: 6,969 ms/op
+# Warmup Iteration   9: 6,963 ms/op
+# Warmup Iteration  10: 6,958 ms/op
+Iteration   1: 6,964 ms/op
+Iteration   2: 6,965 ms/op
+Iteration   3: 6,959 ms/op
+Iteration   4: 6,964 ms/op
+Iteration   5: 6,966 ms/op
+Iteration   6: 6,969 ms/op
+Iteration   7: 6,973 ms/op
+Iteration   8: 6,981 ms/op
+Iteration   9: 6,974 ms/op
+Iteration  10: 6,971 ms/op
+
+Result: 6,969 ▒(99.9%) 0,009 ms/op
+  Statistics: (min, avg, max) = (6,959, 6,969, 6,981), stdev = 0,006
+  Confidence interval (99.9%): [6,959, 6,978]
+
+
+# Run progress: 35,00% complete, ETA 00:08:16
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenBaseline
+# Warmup Iteration   1: 11,003 ms/op
+# Warmup Iteration   2: 10,808 ms/op
+# Warmup Iteration   3: 10,990 ms/op
+# Warmup Iteration   4: 10,857 ms/op
+# Warmup Iteration   5: 10,796 ms/op
+# Warmup Iteration   6: 10,884 ms/op
+# Warmup Iteration   7: 10,857 ms/op
+# Warmup Iteration   8: 10,816 ms/op
+# Warmup Iteration   9: 10,772 ms/op
+# Warmup Iteration  10: 10,876 ms/op
+Iteration   1: 10,777 ms/op
+Iteration   2: 10,794 ms/op
+Iteration   3: 10,838 ms/op
+Iteration   4: 10,840 ms/op
+Iteration   5: 10,826 ms/op
+Iteration   6: 10,769 ms/op
+Iteration   7: 10,813 ms/op
+Iteration   8: 10,762 ms/op
+Iteration   9: 10,762 ms/op
+Iteration  10: 10,871 ms/op
+
+Result: 10,805 ▒(99.9%) 0,058 ms/op
+  Statistics: (min, avg, max) = (10,762, 10,805, 10,871), stdev = 0,038
+  Confidence interval (99.9%): [10,747, 10,863]
+
+
+# Run progress: 40,00% complete, ETA 00:07:25
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenPar
+# Warmup Iteration   1: 6602,937 ms/op
+# Warmup Iteration   2: 9837,399 ms/op
+# Warmup Iteration   3: 9363,438 ms/op
+# Warmup Iteration   4: 9569,861 ms/op
+# Warmup Iteration   5: 9058,971 ms/op
+# Warmup Iteration   6: 8449,825 ms/op
+# Warmup Iteration   7: 8466,070 ms/op
+# Warmup Iteration   8: 8460,889 ms/op
+# Warmup Iteration   9: 8559,230 ms/op
+# Warmup Iteration  10: 8533,794 ms/op
+Iteration   1: 8565,326 ms/op
+Iteration   2: 8455,829 ms/op
+Iteration   3: 8537,750 ms/op
+Iteration   4: 8074,347 ms/op
+Iteration   5: 8402,423 ms/op
+Iteration   6: 8434,368 ms/op
+Iteration   7: 8042,883 ms/op
+Iteration   8: 8565,070 ms/op
+Iteration   9: 8455,663 ms/op
+Iteration  10: 8605,991 ms/op
+
+Result: 8413,965 ▒(99.9%) 300,274 ms/op
+  Statistics: (min, avg, max) = (8042,883, 8413,965, 8605,991), stdev = 198,613
+  Confidence interval (99.9%): [8113,691, 8714,239]
+
+
+# Run progress: 45,00% complete, ETA 00:09:39
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenParOpt
+# Warmup Iteration   1: 82,992 ms/op
+# Warmup Iteration   2: 62,328 ms/op
+# Warmup Iteration   3: 62,332 ms/op
+# Warmup Iteration   4: 62,288 ms/op
+# Warmup Iteration   5: 63,186 ms/op
+# Warmup Iteration   6: 65,362 ms/op
+# Warmup Iteration   7: 63,136 ms/op
+# Warmup Iteration   8: 62,314 ms/op
+# Warmup Iteration   9: 62,331 ms/op
+# Warmup Iteration  10: 62,270 ms/op
+Iteration   1: 62,285 ms/op
+Iteration   2: 62,294 ms/op
+Iteration   3: 62,267 ms/op
+Iteration   4: 62,268 ms/op
+Iteration   5: 62,280 ms/op
+Iteration   6: 62,238 ms/op
+Iteration   7: 62,253 ms/op
+Iteration   8: 62,256 ms/op
+Iteration   9: 62,253 ms/op
+Iteration  10: 62,249 ms/op
+
+Result: 62,264 ▒(99.9%) 0,027 ms/op
+  Statistics: (min, avg, max) = (62,238, 62,264, 62,294), stdev = 0,018
+  Confidence interval (99.9%): [62,238, 62,291]
+
+
+# Run progress: 50,00% complete, ETA 00:08:23
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenSeq
+# Warmup Iteration   1: 315,053 ms/op
+# Warmup Iteration   2: 285,703 ms/op
+# Warmup Iteration   3: 277,395 ms/op
+# Warmup Iteration   4: 286,505 ms/op
+# Warmup Iteration   5: 272,864 ms/op
+# Warmup Iteration   6: 288,038 ms/op
+# Warmup Iteration   7: 274,139 ms/op
+# Warmup Iteration   8: 284,094 ms/op
+# Warmup Iteration   9: 273,075 ms/op
+# Warmup Iteration  10: 290,488 ms/op
+Iteration   1: 275,703 ms/op
+Iteration   2: 290,624 ms/op
+Iteration   3: 272,875 ms/op
+Iteration   4: 284,538 ms/op
+Iteration   5: 275,304 ms/op
+Iteration   6: 287,107 ms/op
+Iteration   7: 271,517 ms/op
+Iteration   8: 285,955 ms/op
+Iteration   9: 273,005 ms/op
+Iteration  10: 287,256 ms/op
+
+Result: 280,388 ▒(99.9%) 11,073 ms/op
+  Statistics: (min, avg, max) = (271,517, 280,388, 290,624), stdev = 7,324
+  Confidence interval (99.9%): [269,316, 291,461]
+
+
+# Run progress: 55,00% complete, ETA 00:07:18
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenSeqOpt
+# Warmup Iteration   1: 91,318 ms/op
+# Warmup Iteration   2: 67,186 ms/op
+# Warmup Iteration   3: 67,195 ms/op
+# Warmup Iteration   4: 65,345 ms/op
+# Warmup Iteration   5: 66,270 ms/op
+# Warmup Iteration   6: 65,733 ms/op
+# Warmup Iteration   7: 66,632 ms/op
+# Warmup Iteration   8: 66,498 ms/op
+# Warmup Iteration   9: 66,177 ms/op
+# Warmup Iteration  10: 66,725 ms/op
+Iteration   1: 65,480 ms/op
+Iteration   2: 67,499 ms/op
+Iteration   3: 67,432 ms/op
+Iteration   4: 65,463 ms/op
+Iteration   5: 65,367 ms/op
+Iteration   6: 64,391 ms/op
+Iteration   7: 65,979 ms/op
+Iteration   8: 66,288 ms/op
+Iteration   9: 67,206 ms/op
+Iteration  10: 67,184 ms/op
+
+Result: 66,229 ▒(99.9%) 1,614 ms/op
+  Statistics: (min, avg, max) = (64,391, 66,229, 67,499), stdev = 1,068
+  Confidence interval (99.9%): [64,615, 67,843]
+
+
+# Run progress: 60,00% complete, ETA 00:06:16
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresPar
+# Warmup Iteration   1: 5243,742 ms/op
+# Warmup Iteration   2: 6368,254 ms/op
+# Warmup Iteration   3: 4681,675 ms/op
+# Warmup Iteration   4: 1718,892 ms/op
+# Warmup Iteration   5: 1718,954 ms/op
+# Warmup Iteration   6: 1719,087 ms/op
+# Warmup Iteration   7: 1718,892 ms/op
+# Warmup Iteration   8: 1797,263 ms/op
+# Warmup Iteration   9: 1727,051 ms/op
+# Warmup Iteration  10: 1711,028 ms/op
+Iteration   1: 1711,189 ms/op
+Iteration   2: 1711,087 ms/op
+Iteration   3: 1718,853 ms/op
+Iteration   4: 1719,153 ms/op
+Iteration   5: 1718,861 ms/op
+Iteration   6: 1718,880 ms/op
+Iteration   7: 1718,797 ms/op
+Iteration   8: 1719,032 ms/op
+Iteration   9: 1718,992 ms/op
+Iteration  10: 1719,139 ms/op
+
+Result: 1717,398 ▒(99.9%) 4,991 ms/op
+  Statistics: (min, avg, max) = (1711,087, 1717,398, 1719,153), stdev = 3,302
+  Confidence interval (99.9%): [1712,407, 1722,390]
+
+
+# Run progress: 65,00% complete, ETA 00:05:48
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresParOpt
+# Warmup Iteration   1: 48,745 ms/op
+# Warmup Iteration   2: 36,010 ms/op
+# Warmup Iteration   3: 35,651 ms/op
+# Warmup Iteration   4: 35,483 ms/op
+# Warmup Iteration   5: 35,554 ms/op
+# Warmup Iteration   6: 35,701 ms/op
+# Warmup Iteration   7: 35,453 ms/op
+# Warmup Iteration   8: 35,788 ms/op
+# Warmup Iteration   9: 35,539 ms/op
+# Warmup Iteration  10: 37,306 ms/op
+Iteration   1: 35,661 ms/op
+Iteration   2: 35,512 ms/op
+Iteration   3: 35,497 ms/op
+Iteration   4: 35,492 ms/op
+Iteration   5: 35,561 ms/op
+Iteration   6: 35,689 ms/op
+Iteration   7: 34,894 ms/op
+Iteration   8: 34,744 ms/op
+Iteration   9: 34,857 ms/op
+Iteration  10: 34,763 ms/op
+
+Result: 35,267 ▒(99.9%) 0,600 ms/op
+  Statistics: (min, avg, max) = (34,744, 35,267, 35,689), stdev = 0,397
+  Confidence interval (99.9%): [34,667, 35,867]
+
+
+# Run progress: 70,00% complete, ETA 00:04:49
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresSeq
+# Warmup Iteration   1: 153,629 ms/op
+# Warmup Iteration   2: 133,931 ms/op
+# Warmup Iteration   3: 135,369 ms/op
+# Warmup Iteration   4: 134,585 ms/op
+# Warmup Iteration   5: 137,247 ms/op
+# Warmup Iteration   6: 133,762 ms/op
+# Warmup Iteration   7: 133,904 ms/op
+# Warmup Iteration   8: 134,395 ms/op
+# Warmup Iteration   9: 133,859 ms/op
+# Warmup Iteration  10: 133,646 ms/op
+Iteration   1: 134,014 ms/op
+Iteration   2: 133,952 ms/op
+Iteration   3: 133,721 ms/op
+Iteration   4: 134,285 ms/op
+Iteration   5: 133,982 ms/op
+Iteration   6: 133,781 ms/op
+Iteration   7: 133,865 ms/op
+Iteration   8: 134,591 ms/op
+Iteration   9: 133,926 ms/op
+Iteration  10: 133,945 ms/op
+
+Result: 134,006 ▒(99.9%) 0,386 ms/op
+  Statistics: (min, avg, max) = (133,721, 134,006, 134,591), stdev = 0,255
+  Confidence interval (99.9%): [133,621, 134,392]
+
+
+# Run progress: 75,00% complete, ETA 00:03:55
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresSeqOpt
+# Warmup Iteration   1: 44,273 ms/op
+# Warmup Iteration   2: 35,608 ms/op
+# Warmup Iteration   3: 35,817 ms/op
+# Warmup Iteration   4: 35,503 ms/op
+# Warmup Iteration   5: 35,496 ms/op
+# Warmup Iteration   6: 35,582 ms/op
+# Warmup Iteration   7: 35,570 ms/op
+# Warmup Iteration   8: 35,504 ms/op
+# Warmup Iteration   9: 35,597 ms/op
+# Warmup Iteration  10: 35,576 ms/op
+Iteration   1: 35,455 ms/op
+Iteration   2: 36,254 ms/op
+Iteration   3: 36,240 ms/op
+Iteration   4: 36,020 ms/op
+Iteration   5: 35,938 ms/op
+Iteration   6: 35,781 ms/op
+Iteration   7: 35,759 ms/op
+Iteration   8: 35,936 ms/op
+Iteration   9: 36,277 ms/op
+Iteration  10: 35,503 ms/op
+
+Result: 35,916 ▒(99.9%) 0,447 ms/op
+  Statistics: (min, avg, max) = (35,455, 35,916, 36,277), stdev = 0,296
+  Confidence interval (99.9%): [35,469, 36,364]
+
+
+# Run progress: 80,00% complete, ETA 00:03:03
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumPar
+# Warmup Iteration   1: 4441,084 ms/op
+# Warmup Iteration   2: 3763,305 ms/op
+# Warmup Iteration   3: 3948,961 ms/op
+# Warmup Iteration   4: 1579,816 ms/op
+# Warmup Iteration   5: 1603,137 ms/op
+# Warmup Iteration   6: 1595,269 ms/op
+# Warmup Iteration   7: 1587,622 ms/op
+# Warmup Iteration   8: 1571,821 ms/op
+# Warmup Iteration   9: 1579,705 ms/op
+# Warmup Iteration  10: 1579,629 ms/op
+Iteration   1: 1572,266 ms/op
+Iteration   2: 1587,527 ms/op
+Iteration   3: 1587,875 ms/op
+Iteration   4: 1579,652 ms/op
+Iteration   5: 1587,468 ms/op
+Iteration   6: 1595,151 ms/op
+Iteration   7: 1580,045 ms/op
+Iteration   8: 1579,621 ms/op
+Iteration   9: 1595,313 ms/op
+Iteration  10: 1564,055 ms/op
+
+Result: 1582,897 ▒(99.9%) 14,854 ms/op
+  Statistics: (min, avg, max) = (1564,055, 1582,897, 1595,313), stdev = 9,825
+  Confidence interval (99.9%): [1568,043, 1597,752]
+
+
+# Run progress: 85,00% complete, ETA 00:02:22
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumParOpt
+# Warmup Iteration   1: 7,749 ms/op
+# Warmup Iteration   2: 7,030 ms/op
+# Warmup Iteration   3: 6,799 ms/op
+# Warmup Iteration   4: 6,765 ms/op
+# Warmup Iteration   5: 6,755 ms/op
+# Warmup Iteration   6: 6,713 ms/op
+# Warmup Iteration   7: 6,727 ms/op
+# Warmup Iteration   8: 6,727 ms/op
+# Warmup Iteration   9: 6,726 ms/op
+# Warmup Iteration  10: 6,729 ms/op
+Iteration   1: 6,719 ms/op
+Iteration   2: 6,702 ms/op
+Iteration   3: 6,725 ms/op
+Iteration   4: 6,727 ms/op
+Iteration   5: 6,700 ms/op
+Iteration   6: 6,766 ms/op
+Iteration   7: 6,725 ms/op
+Iteration   8: 6,703 ms/op
+Iteration   9: 6,821 ms/op
+Iteration  10: 6,726 ms/op
+
+Result: 6,731 ▒(99.9%) 0,055 ms/op
+  Statistics: (min, avg, max) = (6,700, 6,731, 6,821), stdev = 0,037
+  Confidence interval (99.9%): [6,676, 6,787]
+
+
+# Run progress: 90,00% complete, ETA 00:01:33
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumSeq
+# Warmup Iteration   1: 101,292 ms/op
+# Warmup Iteration   2: 90,934 ms/op
+# Warmup Iteration   3: 90,204 ms/op
+# Warmup Iteration   4: 90,749 ms/op
+# Warmup Iteration   5: 91,141 ms/op
+# Warmup Iteration   6: 90,350 ms/op
+# Warmup Iteration   7: 90,326 ms/op
+# Warmup Iteration   8: 90,763 ms/op
+# Warmup Iteration   9: 90,089 ms/op
+# Warmup Iteration  10: 90,314 ms/op
+Iteration   1: 90,152 ms/op
+Iteration   2: 90,056 ms/op
+Iteration   3: 90,453 ms/op
+Iteration   4: 90,232 ms/op
+Iteration   5: 90,474 ms/op
+Iteration   6: 90,098 ms/op
+Iteration   7: 90,219 ms/op
+Iteration   8: 91,922 ms/op
+Iteration   9: 91,826 ms/op
+Iteration  10: 90,417 ms/op
+
+Result: 90,585 ▒(99.9%) 1,051 ms/op
+  Statistics: (min, avg, max) = (90,056, 90,585, 91,922), stdev = 0,695
+  Confidence interval (99.9%): [89,534, 91,636]
+
+
+# Run progress: 95,00% complete, ETA 00:00:45
+# VM invoker: c:\Program Files\Java\jdk1.8.0_05\jre\bin\java.exe
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumSeqOpt
+# Warmup Iteration   1: 7,630 ms/op
+# Warmup Iteration   2: 6,914 ms/op
+# Warmup Iteration   3: 6,979 ms/op
+# Warmup Iteration   4: 6,903 ms/op
+# Warmup Iteration   5: 6,926 ms/op
+# Warmup Iteration   6: 6,914 ms/op
+# Warmup Iteration   7: 6,911 ms/op
+# Warmup Iteration   8: 6,899 ms/op
+# Warmup Iteration   9: 6,911 ms/op
+# Warmup Iteration  10: 6,906 ms/op
+Iteration   1: 6,906 ms/op
+Iteration   2: 6,924 ms/op
+Iteration   3: 6,906 ms/op
+Iteration   4: 6,896 ms/op
+Iteration   5: 6,899 ms/op
+Iteration   6: 6,908 ms/op
+Iteration   7: 6,902 ms/op
+Iteration   8: 6,901 ms/op
+Iteration   9: 6,926 ms/op
+Iteration  10: 6,911 ms/op
+
+Result: 6,908 ▒(99.9%) 0,015 ms/op
+  Statistics: (min, avg, max) = (6,896, 6,908, 6,926), stdev = 0,010
+  Confidence interval (99.9%): [6,893, 6,923]
+
+
+# Run complete. Total time: 00:14:56
+
+Benchmark                                     Mode   Samples         Mean   Mean error    Units
+b.ClashOfLambdas.cartBaseline                 avgt        10        4,315        0,023    ms/op
+b.ClashOfLambdas.cartPar                      avgt        10     4048,953       31,394    ms/op
+b.ClashOfLambdas.cartParOpt                 avgt        10      240,107        1,158    ms/op
+b.ClashOfLambdas.cartSeq                      avgt        10      138,075        1,000    ms/op
+b.ClashOfLambdas.cartSeqOpt                 avgt        10      167,215        0,719    ms/op
+b.ClashOfLambdas.sumBaseline                  avgt        10        6,881        0,014    ms/op
+b.ClashOfLambdas.sumOfSquaresBaseline         avgt        10        6,969        0,009    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenBaseline     avgt        10       10,805        0,058    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenPar          avgt        10     8413,965      300,274    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenParOpt     avgt        10       62,264        0,027    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeq          avgt        10      280,388       11,073    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeqOpt     avgt        10       66,229        1,614    ms/op
+b.ClashOfLambdas.sumOfSquaresPar              avgt        10     1717,398        4,991    ms/op
+b.ClashOfLambdas.sumOfSquaresParOpt         avgt        10       35,267        0,600    ms/op
+b.ClashOfLambdas.sumOfSquaresSeq              avgt        10      134,006        0,386    ms/op
+b.ClashOfLambdas.sumOfSquaresSeqOpt         avgt        10       35,916        0,447    ms/op
+b.ClashOfLambdas.sumPar                       avgt        10     1582,897       14,854    ms/op
+b.ClashOfLambdas.sumParOpt                  avgt        10        6,731        0,055    ms/op
+b.ClashOfLambdas.sumSeq                       avgt        10       90,585        1,051    ms/op
+b.ClashOfLambdas.sumSeqOpt                  avgt        10        6,908        0,015    ms/op
+# Compiling F#
+# Command: C:\"Program\ Files\ \(x86\)"\"Microsoft\ SDKs"\F#\\3.1\\Framework\\v4.0\\fsc.exe --optimize+ --checked- --nologo -r fsharp/lib/LinqOptimizer.Base.dll -r fsharp/lib/LinqOptimizer.Core.dll -r fsharp/lib/LinqOptimizer.FSharp.dll -r fsharp/lib/LambdaMicrobenchmarking.dll --out:build/fsharp/ClashOfLambdas.exe fsharp/ClashOfLambdas.fs
+# Benchmarking fsharp version
+# Command: build/fsharp/ClashOfLambdas.exe
+Benchmark                 	      Mean Mean-Error   Sdev  Unit
+sumBaseline              	         7       0,00   0,00 ms/op
+sumSeq                   	      63,2       0,96   0,63 ms/op
+sumSeqOpt                	       9,2       0,96   0,63 ms/op
+sumPar                   	      22,7       1,43   0,95 ms/op
+sumParOpt                	         6       0,00   0,00 ms/op
+sumOfSquaresBaseline     	       7,1       0,48   0,32 ms/op
+sumOfSquaresSeq          	     179,4       5,89   3,89 ms/op
+sumOfSquaresSeqOpt       	      11,2       0,64   0,42 ms/op
+sumOfSquaresPar          	      56,1       3,73   2,47 ms/op
+sumOfSquaresParOpt       	         6       0,00   0,00 ms/op
+sumOfSquaresEvenBaseline 	        11       0,00   0,00 ms/op
+sumOfSquaresEvenSeq      	     203,2       4,82   3,19 ms/op
+sumOfSquaresEvenSeqOpt   	        52       0,00   0,00 ms/op
+sumOfSquaresEvenPar      	      48,9       4,86   3,21 ms/op
+sumOfSquaresEvenParOpt   	         8       0,00   0,00 ms/op
+cartBaseline             	         6       0,00   0,00 ms/op
+cartSeq                  	     280,8       6,33   4,18 ms/op
+cartSeqOpt               	      11,6       0,78   0,52 ms/op
+cartPar                  	      63,2       8,98   5,94 ms/op
+cartParOpt               	         6       0,00   0,00 ms/op

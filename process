@@ -1,0 +1,58 @@
+#! /usr/bin/gawk -f
+
+# multidimentional arrays are essentially of single dimention.
+# here we parse effectively e.g., results[c#@sumBaseline].
+function printBenchOfLang (lang, bench) {
+    print bench ";" results[lang "\034" bench]
+}
+
+#enforcing ordering.
+function printLang (lang) {
+    print lang 
+    printBenchOfLang(lang,"sumBaseline")
+    printBenchOfLang(lang,"sumSeq")
+    printBenchOfLang(lang,"sumSeqOpt")
+    printBenchOfLang(lang,"sumPar")
+    printBenchOfLang(lang,"sumParOpt") 
+    printBenchOfLang(lang,"sumOfSquaresBaseline")
+    printBenchOfLang(lang,"sumOfSquaresSeq")
+    printBenchOfLang(lang,"sumOfSquaresSeqOpt") 
+    printBenchOfLang(lang,"sumOfSquaresPar")
+    printBenchOfLang(lang,"sumOfSquaresParOpt")
+    printBenchOfLang(lang,"sumOfSquaresEvenBaseline")
+    printBenchOfLang(lang,"sumOfSquaresEvenSeq")
+    printBenchOfLang(lang,"sumOfSquaresEvenSeqOpt")
+    printBenchOfLang(lang,"sumOfSquaresEvenPar")
+    printBenchOfLang(lang,"sumOfSquaresEvenParOpt") 
+    printBenchOfLang(lang,"cartBaseline")
+    printBenchOfLang(lang,"cartSeq")
+    printBenchOfLang(lang,"cartSeqOpt")
+    printBenchOfLang(lang,"cartPar")   
+    printBenchOfLang(lang,"cartParOpt")
+}
+
+/Compiling/ { lang = $3 }
+/\# Benchmark:/ { split($3, fname,"."); name = fname[3] }
+/Result:/ { mean = $2; meanerr = $4 }
+/Statistics:/ { 
+    sdev = $11; 
+    stats =  mean ";" meanerr ";" sdev
+    results[lang, name] = stats
+}
+/^sum|^cart/ {
+    name = $1;
+    mean = $2;
+    meanerr = $3;
+    sdev = $4;
+    stats =  mean ";" meanerr ";" sdev
+    results[lang, name] = stats
+}
+END {
+    split(FILENAME, filename, ".")
+    sub(".", substr(toupper(filename[2]), 1,1) , filename[2])
+    print filename[2]
+    printLang("Java")
+    printLang("Scala")
+    printLang("C#")
+    printLang("F#")
+}

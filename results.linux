@@ -1,0 +1,1216 @@
+# Compiling C#
+# Command: mcs /optimize+ /checked- /out:build/csharp/ClashOfLambdas.exe /r:csharp/lib/LinqOptimizer.CSharp.dll /r:csharp/lib/LinqOptimizer.Base.dll /r:csharp/lib/LinqOptimizer.Core.dll /r:csharp/lib/LambdaMicrobenchmarking.dll csharp/ClashOfLambdas.cs
+# Benchmarking csharp version
+# Command: mono build/csharp/ClashOfLambdas.exe
+Benchmark                 	      Mean Mean-Error   Sdev  Unit
+sumBaseline              	         9       0.00   0.00 ms/op
+sumSeq                   	     103.6       0.78   0.52 ms/op
+sumSeqOpt                	      11.1       0.48   0.32 ms/op
+sumPar                   	       252       7.20   4.76 ms/op
+sumParOpt                	      12.2       0.64   0.42 ms/op
+sumOfSquaresBaseline     	      14.8       2.23   1.48 ms/op
+sumOfSquaresSeq          	     229.1       1.50   0.99 ms/op
+sumOfSquaresSeqOpt       	        12       0.00   0.00 ms/op
+sumOfSquaresPar          	     465.6      69.22  45.79 ms/op
+sumOfSquaresParOpt       	       7.9       2.51   1.66 ms/op
+sumOfSquaresEvenBaseline 	     102.4       0.78   0.52 ms/op
+sumOfSquaresEvenSeq      	     229.8       1.99   1.32 ms/op
+sumOfSquaresEvenSeqOpt   	     102.6       0.78   0.52 ms/op
+sumOfSquaresEvenPar      	     474.7      47.09  31.15 ms/op
+sumOfSquaresEvenParOpt   	      48.2       2.23   1.48 ms/op
+cartBaseline             	      13.1       0.48   0.32 ms/op
+cartSeq                  	     258.3       1.60   1.06 ms/op
+cartSeqOpt               	        14       0.00   0.00 ms/op
+cartPar                  	     265.5      37.08  24.52 ms/op
+cartParOpt               	       8.3       0.73   0.48 ms/op
+# Compiling Java
+# Command: mvn -q -f java/pom.xml clean install -Dmaven.test.skip=true
+# Benchmarking java version
+# Command: java -Xms769m -Xmx769m -XX:-TieredCompilation  -jar build/java/microbenchmarks.jar -gc true -f 1 -i 10 -wi 10 -tu ms ".*" 
+# Run progress: 0.00% complete, ETA 00:04:00
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartBaseline
+# Warmup Iteration   1: 4.221 ms/op
+# Warmup Iteration   2: 4.231 ms/op
+# Warmup Iteration   3: 4.217 ms/op
+# Warmup Iteration   4: 4.252 ms/op
+# Warmup Iteration   5: 4.236 ms/op
+# Warmup Iteration   6: 4.241 ms/op
+# Warmup Iteration   7: 4.238 ms/op
+# Warmup Iteration   8: 4.236 ms/op
+# Warmup Iteration   9: 4.222 ms/op
+# Warmup Iteration  10: 4.220 ms/op
+Iteration   1: 4.219 ms/op
+Iteration   2: 4.213 ms/op
+Iteration   3: 4.227 ms/op
+Iteration   4: 4.238 ms/op
+Iteration   5: 4.235 ms/op
+Iteration   6: 4.234 ms/op
+Iteration   7: 4.225 ms/op
+Iteration   8: 4.224 ms/op
+Iteration   9: 4.229 ms/op
+Iteration  10: 4.262 ms/op
+
+Result : 4.230 ±(99.9%) 0.020 ms/op
+  Statistics: (min, avg, max) = (4.213, 4.230, 4.262), stdev = 0.013
+  Confidence interval (99.9%): [4.210, 4.251]
+
+
+# Run progress: 8.33% complete, ETA 00:04:35
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartPar
+# Warmup Iteration   1: 3.038 ms/op
+# Warmup Iteration   2: 2.431 ms/op
+# Warmup Iteration   3: 2.409 ms/op
+# Warmup Iteration   4: 2.366 ms/op
+# Warmup Iteration   5: 2.371 ms/op
+# Warmup Iteration   6: 2.394 ms/op
+# Warmup Iteration   7: 2.373 ms/op
+# Warmup Iteration   8: 2.352 ms/op
+# Warmup Iteration   9: 2.368 ms/op
+# Warmup Iteration  10: 2.385 ms/op
+Iteration   1: 2.371 ms/op
+Iteration   2: 2.372 ms/op
+Iteration   3: 2.390 ms/op
+Iteration   4: 2.358 ms/op
+Iteration   5: 2.402 ms/op
+Iteration   6: 2.370 ms/op
+Iteration   7: 2.370 ms/op
+Iteration   8: 2.362 ms/op
+Iteration   9: 2.355 ms/op
+Iteration  10: 2.378 ms/op
+
+Result : 2.373 ±(99.9%) 0.022 ms/op
+  Statistics: (min, avg, max) = (2.355, 2.373, 2.402), stdev = 0.014
+  Confidence interval (99.9%): [2.351, 2.394]
+
+
+# Run progress: 16.67% complete, ETA 00:04:08
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartSeq
+# Warmup Iteration   1: 5.783 ms/op
+# Warmup Iteration   2: 4.888 ms/op
+# Warmup Iteration   3: 4.850 ms/op
+# Warmup Iteration   4: 4.786 ms/op
+# Warmup Iteration   5: 4.742 ms/op
+# Warmup Iteration   6: 4.735 ms/op
+# Warmup Iteration   7: 4.744 ms/op
+# Warmup Iteration   8: 4.738 ms/op
+# Warmup Iteration   9: 4.748 ms/op
+# Warmup Iteration  10: 4.725 ms/op
+Iteration   1: 4.732 ms/op
+Iteration   2: 4.706 ms/op
+Iteration   3: 5.060 ms/op
+Iteration   4: 4.726 ms/op
+Iteration   5: 4.723 ms/op
+Iteration   6: 4.721 ms/op
+Iteration   7: 4.748 ms/op
+Iteration   8: 4.787 ms/op
+Iteration   9: 4.727 ms/op
+Iteration  10: 4.760 ms/op
+
+Result : 4.769 ±(99.9%) 0.158 ms/op
+  Statistics: (min, avg, max) = (4.706, 4.769, 5.060), stdev = 0.105
+  Confidence interval (99.9%): [4.611, 4.928]
+
+
+# Run progress: 25.00% complete, ETA 00:03:43
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumBaseline
+# Warmup Iteration   1: 6.894 ms/op
+# Warmup Iteration   2: 6.856 ms/op
+# Warmup Iteration   3: 6.879 ms/op
+# Warmup Iteration   4: 6.860 ms/op
+# Warmup Iteration   5: 6.890 ms/op
+# Warmup Iteration   6: 6.868 ms/op
+# Warmup Iteration   7: 6.924 ms/op
+# Warmup Iteration   8: 6.869 ms/op
+# Warmup Iteration   9: 6.873 ms/op
+# Warmup Iteration  10: 6.902 ms/op
+Iteration   1: 6.878 ms/op
+Iteration   2: 6.879 ms/op
+Iteration   3: 6.872 ms/op
+Iteration   4: 6.855 ms/op
+Iteration   5: 6.871 ms/op
+Iteration   6: 6.861 ms/op
+Iteration   7: 6.877 ms/op
+Iteration   8: 6.863 ms/op
+Iteration   9: 6.864 ms/op
+Iteration  10: 6.845 ms/op
+
+Result : 6.867 ±(99.9%) 0.017 ms/op
+  Statistics: (min, avg, max) = (6.845, 6.867, 6.879), stdev = 0.011
+  Confidence interval (99.9%): [6.850, 6.883]
+
+
+# Run progress: 33.33% complete, ETA 00:03:18
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresBaseline
+# Warmup Iteration   1: 7.018 ms/op
+# Warmup Iteration   2: 7.020 ms/op
+# Warmup Iteration   3: 7.057 ms/op
+# Warmup Iteration   4: 7.053 ms/op
+# Warmup Iteration   5: 7.055 ms/op
+# Warmup Iteration   6: 7.052 ms/op
+# Warmup Iteration   7: 7.041 ms/op
+# Warmup Iteration   8: 7.021 ms/op
+# Warmup Iteration   9: 7.045 ms/op
+# Warmup Iteration  10: 7.022 ms/op
+Iteration   1: 7.013 ms/op
+Iteration   2: 7.045 ms/op
+Iteration   3: 7.048 ms/op
+Iteration   4: 7.048 ms/op
+Iteration   5: 7.042 ms/op
+Iteration   6: 7.033 ms/op
+Iteration   7: 7.037 ms/op
+Iteration   8: 7.055 ms/op
+Iteration   9: 7.031 ms/op
+Iteration  10: 7.034 ms/op
+
+Result : 7.038 ±(99.9%) 0.018 ms/op
+  Statistics: (min, avg, max) = (7.013, 7.038, 7.055), stdev = 0.012
+  Confidence interval (99.9%): [7.021, 7.056]
+
+
+# Run progress: 41.67% complete, ETA 00:02:54
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenBaseline
+# Warmup Iteration   1: 11.155 ms/op
+# Warmup Iteration   2: 11.169 ms/op
+# Warmup Iteration   3: 11.162 ms/op
+# Warmup Iteration   4: 11.208 ms/op
+# Warmup Iteration   5: 11.247 ms/op
+# Warmup Iteration   6: 11.232 ms/op
+# Warmup Iteration   7: 11.188 ms/op
+# Warmup Iteration   8: 11.245 ms/op
+# Warmup Iteration   9: 11.255 ms/op
+# Warmup Iteration  10: 11.212 ms/op
+Iteration   1: 11.272 ms/op
+Iteration   2: 11.171 ms/op
+Iteration   3: 11.213 ms/op
+Iteration   4: 11.165 ms/op
+Iteration   5: 11.282 ms/op
+Iteration   6: 11.141 ms/op
+Iteration   7: 11.149 ms/op
+Iteration   8: 11.237 ms/op
+Iteration   9: 11.219 ms/op
+Iteration  10: 11.155 ms/op
+
+Result : 11.200 ±(99.9%) 0.078 ms/op
+  Statistics: (min, avg, max) = (11.141, 11.200, 11.282), stdev = 0.051
+  Confidence interval (99.9%): [11.123, 11.278]
+
+
+# Run progress: 50.00% complete, ETA 00:02:29
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenPar
+# Warmup Iteration   1: 10.919 ms/op
+# Warmup Iteration   2: 11.962 ms/op
+# Warmup Iteration   3: 11.819 ms/op
+# Warmup Iteration   4: 10.757 ms/op
+# Warmup Iteration   5: 10.574 ms/op
+# Warmup Iteration   6: 10.567 ms/op
+# Warmup Iteration   7: 10.627 ms/op
+# Warmup Iteration   8: 10.682 ms/op
+# Warmup Iteration   9: 10.602 ms/op
+# Warmup Iteration  10: 10.556 ms/op
+Iteration   1: 10.569 ms/op
+Iteration   2: 10.599 ms/op
+Iteration   3: 10.487 ms/op
+Iteration   4: 10.583 ms/op
+Iteration   5: 10.564 ms/op
+Iteration   6: 10.499 ms/op
+Iteration   7: 10.527 ms/op
+Iteration   8: 10.501 ms/op
+Iteration   9: 10.546 ms/op
+Iteration  10: 10.507 ms/op
+
+Result : 10.538 ±(99.9%) 0.060 ms/op
+  Statistics: (min, avg, max) = (10.487, 10.538, 10.599), stdev = 0.040
+  Confidence interval (99.9%): [10.478, 10.598]
+
+
+# Run progress: 58.33% complete, ETA 00:02:04
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenSeq
+# Warmup Iteration   1: 17.191 ms/op
+# Warmup Iteration   2: 17.082 ms/op
+# Warmup Iteration   3: 17.002 ms/op
+# Warmup Iteration   4: 16.957 ms/op
+# Warmup Iteration   5: 16.928 ms/op
+# Warmup Iteration   6: 17.078 ms/op
+# Warmup Iteration   7: 16.987 ms/op
+# Warmup Iteration   8: 17.028 ms/op
+# Warmup Iteration   9: 17.001 ms/op
+# Warmup Iteration  10: 17.029 ms/op
+Iteration   1: 17.048 ms/op
+Iteration   2: 16.986 ms/op
+Iteration   3: 17.003 ms/op
+Iteration   4: 17.012 ms/op
+Iteration   5: 16.993 ms/op
+Iteration   6: 17.089 ms/op
+Iteration   7: 16.972 ms/op
+Iteration   8: 17.102 ms/op
+Iteration   9: 16.992 ms/op
+Iteration  10: 17.164 ms/op
+
+Result : 17.036 ±(99.9%) 0.095 ms/op
+  Statistics: (min, avg, max) = (16.972, 17.036, 17.164), stdev = 0.063
+  Confidence interval (99.9%): [16.941, 17.131]
+
+
+# Run progress: 66.67% complete, ETA 00:01:39
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresPar
+# Warmup Iteration   1: 7.313 ms/op
+# Warmup Iteration   2: 7.179 ms/op
+# Warmup Iteration   3: 7.230 ms/op
+# Warmup Iteration   4: 7.064 ms/op
+# Warmup Iteration   5: 7.121 ms/op
+# Warmup Iteration   6: 7.062 ms/op
+# Warmup Iteration   7: 7.044 ms/op
+# Warmup Iteration   8: 7.034 ms/op
+# Warmup Iteration   9: 7.048 ms/op
+# Warmup Iteration  10: 7.036 ms/op
+Iteration   1: 7.030 ms/op
+Iteration   2: 7.056 ms/op
+Iteration   3: 7.021 ms/op
+Iteration   4: 7.036 ms/op
+Iteration   5: 7.017 ms/op
+Iteration   6: 6.999 ms/op
+Iteration   7: 7.015 ms/op
+Iteration   8: 7.017 ms/op
+Iteration   9: 7.019 ms/op
+Iteration  10: 7.008 ms/op
+
+Result : 7.022 ±(99.9%) 0.024 ms/op
+  Statistics: (min, avg, max) = (6.999, 7.022, 7.056), stdev = 0.016
+  Confidence interval (99.9%): [6.998, 7.046]
+
+
+# Run progress: 75.00% complete, ETA 00:01:14
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresSeq
+# Warmup Iteration   1: 7.165 ms/op
+# Warmup Iteration   2: 7.065 ms/op
+# Warmup Iteration   3: 7.083 ms/op
+# Warmup Iteration   4: 7.057 ms/op
+# Warmup Iteration   5: 7.060 ms/op
+# Warmup Iteration   6: 7.054 ms/op
+# Warmup Iteration   7: 7.049 ms/op
+# Warmup Iteration   8: 7.078 ms/op
+# Warmup Iteration   9: 7.081 ms/op
+# Warmup Iteration  10: 7.075 ms/op
+Iteration   1: 7.055 ms/op
+Iteration   2: 7.061 ms/op
+Iteration   3: 7.081 ms/op
+Iteration   4: 7.067 ms/op
+Iteration   5: 7.051 ms/op
+Iteration   6: 7.046 ms/op
+Iteration   7: 7.055 ms/op
+Iteration   8: 7.044 ms/op
+Iteration   9: 7.074 ms/op
+Iteration  10: 7.072 ms/op
+
+Result : 7.061 ±(99.9%) 0.019 ms/op
+  Statistics: (min, avg, max) = (7.044, 7.061, 7.081), stdev = 0.013
+  Confidence interval (99.9%): [7.042, 7.080]
+
+
+# Run progress: 83.33% complete, ETA 00:00:49
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumPar
+# Warmup Iteration   1: 7.304 ms/op
+# Warmup Iteration   2: 7.171 ms/op
+# Warmup Iteration   3: 7.139 ms/op
+# Warmup Iteration   4: 7.132 ms/op
+# Warmup Iteration   5: 7.103 ms/op
+# Warmup Iteration   6: 7.041 ms/op
+# Warmup Iteration   7: 7.057 ms/op
+# Warmup Iteration   8: 7.077 ms/op
+# Warmup Iteration   9: 7.058 ms/op
+# Warmup Iteration  10: 7.032 ms/op
+Iteration   1: 7.040 ms/op
+Iteration   2: 7.050 ms/op
+Iteration   3: 7.061 ms/op
+Iteration   4: 7.046 ms/op
+Iteration   5: 7.061 ms/op
+Iteration   6: 7.049 ms/op
+Iteration   7: 7.027 ms/op
+Iteration   8: 7.035 ms/op
+Iteration   9: 7.025 ms/op
+Iteration  10: 7.037 ms/op
+
+Result : 7.043 ±(99.9%) 0.019 ms/op
+  Statistics: (min, avg, max) = (7.025, 7.043, 7.061), stdev = 0.012
+  Confidence interval (99.9%): [7.024, 7.062]
+
+
+# Run progress: 91.67% complete, ETA 00:00:24
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumSeq
+# Warmup Iteration   1: 6.940 ms/op
+# Warmup Iteration   2: 6.881 ms/op
+# Warmup Iteration   3: 6.915 ms/op
+# Warmup Iteration   4: 6.912 ms/op
+# Warmup Iteration   5: 6.915 ms/op
+# Warmup Iteration   6: 6.912 ms/op
+# Warmup Iteration   7: 6.922 ms/op
+# Warmup Iteration   8: 6.891 ms/op
+# Warmup Iteration   9: 6.928 ms/op
+# Warmup Iteration  10: 6.920 ms/op
+Iteration   1: 6.907 ms/op
+Iteration   2: 6.908 ms/op
+Iteration   3: 6.914 ms/op
+Iteration   4: 6.899 ms/op
+Iteration   5: 6.915 ms/op
+Iteration   6: 6.921 ms/op
+Iteration   7: 6.912 ms/op
+Iteration   8: 6.913 ms/op
+Iteration   9: 6.912 ms/op
+Iteration  10: 6.913 ms/op
+
+Result : 6.911 ±(99.9%) 0.009 ms/op
+  Statistics: (min, avg, max) = (6.899, 6.911, 6.921), stdev = 0.006
+  Confidence interval (99.9%): [6.903, 6.920]
+
+
+Benchmark                                     Mode   Samples         Mean   Mean error    Units
+b.ClashOfLambdas.cartBaseline                 avgt        10        4.230        0.020    ms/op
+b.ClashOfLambdas.cartPar                      avgt        10        2.373        0.022    ms/op
+b.ClashOfLambdas.cartSeq                      avgt        10        4.769        0.158    ms/op
+b.ClashOfLambdas.sumBaseline                  avgt        10        6.867        0.017    ms/op
+b.ClashOfLambdas.sumOfSquaresBaseline         avgt        10        7.038        0.018    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenBaseline     avgt        10       11.200        0.078    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenPar          avgt        10       10.538        0.060    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeq          avgt        10       17.036        0.095    ms/op
+b.ClashOfLambdas.sumOfSquaresPar              avgt        10        7.022        0.024    ms/op
+b.ClashOfLambdas.sumOfSquaresSeq              avgt        10        7.061        0.019    ms/op
+b.ClashOfLambdas.sumPar                       avgt        10        7.043        0.019    ms/op
+b.ClashOfLambdas.sumSeq                       avgt        10        6.911        0.009    ms/op
+# Compiling Scala
+# Command: mvn -q -f scala/pom.xml clean install -Dmaven.test.skip=true
+Processing 38 classes from /home/bibou/Projects/clashofthelambdas/scala/target/classes
+Writing out Java source to /home/bibou/Projects/clashofthelambdas/scala/target/generated-sources/jmh and resources to /home/bibou/Projects/clashofthelambdas/scala/target/classes
+# Benchmarking scala version
+# Command: java -Xms769m -Xmx769m -XX:-TieredCompilation  -jar build/scala/microbenchmarks.jar -gc true -f 1 -i 10 -wi 10 -tu ms ".*" 
+# Run progress: 0.00% complete, ETA 00:06:40
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartBaseline
+# Warmup Iteration   1: 4.339 ms/op
+# Warmup Iteration   2: 4.311 ms/op
+# Warmup Iteration   3: 4.332 ms/op
+# Warmup Iteration   4: 4.332 ms/op
+# Warmup Iteration   5: 4.345 ms/op
+# Warmup Iteration   6: 4.353 ms/op
+# Warmup Iteration   7: 4.324 ms/op
+# Warmup Iteration   8: 4.330 ms/op
+# Warmup Iteration   9: 4.319 ms/op
+# Warmup Iteration  10: 4.332 ms/op
+Iteration   1: 4.319 ms/op
+Iteration   2: 4.327 ms/op
+Iteration   3: 4.303 ms/op
+Iteration   4: 4.325 ms/op
+Iteration   5: 4.306 ms/op
+Iteration   6: 4.326 ms/op
+Iteration   7: 4.346 ms/op
+Iteration   8: 4.336 ms/op
+Iteration   9: 4.351 ms/op
+Iteration  10: 4.350 ms/op
+
+Result: 4.329 ±(99.9%) 0.026 ms/op
+  Statistics: (min, avg, max) = (4.303, 4.329, 4.351), stdev = 0.017
+  Confidence interval (99.9%): [4.303, 4.355]
+
+
+# Run progress: 5.00% complete, ETA 00:09:17
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartPar
+# Warmup Iteration   1: 4186.182 ms/op
+# Warmup Iteration   2: 3253.018 ms/op
+# Warmup Iteration   3: 3211.332 ms/op
+# Warmup Iteration   4: 3216.820 ms/op
+# Warmup Iteration   5: 3157.414 ms/op
+# Warmup Iteration   6: 3262.135 ms/op
+# Warmup Iteration   7: 1700.372 ms/op
+# Warmup Iteration   8: 3234.737 ms/op
+# Warmup Iteration   9: 3203.901 ms/op
+# Warmup Iteration  10: 3232.949 ms/op
+Iteration   1: 3232.807 ms/op
+Iteration   2: 3199.142 ms/op
+Iteration   3: 3201.472 ms/op
+Iteration   4: 3219.312 ms/op
+Iteration   5: 3170.457 ms/op
+Iteration   6: 3218.990 ms/op
+Iteration   7: 3237.142 ms/op
+Iteration   8: 3212.206 ms/op
+Iteration   9: 3242.760 ms/op
+Iteration  10: 3238.564 ms/op
+
+Result: 3217.285 ±(99.9%) 33.963 ms/op
+  Statistics: (min, avg, max) = (3170.457, 3217.285, 3242.760), stdev = 22.465
+  Confidence interval (99.9%): [3183.322, 3251.248]
+
+
+# Run progress: 10.00% complete, ETA 00:14:53
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartParOpt
+# Warmup Iteration   1: 383.418 ms/op
+# Warmup Iteration   2: 285.175 ms/op
+# Warmup Iteration   3: 278.214 ms/op
+# Warmup Iteration   4: 267.045 ms/op
+# Warmup Iteration   5: 271.249 ms/op
+# Warmup Iteration   6: 269.132 ms/op
+# Warmup Iteration   7: 268.648 ms/op
+# Warmup Iteration   8: 268.840 ms/op
+# Warmup Iteration   9: 287.132 ms/op
+# Warmup Iteration  10: 267.290 ms/op
+Iteration   1: 270.248 ms/op
+Iteration   2: 280.946 ms/op
+Iteration   3: 266.410 ms/op
+Iteration   4: 268.807 ms/op
+Iteration   5: 265.486 ms/op
+Iteration   6: 268.699 ms/op
+Iteration   7: 266.044 ms/op
+Iteration   8: 268.796 ms/op
+Iteration   9: 268.139 ms/op
+Iteration  10: 265.528 ms/op
+
+Result: 268.910 ±(99.9%) 6.854 ms/op
+  Statistics: (min, avg, max) = (265.486, 268.910, 280.946), stdev = 4.533
+  Confidence interval (99.9%): [262.057, 275.764]
+
+
+# Run progress: 15.00% complete, ETA 00:12:29
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartSeq
+# Warmup Iteration   1: 185.364 ms/op
+# Warmup Iteration   2: 163.184 ms/op
+# Warmup Iteration   3: 157.527 ms/op
+# Warmup Iteration   4: 158.467 ms/op
+# Warmup Iteration   5: 155.488 ms/op
+# Warmup Iteration   6: 160.620 ms/op
+# Warmup Iteration   7: 159.274 ms/op
+# Warmup Iteration   8: 154.231 ms/op
+# Warmup Iteration   9: 154.084 ms/op
+# Warmup Iteration  10: 157.656 ms/op
+Iteration   1: 156.585 ms/op
+Iteration   2: 153.352 ms/op
+Iteration   3: 156.559 ms/op
+Iteration   4: 159.147 ms/op
+Iteration   5: 156.865 ms/op
+Iteration   6: 155.578 ms/op
+Iteration   7: 155.649 ms/op
+Iteration   8: 156.838 ms/op
+Iteration   9: 158.520 ms/op
+Iteration  10: 155.813 ms/op
+
+Result: 156.491 ±(99.9%) 2.432 ms/op
+  Statistics: (min, avg, max) = (153.352, 156.491, 159.147), stdev = 1.609
+  Confidence interval (99.9%): [154.058, 158.923]
+
+
+# Run progress: 20.00% complete, ETA 00:10:51
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.cartSeqOpt
+# Warmup Iteration   1: 283.056 ms/op
+# Warmup Iteration   2: 199.450 ms/op
+# Warmup Iteration   3: 189.066 ms/op
+# Warmup Iteration   4: 187.254 ms/op
+# Warmup Iteration   5: 189.113 ms/op
+# Warmup Iteration   6: 186.311 ms/op
+# Warmup Iteration   7: 184.062 ms/op
+# Warmup Iteration   8: 188.302 ms/op
+# Warmup Iteration   9: 187.807 ms/op
+# Warmup Iteration  10: 188.904 ms/op
+Iteration   1: 187.574 ms/op
+Iteration   2: 185.429 ms/op
+Iteration   3: 185.940 ms/op
+Iteration   4: 189.294 ms/op
+Iteration   5: 186.217 ms/op
+Iteration   6: 187.037 ms/op
+Iteration   7: 190.046 ms/op
+Iteration   8: 185.562 ms/op
+Iteration   9: 185.702 ms/op
+Iteration  10: 188.672 ms/op
+
+Result: 187.147 ±(99.9%) 2.540 ms/op
+  Statistics: (min, avg, max) = (185.429, 187.147, 190.046), stdev = 1.680
+  Confidence interval (99.9%): [184.607, 189.688]
+
+
+# Run progress: 25.00% complete, ETA 00:09:36
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumBaseline
+# Warmup Iteration   1: 6.887 ms/op
+# Warmup Iteration   2: 6.955 ms/op
+# Warmup Iteration   3: 7.029 ms/op
+# Warmup Iteration   4: 6.995 ms/op
+# Warmup Iteration   5: 6.962 ms/op
+# Warmup Iteration   6: 6.990 ms/op
+# Warmup Iteration   7: 6.980 ms/op
+# Warmup Iteration   8: 6.974 ms/op
+# Warmup Iteration   9: 7.023 ms/op
+# Warmup Iteration  10: 6.989 ms/op
+Iteration   1: 6.987 ms/op
+Iteration   2: 6.974 ms/op
+Iteration   3: 6.974 ms/op
+Iteration   4: 7.010 ms/op
+Iteration   5: 6.998 ms/op
+Iteration   6: 6.989 ms/op
+Iteration   7: 6.995 ms/op
+Iteration   8: 6.966 ms/op
+Iteration   9: 6.983 ms/op
+Iteration  10: 7.040 ms/op
+
+Result: 6.992 ±(99.9%) 0.032 ms/op
+  Statistics: (min, avg, max) = (6.966, 6.992, 7.040), stdev = 0.021
+  Confidence interval (99.9%): [6.959, 7.024]
+
+
+# Run progress: 30.00% complete, ETA 00:08:37
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresBaseline
+# Warmup Iteration   1: 7.032 ms/op
+# Warmup Iteration   2: 7.113 ms/op
+# Warmup Iteration   3: 7.116 ms/op
+# Warmup Iteration   4: 7.121 ms/op
+# Warmup Iteration   5: 7.123 ms/op
+# Warmup Iteration   6: 7.131 ms/op
+# Warmup Iteration   7: 7.148 ms/op
+# Warmup Iteration   8: 7.132 ms/op
+# Warmup Iteration   9: 7.126 ms/op
+# Warmup Iteration  10: 7.130 ms/op
+Iteration   1: 7.196 ms/op
+Iteration   2: 7.151 ms/op
+Iteration   3: 7.210 ms/op
+Iteration   4: 7.160 ms/op
+Iteration   5: 7.156 ms/op
+Iteration   6: 7.139 ms/op
+Iteration   7: 7.128 ms/op
+Iteration   8: 7.330 ms/op
+Iteration   9: 6.886 ms/op
+Iteration  10: 6.898 ms/op
+
+Result: 7.126 ±(99.9%) 0.205 ms/op
+  Statistics: (min, avg, max) = (6.886, 7.126, 7.330), stdev = 0.136
+  Confidence interval (99.9%): [6.920, 7.331]
+
+
+# Run progress: 35.00% complete, ETA 00:07:46
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenBaseline
+# Warmup Iteration   1: 10.879 ms/op
+# Warmup Iteration   2: 10.879 ms/op
+# Warmup Iteration   3: 10.980 ms/op
+# Warmup Iteration   4: 10.918 ms/op
+# Warmup Iteration   5: 10.902 ms/op
+# Warmup Iteration   6: 10.892 ms/op
+# Warmup Iteration   7: 10.852 ms/op
+# Warmup Iteration   8: 10.880 ms/op
+# Warmup Iteration   9: 10.863 ms/op
+# Warmup Iteration  10: 10.892 ms/op
+Iteration   1: 10.910 ms/op
+Iteration   2: 10.916 ms/op
+Iteration   3: 10.871 ms/op
+Iteration   4: 10.978 ms/op
+Iteration   5: 10.872 ms/op
+Iteration   6: 10.905 ms/op
+Iteration   7: 10.863 ms/op
+Iteration   8: 10.918 ms/op
+Iteration   9: 10.873 ms/op
+Iteration  10: 10.887 ms/op
+
+Result: 10.899 ±(99.9%) 0.052 ms/op
+  Statistics: (min, avg, max) = (10.863, 10.899, 10.978), stdev = 0.034
+  Confidence interval (99.9%): [10.847, 10.951]
+
+
+# Run progress: 40.00% complete, ETA 00:07:00
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenPar
+# Warmup Iteration   1: 5558.754 ms/op
+# Warmup Iteration   2: 8226.325 ms/op
+# Warmup Iteration   3: 8026.067 ms/op
+# Warmup Iteration   4: 7869.608 ms/op
+# Warmup Iteration   5: 7357.531 ms/op
+# Warmup Iteration   6: 7108.300 ms/op
+# Warmup Iteration   7: 6912.087 ms/op
+# Warmup Iteration   8: 6734.632 ms/op
+# Warmup Iteration   9: 7049.674 ms/op
+# Warmup Iteration  10: 7037.675 ms/op
+Iteration   1: 6772.040 ms/op
+Iteration   2: 7110.641 ms/op
+Iteration   3: 6984.098 ms/op
+Iteration   4: 7016.089 ms/op
+Iteration   5: 6443.700 ms/op
+Iteration   6: 6921.480 ms/op
+Iteration   7: 6823.658 ms/op
+Iteration   8: 6979.456 ms/op
+Iteration   9: 7057.342 ms/op
+Iteration  10: 6314.792 ms/op
+
+Result: 6842.330 ±(99.9%) 401.922 ms/op
+  Statistics: (min, avg, max) = (6314.792, 6842.330, 7110.641), stdev = 265.847
+  Confidence interval (99.9%): [6440.407, 7244.252]
+
+
+# Run progress: 45.00% complete, ETA 00:08:42
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenParOpt
+# Warmup Iteration   1: 95.070 ms/op
+# Warmup Iteration   2: 69.877 ms/op
+# Warmup Iteration   3: 70.436 ms/op
+# Warmup Iteration   4: 71.962 ms/op
+# Warmup Iteration   5: 68.905 ms/op
+# Warmup Iteration   6: 74.091 ms/op
+# Warmup Iteration   7: 68.202 ms/op
+# Warmup Iteration   8: 68.789 ms/op
+# Warmup Iteration   9: 68.456 ms/op
+# Warmup Iteration  10: 69.584 ms/op
+Iteration   1: 68.271 ms/op
+Iteration   2: 68.183 ms/op
+Iteration   3: 68.924 ms/op
+Iteration   4: 70.955 ms/op
+Iteration   5: 68.120 ms/op
+Iteration   6: 68.775 ms/op
+Iteration   7: 68.006 ms/op
+Iteration   8: 69.946 ms/op
+Iteration   9: 68.291 ms/op
+Iteration  10: 68.138 ms/op
+
+Result: 68.761 ±(99.9%) 1.461 ms/op
+  Statistics: (min, avg, max) = (68.006, 68.761, 70.955), stdev = 0.967
+  Confidence interval (99.9%): [67.300, 70.222]
+
+
+# Run progress: 50.00% complete, ETA 00:07:36
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenSeq
+# Warmup Iteration   1: 350.054 ms/op
+# Warmup Iteration   2: 310.538 ms/op
+# Warmup Iteration   3: 295.917 ms/op
+# Warmup Iteration   4: 294.832 ms/op
+# Warmup Iteration   5: 297.610 ms/op
+# Warmup Iteration   6: 296.356 ms/op
+# Warmup Iteration   7: 290.991 ms/op
+# Warmup Iteration   8: 293.165 ms/op
+# Warmup Iteration   9: 298.273 ms/op
+# Warmup Iteration  10: 295.775 ms/op
+Iteration   1: 293.910 ms/op
+Iteration   2: 291.580 ms/op
+Iteration   3: 292.011 ms/op
+Iteration   4: 295.148 ms/op
+Iteration   5: 295.315 ms/op
+Iteration   6: 296.583 ms/op
+Iteration   7: 295.282 ms/op
+Iteration   8: 293.511 ms/op
+Iteration   9: 296.443 ms/op
+Iteration  10: 300.014 ms/op
+
+Result: 294.980 ±(99.9%) 3.702 ms/op
+  Statistics: (min, avg, max) = (291.580, 294.980, 300.014), stdev = 2.449
+  Confidence interval (99.9%): [291.278, 298.681]
+
+
+# Run progress: 55.00% complete, ETA 00:06:37
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresEvenSeqOpt
+# Warmup Iteration   1: 95.840 ms/op
+# Warmup Iteration   2: 72.412 ms/op
+# Warmup Iteration   3: 72.323 ms/op
+# Warmup Iteration   4: 72.036 ms/op
+# Warmup Iteration   5: 72.975 ms/op
+# Warmup Iteration   6: 73.240 ms/op
+# Warmup Iteration   7: 72.460 ms/op
+# Warmup Iteration   8: 73.018 ms/op
+# Warmup Iteration   9: 72.631 ms/op
+# Warmup Iteration  10: 73.048 ms/op
+Iteration   1: 71.601 ms/op
+Iteration   2: 73.790 ms/op
+Iteration   3: 71.845 ms/op
+Iteration   4: 73.290 ms/op
+Iteration   5: 72.772 ms/op
+Iteration   6: 73.658 ms/op
+Iteration   7: 71.606 ms/op
+Iteration   8: 72.720 ms/op
+Iteration   9: 72.081 ms/op
+Iteration  10: 71.799 ms/op
+
+Result: 72.516 ±(99.9%) 1.280 ms/op
+  Statistics: (min, avg, max) = (71.601, 72.516, 73.790), stdev = 0.847
+  Confidence interval (99.9%): [71.236, 73.796]
+
+
+# Run progress: 60.00% complete, ETA 00:05:43
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresPar
+# Warmup Iteration   1: 4234.922 ms/op
+# Warmup Iteration   2: 5275.120 ms/op
+# Warmup Iteration   3: 3930.782 ms/op
+# Warmup Iteration   4: 1378.124 ms/op
+# Warmup Iteration   5: 1394.266 ms/op
+# Warmup Iteration   6: 1374.542 ms/op
+# Warmup Iteration   7: 1376.167 ms/op
+# Warmup Iteration   8: 1391.047 ms/op
+# Warmup Iteration   9: 1372.449 ms/op
+# Warmup Iteration  10: 1351.582 ms/op
+Iteration   1: 1374.540 ms/op
+Iteration   2: 1384.262 ms/op
+Iteration   3: 1395.018 ms/op
+Iteration   4: 1376.549 ms/op
+Iteration   5: 1378.203 ms/op
+Iteration   6: 1377.188 ms/op
+Iteration   7: 1378.520 ms/op
+Iteration   8: 1376.221 ms/op
+Iteration   9: 1377.984 ms/op
+Iteration  10: 1397.693 ms/op
+
+Result: 1381.618 ±(99.9%) 12.385 ms/op
+  Statistics: (min, avg, max) = (1374.540, 1381.618, 1397.693), stdev = 8.192
+  Confidence interval (99.9%): [1369.233, 1394.003]
+
+
+# Run progress: 65.00% complete, ETA 00:05:13
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresParOpt
+# Warmup Iteration   1: 61.321 ms/op
+# Warmup Iteration   2: 44.653 ms/op
+# Warmup Iteration   3: 44.176 ms/op
+# Warmup Iteration   4: 44.172 ms/op
+# Warmup Iteration   5: 44.209 ms/op
+# Warmup Iteration   6: 44.070 ms/op
+# Warmup Iteration   7: 44.073 ms/op
+# Warmup Iteration   8: 44.238 ms/op
+# Warmup Iteration   9: 44.129 ms/op
+# Warmup Iteration  10: 43.954 ms/op
+Iteration   1: 43.945 ms/op
+Iteration   2: 43.884 ms/op
+Iteration   3: 43.925 ms/op
+Iteration   4: 44.111 ms/op
+Iteration   5: 44.294 ms/op
+Iteration   6: 44.017 ms/op
+Iteration   7: 43.880 ms/op
+Iteration   8: 43.890 ms/op
+Iteration   9: 43.879 ms/op
+Iteration  10: 43.893 ms/op
+
+Result: 43.972 ±(99.9%) 0.205 ms/op
+  Statistics: (min, avg, max) = (43.879, 43.972, 44.294), stdev = 0.136
+  Confidence interval (99.9%): [43.767, 44.177]
+
+
+# Run progress: 70.00% complete, ETA 00:04:22
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresSeq
+# Warmup Iteration   1: 173.455 ms/op
+# Warmup Iteration   2: 152.284 ms/op
+# Warmup Iteration   3: 149.125 ms/op
+# Warmup Iteration   4: 144.518 ms/op
+# Warmup Iteration   5: 144.561 ms/op
+# Warmup Iteration   6: 146.135 ms/op
+# Warmup Iteration   7: 150.067 ms/op
+# Warmup Iteration   8: 149.395 ms/op
+# Warmup Iteration   9: 147.858 ms/op
+# Warmup Iteration  10: 148.814 ms/op
+Iteration   1: 147.275 ms/op
+Iteration   2: 147.465 ms/op
+Iteration   3: 150.242 ms/op
+Iteration   4: 147.962 ms/op
+Iteration   5: 149.202 ms/op
+Iteration   6: 149.504 ms/op
+Iteration   7: 153.730 ms/op
+Iteration   8: 151.610 ms/op
+Iteration   9: 156.078 ms/op
+Iteration  10: 152.786 ms/op
+
+Result: 150.585 ±(99.9%) 4.414 ms/op
+  Statistics: (min, avg, max) = (147.275, 150.585, 156.078), stdev = 2.920
+  Confidence interval (99.9%): [146.171, 155.000]
+
+
+# Run progress: 75.00% complete, ETA 00:03:34
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumOfSquaresSeqOpt
+# Warmup Iteration   1: 54.448 ms/op
+# Warmup Iteration   2: 44.165 ms/op
+# Warmup Iteration   3: 44.240 ms/op
+# Warmup Iteration   4: 44.092 ms/op
+# Warmup Iteration   5: 44.145 ms/op
+# Warmup Iteration   6: 44.089 ms/op
+# Warmup Iteration   7: 43.874 ms/op
+# Warmup Iteration   8: 44.339 ms/op
+# Warmup Iteration   9: 44.064 ms/op
+# Warmup Iteration  10: 44.160 ms/op
+Iteration   1: 44.249 ms/op
+Iteration   2: 44.104 ms/op
+Iteration   3: 44.207 ms/op
+Iteration   4: 43.906 ms/op
+Iteration   5: 43.895 ms/op
+Iteration   6: 44.028 ms/op
+Iteration   7: 43.898 ms/op
+Iteration   8: 44.041 ms/op
+Iteration   9: 44.376 ms/op
+Iteration  10: 44.216 ms/op
+
+Result: 44.092 ±(99.9%) 0.253 ms/op
+  Statistics: (min, avg, max) = (43.895, 44.092, 44.376), stdev = 0.167
+  Confidence interval (99.9%): [43.839, 44.345]
+
+
+# Run progress: 80.00% complete, ETA 00:02:47
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumPar
+# Warmup Iteration   1: 3481.922 ms/op
+# Warmup Iteration   2: 2911.562 ms/op
+# Warmup Iteration   3: 3106.266 ms/op
+# Warmup Iteration   4: 1278.071 ms/op
+# Warmup Iteration   5: 1289.230 ms/op
+# Warmup Iteration   6: 1278.967 ms/op
+# Warmup Iteration   7: 1276.511 ms/op
+# Warmup Iteration   8: 1281.200 ms/op
+# Warmup Iteration   9: 1283.203 ms/op
+# Warmup Iteration  10: 1271.369 ms/op
+Iteration   1: 1277.809 ms/op
+Iteration   2: 1270.243 ms/op
+Iteration   3: 1277.621 ms/op
+Iteration   4: 1276.435 ms/op
+Iteration   5: 1267.926 ms/op
+Iteration   6: 1282.227 ms/op
+Iteration   7: 1273.887 ms/op
+Iteration   8: 1281.460 ms/op
+Iteration   9: 1283.961 ms/op
+Iteration  10: 1281.617 ms/op
+
+Result: 1277.319 ±(99.9%) 8.048 ms/op
+  Statistics: (min, avg, max) = (1267.926, 1277.319, 1283.961), stdev = 5.323
+  Confidence interval (99.9%): [1269.271, 1285.367]
+
+
+# Run progress: 85.00% complete, ETA 00:02:08
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumParOpt
+# Warmup Iteration   1: 7.903 ms/op
+# Warmup Iteration   2: 6.874 ms/op
+# Warmup Iteration   3: 6.903 ms/op
+# Warmup Iteration   4: 6.823 ms/op
+# Warmup Iteration   5: 6.832 ms/op
+# Warmup Iteration   6: 6.829 ms/op
+# Warmup Iteration   7: 6.765 ms/op
+# Warmup Iteration   8: 6.773 ms/op
+# Warmup Iteration   9: 6.774 ms/op
+# Warmup Iteration  10: 6.773 ms/op
+Iteration   1: 6.763 ms/op
+Iteration   2: 6.768 ms/op
+Iteration   3: 6.767 ms/op
+Iteration   4: 6.766 ms/op
+Iteration   5: 6.760 ms/op
+Iteration   6: 6.791 ms/op
+Iteration   7: 6.755 ms/op
+Iteration   8: 6.750 ms/op
+Iteration   9: 6.755 ms/op
+Iteration  10: 6.836 ms/op
+
+Result: 6.771 ±(99.9%) 0.038 ms/op
+  Statistics: (min, avg, max) = (6.750, 6.771, 6.836), stdev = 0.025
+  Confidence interval (99.9%): [6.733, 6.810]
+
+
+# Run progress: 90.00% complete, ETA 00:01:24
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumSeq
+# Warmup Iteration   1: 104.657 ms/op
+# Warmup Iteration   2: 94.130 ms/op
+# Warmup Iteration   3: 94.613 ms/op
+# Warmup Iteration   4: 94.340 ms/op
+# Warmup Iteration   5: 96.408 ms/op
+# Warmup Iteration   6: 96.687 ms/op
+# Warmup Iteration   7: 95.855 ms/op
+# Warmup Iteration   8: 94.465 ms/op
+# Warmup Iteration   9: 95.551 ms/op
+# Warmup Iteration  10: 97.024 ms/op
+Iteration   1: 97.302 ms/op
+Iteration   2: 94.842 ms/op
+Iteration   3: 95.932 ms/op
+Iteration   4: 97.519 ms/op
+Iteration   5: 97.317 ms/op
+Iteration   6: 96.288 ms/op
+Iteration   7: 94.414 ms/op
+Iteration   8: 95.816 ms/op
+Iteration   9: 94.807 ms/op
+Iteration  10: 95.220 ms/op
+
+Result: 95.946 ±(99.9%) 1.725 ms/op
+  Statistics: (min, avg, max) = (94.414, 95.946, 97.519), stdev = 1.141
+  Confidence interval (99.9%): [94.221, 97.671]
+
+
+# Run progress: 95.00% complete, ETA 00:00:41
+# VM invoker: /home/bibou/Projects/openjdk/jdk1.8.0/jre/bin/java
+# VM options: -Xms769m -Xmx769m -XX:-TieredCompilation
+# Fork: 1 of 1
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmarks.ClashOfLambdas.sumSeqOpt
+# Warmup Iteration   1: 7.229 ms/op
+# Warmup Iteration   2: 6.787 ms/op
+# Warmup Iteration   3: 6.783 ms/op
+# Warmup Iteration   4: 6.814 ms/op
+# Warmup Iteration   5: 6.814 ms/op
+# Warmup Iteration   6: 6.826 ms/op
+# Warmup Iteration   7: 6.806 ms/op
+# Warmup Iteration   8: 6.812 ms/op
+# Warmup Iteration   9: 6.801 ms/op
+# Warmup Iteration  10: 6.806 ms/op
+Iteration   1: 6.820 ms/op
+Iteration   2: 6.818 ms/op
+Iteration   3: 6.780 ms/op
+Iteration   4: 6.801 ms/op
+Iteration   5: 6.806 ms/op
+Iteration   6: 6.811 ms/op
+Iteration   7: 6.797 ms/op
+Iteration   8: 6.828 ms/op
+Iteration   9: 6.803 ms/op
+Iteration  10: 6.819 ms/op
+
+Result: 6.808 ±(99.9%) 0.021 ms/op
+  Statistics: (min, avg, max) = (6.780, 6.808, 6.828), stdev = 0.014
+  Confidence interval (99.9%): [6.787, 6.830]
+
+
+# Run complete. Total time: 00:13:38
+
+Benchmark                                     Mode   Samples         Mean   Mean error    Units
+b.ClashOfLambdas.cartBaseline                 avgt        10        4.329        0.026    ms/op
+b.ClashOfLambdas.cartPar                      avgt        10     3217.285       33.963    ms/op
+b.ClashOfLambdas.cartParOpt                 avgt        10      268.910        6.854    ms/op
+b.ClashOfLambdas.cartSeq                      avgt        10      156.491        2.432    ms/op
+b.ClashOfLambdas.cartSeqOpt                 avgt        10      187.147        2.540    ms/op
+b.ClashOfLambdas.sumBaseline                  avgt        10        6.992        0.032    ms/op
+b.ClashOfLambdas.sumOfSquaresBaseline         avgt        10        7.126        0.205    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenBaseline     avgt        10       10.899        0.052    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenPar          avgt        10     6842.330      401.922    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenParOpt     avgt        10       68.761        1.461    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeq          avgt        10      294.980        3.702    ms/op
+b.ClashOfLambdas.sumOfSquaresEvenSeqOpt     avgt        10       72.516        1.280    ms/op
+b.ClashOfLambdas.sumOfSquaresPar              avgt        10     1381.618       12.385    ms/op
+b.ClashOfLambdas.sumOfSquaresParOpt         avgt        10       43.972        0.205    ms/op
+b.ClashOfLambdas.sumOfSquaresSeq              avgt        10      150.585        4.414    ms/op
+b.ClashOfLambdas.sumOfSquaresSeqOpt         avgt        10       44.092        0.253    ms/op
+b.ClashOfLambdas.sumPar                       avgt        10     1277.319        8.048    ms/op
+b.ClashOfLambdas.sumParOpt                  avgt        10        6.771        0.038    ms/op
+b.ClashOfLambdas.sumSeq                       avgt        10       95.946        1.725    ms/op
+b.ClashOfLambdas.sumSeqOpt                  avgt        10        6.808        0.021    ms/op
+# Compiling F#
+# Command: fsharpc --optimize+ --checked- -r fsharp/lib/LinqOptimizer.Base.dll  --nologo -r fsharp/lib/LinqOptimizer.Core.dll -r fsharp/lib/LinqOptimizer.FSharp.dll -r fsharp/lib/LambdaMicrobenchmarking.dll --out:build/fsharp/ClashOfLambdas.exe fsharp/ClashOfLambdas.fs
+# Benchmarking fsharp version
+# Command: mono build/fsharp/ClashOfLambdas.exe
+Benchmark                 	      Mean Mean-Error   Sdev  Unit
+sumBaseline              	       8.1       0.48   0.32 ms/op
+sumSeq                   	     112.6       0.78   0.52 ms/op
+sumSeqOpt                	        11       0.00   0.00 ms/op
+sumPar                   	       330     135.26  89.47 ms/op
+sumParOpt                	         7       0.00   0.00 ms/op
+sumOfSquaresBaseline     	        12       0.00   0.00 ms/op
+sumOfSquaresSeq          	     220.2       0.64   0.42 ms/op
+sumOfSquaresSeqOpt       	        12       0.00   0.00 ms/op
+sumOfSquaresPar          	     489.6      34.48  22.80 ms/op
+sumOfSquaresParOpt       	       7.3       0.73   0.48 ms/op
+sumOfSquaresEvenBaseline 	     101.5       1.47   0.97 ms/op
+sumOfSquaresEvenSeq      	     325.6       1.27   0.84 ms/op
+sumOfSquaresEvenSeqOpt   	       106       0.00   0.00 ms/op
+sumOfSquaresEvenPar      	       448      43.56  28.81 ms/op
+sumOfSquaresEvenParOpt   	      48.1       2.07   1.37 ms/op
+cartBaseline             	        11       0.00   0.00 ms/op
+cartSeq                  	     321.7       1.02   0.67 ms/op
+cartSeqOpt               	      13.5       1.07   0.71 ms/op
+cartPar                  	     312.4      17.73  11.73 ms/op
+cartParOpt               	       7.7       0.73   0.48 ms/op

@@ -155,7 +155,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumSeqBlitz () : Long = {
+    def sumSeqOpt () : Long = {
       optimize {
 	val sum : Long = v
 	  .sum
@@ -164,7 +164,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresSeqBlitz () : Long = {
+    def sumOfSquaresSeqOpt () : Long = {
       optimize {
 	val sum : Long = v
 	  .map(d => d * d)
@@ -174,7 +174,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartSeqBlitz () : Long = {
+    def cartSeqOpt () : Long = {
       optimize {
 	val sum : Long = vHi
 	  .flatMap(d => vLo.view.map (dp => dp * d))
@@ -184,7 +184,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenSeqBlitz () : Long = {
+    def sumOfSquaresEvenSeqOpt () : Long = {
       optimize {
 	val res : Long = v
 	  .filter(x => x % 2 == 0)
@@ -195,7 +195,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumParBlitz () : Long = {
+    def sumParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
 
@@ -206,7 +206,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresParBlitz () : Long = {
+    def sumOfSquaresParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
 
@@ -218,7 +218,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def cartParBlitz () : Long = {
+    def cartParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
 
@@ -230,7 +230,7 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def sumOfSquaresEvenParBlitz () : Long = {
+    def sumOfSquaresEvenParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
       import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
