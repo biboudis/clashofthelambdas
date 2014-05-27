@@ -43,7 +43,6 @@ Running the microbenchmarks
 
 Processing the results
 ----------------------
-
 If you want to process the unified results we offer a gawk script that make use
 of the dos2unix command to convert windows result file.
 
