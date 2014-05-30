@@ -14,8 +14,8 @@ let main argv =
   //////////////////////////
   let N = 10000000
   let v = Enumerable.Range(1, N).Select(fun x -> (int64) (x % 1000)).ToArray()
-  let vHi = Enumerable.Range(1, 10000).Select(fun x -> (int64) x).ToArray()
-  let vLow = Enumerable.Range(1, 1000).Select(fun x -> (int64) x).ToArray()
+  let vHi = Enumerable.Range(1, 100000).Select(fun x -> (int64) x).ToArray()
+  let vLow = Enumerable.Range(1, 100).Select(fun x -> (int64) x).ToArray()
 
   ///////////////////////////
   // Benchmarks definition //
