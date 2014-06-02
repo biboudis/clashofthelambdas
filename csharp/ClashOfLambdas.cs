@@ -19,8 +19,8 @@ namespace benchmarks
             //////////////////////////
             var N = 10000000;
             var v = Enumerable.Range(1, N).Select(x => (long)x % 1000).ToArray();
-            var vHi = Enumerable.Range(1, 100000).Select(x => (long)x).ToArray();
-            var vLow = Enumerable.Range(1, 100).Select(x => (long)x).ToArray();
+            var vHi = Enumerable.Range(1, 1000000).Select(x => (long)x).ToArray();
+            var vLow = Enumerable.Range(1, 10).Select(x => (long)x).ToArray();
 
             ///////////////////////////
             // Benchmarks definition //
@@ -100,10 +100,10 @@ namespace benchmarks
                 Tuple.Create("sumOfSquaresEvenPar",  parSumSqEvensLinq),
                 Tuple.Create("sumOfSquaresEvenParOpt",  parSumSqEvenLinqOpt),
                 Tuple.Create("cartBaseline", cartBaseline),
-                Tuple.Create("cartSeq", cartLinq),
+		Tuple.Create("cartSeq", cartLinq),
                 Tuple.Create("cartSeqOpt",cartLinqOpt),
                 Tuple.Create("cartPar", parCartLinq),
-                Tuple.Create("cartParOpt", parCartLinqOpt)})
+		Tuple.Create("cartParOpt", parCartLinqOpt)})
             .RunAll();
         }
 
