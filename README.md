@@ -1,6 +1,6 @@
 Clash of the Lambdas
 ====================
-Microbenchmarking collection functional APIs of Java 8, Scala, C#, F# on Windows and Linux.
+Microbenchmarking collection, functional APIs of Java 8, Scala, C#, F# on Windows and on Linux.
 
 To run the benchmarking suite as is, you will need a system with approximately
 769mb of free space for heap allocation. Regarding execution time, a run on a
@@ -47,15 +47,15 @@ Running the microbenchmarks
 
 Processing the results
 ----------------------
-If you want to process the unified results we offer a gawk script that make use
-of the dos2unix command to convert windows result file.
+If you want to process the unified results we offer a gawk script (that also makes use
+of the dos2unix command to convert windows result file encoding).
 
 * Run the benchmark suite with on both windows and linux with ```make bench >
   results.{windows, linux}``` (any filename).
 * See the unified results for all languages, platforms and benchmarks (the comma
   separated values are benchmark, mean, mean error, sdev) by running
   ```./process results.linux results.windows > results.processed``` (make
-  process executable first).
+  the script executable first).
 
 **Footnotes:**
 
