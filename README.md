@@ -66,9 +66,7 @@ of the dos2unix command to convert windows result file encoding).
 
 Team
 ----
-[@biboudis](https://twitter.com/biboudis)
-[@NickPalladinos](https://twitter.com/NickPalladinos)
-[Y. Smaragdakis](http://cgi.di.uoa.gr/~smaragd/)
+[@biboudis](https://twitter.com/biboudis), [@NickPalladinos](https://twitter.com/NickPalladinos) and [Y. Smaragdakis](http://cgi.di.uoa.gr/~smaragd/)
 
 **Footnotes:**
 
