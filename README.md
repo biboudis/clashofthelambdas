@@ -64,6 +64,12 @@ of the dos2unix command to convert windows result file encoding).
   ```./process results.linux results.windows > results.processed``` (make
   the script executable first).
 
+Team
+----
+[@biboudis](https://twitter.com/biboudis)
+[@NickPalladinos](https://twitter.com/NickPalladinos)
+[Y. Smaragdakis](http://cgi.di.uoa.gr/~smaragd/)
+
 **Footnotes:**
 
 1. A small utility that was factored out as a seperate project.
