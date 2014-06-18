@@ -1,6 +1,13 @@
 Clash of the Lambdas
 ====================
-Microbenchmarking collection, functional APIs of Java 8, Scala, C#, F# on Windows and on Linux.
+Microbenchmarking collection, functional APIs of the VM multiparadigm languages
+Java 8, Scala, C#, F# on Windows and on Linux.
+
+The results are discussed in our ICOOOLPS'14 workshop paper: 
+> http://www.di.uoa.gr/~biboudis/clashofthelambdas.pdf
+
+A snapshot of the benchmarks in zip-file: 
+> http://www.di.uoa.gr/~biboudis/clashofthelambdas-icooolps14-benchmarks.zip
 
 To run the benchmarking suite as is, you will need a system with approximately
 769mb of free space for heap allocation. Regarding execution time, a run on a
