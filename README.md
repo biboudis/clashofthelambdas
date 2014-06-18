@@ -19,7 +19,7 @@ single platform takes approximately 15-20 minutes on an Intel Core i5.
 * Scala (jvm / [jmh](http://openjdk.java.net/projects/code-tools/jmh/))
   * sequential
   * parallel
-  * optimized sequential/parallel with [Scala-Blitz](http://scala-blitz.github.io/)
+  * optimized sequential/parallel with [ScalaBlitz](http://scala-blitz.github.io/)
 * C# (clr & mono / [Lambda Microbenchmarking](https://github.com/biboudis/LambdaMicrobenchmarking)<sup>1</sup>)
   * sequential
   * parallel
