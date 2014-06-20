@@ -91,7 +91,6 @@ package benchmarks {
     def sumPar () : Long = {
       val sum : Long = v
 	.par
-	.view
 	.sum
       sum
     }
@@ -99,7 +98,6 @@ package benchmarks {
     @GenerateMicroBenchmark
     def sumOfSquaresSeq () : Long = {
       val sum : Long = v
-      .view
       .map(d => d * d)
       .sum
       sum
@@ -109,7 +107,6 @@ package benchmarks {
     def sumOfSquaresPar () : Long = {
       val sum : Long = v
 	.par
-	.view
 	.map(d => d * d)
 	.sum
       sum
@@ -118,8 +115,7 @@ package benchmarks {
     @GenerateMicroBenchmark
     def cartSeq () : Long = {
       val sum : Long = vHi
-	.view
-	.flatMap(d => vLo.view.map (dp => dp * d))
+	.flatMap(d => vLo.map (dp => dp * d))
 	.sum
       sum
     }
@@ -128,8 +124,7 @@ package benchmarks {
     def cartPar () : Long = {
       val sum : Long = vHi
 	.par
-	.view
-	.flatMap(d => vLo.view.map (dp => dp * d))
+	.flatMap(d => vLo.map (dp => dp * d))
 	.sum
       sum
     }
@@ -147,7 +142,6 @@ package benchmarks {
     def sumOfSquaresEvenPar () : Long = {
       val res : Long = v
 	.par
-	.view
 	.filter(x => x % 2 == 0)
 	.map(x => x * x)
 	.sum
@@ -177,7 +171,7 @@ package benchmarks {
     def cartSeqOpt () : Long = {
       optimize {
 	val sum : Long = vHi
-	  .flatMap(d => vLo.view.map (dp => dp * d))
+	  .flatMap(d => vLo.map (dp => dp * d))
 	  .sum
 	sum
       }
