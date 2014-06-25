@@ -20,7 +20,7 @@ let main argv =
   let v = Enumerable.Range(1, N).Select(fun x -> (int64) (x % 1000)).ToArray()
   let vHi = Enumerable.Range(1, 1000000).Select(fun x -> (int64) x).ToArray()
   let vLow = Enumerable.Range(1, 10).Select(fun x -> (int64) x).ToArray()
-  let refs = [|1..10000000|] |> Array.map (fun num -> new Ref(num))
+  let refs = [|1..N|] |> Array.map (fun num -> new Ref(num))
   
   ///////////////////////////
   // Benchmarks definition //
