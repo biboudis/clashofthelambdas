@@ -10,8 +10,18 @@ using LambdaMicrobenchmarking;
 
 namespace benchmarks
 {
+    class Box 
+    {
+      public Box(int num)
+      {
+	this.Num = num;
+      }
+      public int Num;
+    }
+
     class ClashOfLambdas
     {
+      
         static void Main(string[] args)
         {
             //////////////////////////
@@ -21,6 +31,7 @@ namespace benchmarks
             var v = Enumerable.Range(1, N).Select(x => (long)x % 1000).ToArray();
             var vHi = Enumerable.Range(1, 1000000).Select(x => (long)x).ToArray();
             var vLow = Enumerable.Range(1, 10).Select(x => (long)x).ToArray();
+	    var boxes = Enumerable.Range(1, N).Select(num => new Box(num));
 
             ///////////////////////////
             // Benchmarks definition //
@@ -80,6 +91,12 @@ namespace benchmarks
                                          from y in vLow
                                          select x * y).Sum().Compile();
 
+
+	    Func<int> boxedLinq = () => boxes.Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
+	    Func<int> boxedLinqOpt = boxes.AsQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
+	    Func<int> parBoxedLinq = () => boxes.AsParallel().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
+	    Func<int> parBoxedLinqOpt = boxes.AsParallelQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
+
             //////////////////////////
             // Benchmarks execution //
             //////////////////////////
@@ -104,125 +121,14 @@ namespace benchmarks
                 Tuple.Create("cartSeqOpt",cartLinqOpt),
                 Tuple.Create("cartPar", parCartLinq),
 		Tuple.Create("cartParOpt", parCartLinqOpt)})
-            .RunAll();
+	      .RunAll();
+
+	    Script<int>.Of(new Tuple<String, Func<int>>[] {
+		Tuple.Create("boxedSeq", boxedLinq),
+		Tuple.Create("boxedSeqOpt",boxedLinqOpt),
+		Tuple.Create("boxedPar", parBoxedLinq),
+		Tuple.Create("boxedParOpt", parBoxedLinqOpt)})
+	      .RunAll();   
         }
-
-        #region TO-BE-REMOVED
-        /* static int Iterations = 10;
-
-        static double[] measurements = new double[Iterations];
-
-        static T Consume<T>(T dummy)
-        {
-            return dummy;
-        }
-
-        static int getN()
-        {
-            return Iterations;
-        }
-
-        static double getMean()
-        {
-            if (getN() > 0)
-            {
-                return getSum() / getN();
-            }
-            else
-            {
-                return Double.NaN;
-            }
-        }
-
-        static double getSum()
-        {
-            if (getN() > 0)
-            {
-                double s = 0;
-                for (int i = 0; i < getN(); i++)
-                {
-                    s += measurements[i];
-                }
-                return s;
-            }
-            else
-            {
-                return Double.NaN;
-            }
-        }
-
-        static double getStandardDeviation()
-        {
-            return Math.Sqrt(getVariance());
-        }
-
-        static public double getVariance()
-        {
-            if (getN() > 0)
-            {
-                double v = 0;
-                double m = getMean();
-                for (int i = 0; i < Iterations; i++)
-                {
-                    v += Math.Pow(measurements[i] - m, 2);
-                }
-                return v / (getN() - 1);
-            }
-            else
-            {
-                return Double.NaN;
-            }
-        }
-
-        static double getMeanErrorAt(double confidence)
-        {
-            if (getN() <= 2) return Double.NaN;
-            var distribution = new StudentT(0, 1, getN() - 1);
-            double a = distribution.InverseCumulativeDistribution(1 - (1 - confidence) / 2);
-            return a * getStandardDeviation() / Math.Sqrt(getN());
-        }
-
-        static void Measure<T>(string title, Func<T> action)
-        {
-            Array.Clear(measurements, 0, getN());
-
-            //Force Full GC prior to execution
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
-
-            double st = 0.0, sst = 0.0;
-
-            var sw = new Stopwatch();
-
-            // First invocation to compile method.
-            Consume(action());
-
-            for (int i = 0; i < getN(); i++)
-            {
-                sw.Restart();
-
-                //Avoid dead-code.
-                Consume(action());
-
-                sw.Stop();
-
-                measurements[i] = sw.ElapsedMilliseconds;
-            }
-
-            //Add-Up invocation stats
-            foreach (double m in measurements)
-            {
-                st += m;
-                sst += Math.Pow(m, 2);
-            }
-
-            double mean = st / (double)Iterations;
-            double sdev = Math.Sqrt(sst / (double)Iterations - Math.Pow(mean, 2));
-
-            Console.WriteLine("Math-{0,-25}\t{1,10} {2,10:0.00} {3,4:0.00} {4}", title, getMean(), getMeanErrorAt(0.999), getStandardDeviation(), "ms/op");
-            Console.WriteLine("Mine-{0,-25}\t{1,10} {2,10:0.00} {3,4:0.00} {4}", title, mean, Double.NaN, sdev, "ms/op");
-        } */
-        #endregion
     }
 }

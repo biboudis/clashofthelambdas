@@ -7,6 +7,10 @@ open Nessos.LinqOptimizer.FSharp
 open Nessos.LinqOptimizer.Base
 open LambdaMicrobenchmarking
 
+type Box(num : int) =
+  member self.Num = num
+
+
 [<EntryPoint>]
 let main argv =
   //////////////////////////
@@ -16,7 +20,8 @@ let main argv =
   let v = Enumerable.Range(1, N).Select(fun x -> (int64) (x % 1000)).ToArray()
   let vHi = Enumerable.Range(1, 1000000).Select(fun x -> (int64) x).ToArray()
   let vLow = Enumerable.Range(1, 10).Select(fun x -> (int64) x).ToArray()
-
+  let boxes = [|1..10000000|] |> Array.map (fun num -> new Box(num))
+  
   ///////////////////////////
   // Benchmarks definition //
   ///////////////////////////
@@ -64,6 +69,11 @@ let main argv =
   let parallelCartLinq () = vHi.AsParallel().SelectMany(fun x -> vLow.Select(fun y -> x * y)).Sum()
   let parallelCartLinqOpt = vHi |> PQuery.ofSeq |> PQuery.collect (fun x -> Seq.map (fun y -> x * y) vLow) |> PQuery.sum |> PQuery.compile
 
+  let boxedLinq () = boxes |> Seq.filter (fun box -> box.Num % 5 = 0) |> Seq.filter (fun box -> box.Num % 7 = 0) |> Seq.length
+  let boxedLinqOpt  = boxes |> Query.ofSeq |> Query.filter (fun box -> box.Num % 5 = 0) |> Query.filter (fun box -> box.Num % 7 = 0) |> Query.length  |> Query.compile
+  let parallelBoxedLinq () = boxes.AsParallel().Where(fun (box : Box) -> box.Num % 5 = 0).Where(fun (box : Box) -> box.Num % 7 = 0).Count()
+  let parallelBoxedLinqOpt = boxes |> PQuery.ofSeq |> PQuery.filter(fun (box : Box) -> box.Num % 5 = 0) |> PQuery.filter(fun (box : Box) -> box.Num % 7 = 0) |> PQuery.length |> PQuery.compile
+
   //////////////////////////
   // Benchmarks execution //
   //////////////////////////
@@ -90,6 +100,13 @@ let main argv =
     ("cartPar",  Func<int64>  parallelCartLinq);
     ("cartParOpt",  Func<int64>  parallelCartLinqOpt)|] |> fun x -> Script.Of x
 
-  script.RunAll() |> ignore
+  let boxedScript = [|
+    ("boxedSeq",  Func<int> boxedLinq);
+    ("boxedSeqOpt", Func<int> boxedLinqOpt);
+    ("boxedPar",  Func<int> parallelBoxedLinq);
+    ("boxedParOpt",  Func<int> parallelBoxedLinq)|] |> fun x -> Script.Of x
 
+  script.RunAll() |> ignore
+  boxedScript.RunAll() |> ignore
+  
   0 

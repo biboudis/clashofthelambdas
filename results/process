@@ -9,6 +9,8 @@ function printBenchOfLang (filename, lang, bench) {
 #enforcing ordering.
 function printLang (filename, lang) {
     print lang 
+    lang = tolower(lang)
+
     printBenchOfLang(filename, lang,"sumBaseline")
     printBenchOfLang(filename, lang,"sumSeq")
     printBenchOfLang(filename, lang,"sumSeqOpt")
@@ -39,7 +41,7 @@ BEGIN {
 
     print "benchmark,mean,mean error,sdev" 
 }
-/Compiling/ { lang = $3 }
+/\# Benchmarking/ { lang = tolower($3) }
 /\# Benchmark:/ { split($3, fname,"."); name = fname[3] }
 /Result:/ { mean = $2; meanerr = $4}
 /Statistics:/ { 
@@ -68,7 +70,7 @@ END {
 	print filename[2]
 	printLang(ARGV[i], "Java")
 	printLang(ARGV[i], "Scala")
-	printLang(ARGV[i], "C#")
-	printLang(ARGV[i], "F#")
+	printLang(ARGV[i], "CSharp")
+	printLang(ARGV[i], "FSharp")
     }
 }

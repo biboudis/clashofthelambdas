@@ -13,6 +13,8 @@ package benchmarks {
 
   import java.util.concurrent.TimeUnit
 
+  class Box(var num: Int = 0)
+
   @OutputTimeUnit(TimeUnit.NANOSECONDS)
   @BenchmarkMode(Array(Mode.AverageTime))
   @State(Scope.Thread)
@@ -22,6 +24,7 @@ package benchmarks {
     var v : Array[Long] = _
     var vHi : Array[Long] = _
     var vLo : Array[Long] = _
+    var boxes : Array[Box] = _
 
     @Setup
     def prepare() : Unit = {
@@ -29,7 +32,12 @@ package benchmarks {
       v = (0 until N).map(i => i.toLong % 1000).toArray
       vHi = (0 until 1000000).map(i => i.toLong).toArray
       vLo = (0 until 10).map(i => i.toLong).toArray
+      boxes = Array.fill(N)(new Box)
     }
+
+    ////////////////////////////////////////
+    // Benchmarks with Views (non-strict) //
+    ////////////////////////////////////////
 
     @GenerateMicroBenchmark
     def sumBaseline () : Long = {
@@ -83,6 +91,7 @@ package benchmarks {
     @GenerateMicroBenchmark
     def sumSeq () : Long = {
       val sum : Long = v
+	.view
 	.sum
       sum
     }
@@ -99,9 +108,9 @@ package benchmarks {
     @GenerateMicroBenchmark
     def sumOfSquaresSeq () : Long = {
       val sum : Long = v
-      .view
-      .map(d => d * d)
-      .sum
+        .view
+        .map(d => d * d)
+        .sum
       sum
     }
 
@@ -137,6 +146,7 @@ package benchmarks {
     @GenerateMicroBenchmark
     def sumOfSquaresEvenSeq () : Long = {
       val res : Long = v
+	.view
 	.filter(x => x % 2 == 0)
 	.map(x => x * x)
 	.sum
@@ -177,7 +187,7 @@ package benchmarks {
     def cartSeqOpt () : Long = {
       optimize {
 	val sum : Long = vHi
-	  .flatMap(d => vLo.view.map (dp => dp * d))
+	  .flatMap(d => vLo.map (dp => dp * d))
 	  .sum
 	sum
       }
@@ -236,11 +246,147 @@ package benchmarks {
       import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
 
       val res : Long = v
-	.toPar
+	  .toPar
+	  .filter(x => x % 2 == 0)
+	  .map(x => x * x)
+	  .sum
+	res
+    }
+
+    @GenerateMicroBenchmark
+    def boxedSeq () : Int = {
+      val res : Int = boxes
+	.view
+	.filter(_.num % 5 == 0)
+	.filter(_.num % 7 == 0)
+	.size
+      res
+    }
+
+    @GenerateMicroBenchmark
+    def boxedPar () : Int = {
+      val res : Int = boxes
+	.par
+	.view
+	.filter(_.num % 5 == 0)
+	.filter(_.num % 7 == 0)
+	.size
+      res
+    }
+
+    @GenerateMicroBenchmark
+    def boxedSeqOpt () : Int = {
+      optimize {
+	val res : Int = boxes
+	  .filter(_.num % 5 == 0)
+	  .filter(_.num % 7 == 0)
+	  .size
+	res
+      }
+    }
+
+    // @GenerateMicroBenchmark
+    // def boxedParOpt () : Int = {
+    //   import scala.collection.par._
+    //   import Scheduler.Implicits.global
+    //   import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
+      
+    //   val res : Int = boxes
+    // 	.toPar
+    // 	.filter(_.num % 5 == 0)
+    // 	.filter(_.num % 7 == 0)
+    // 	.size
+    //   res
+    // }
+    
+    ///////////////////////////////////////
+    // Benchmarks without Views (strict) //
+    ///////////////////////////////////////
+    @GenerateMicroBenchmark
+    def sumSeq_Strict () : Long = {
+      val sum : Long = v
+	.sum
+      sum
+    }
+
+    @GenerateMicroBenchmark
+    def sumPar_Strict () : Long = {
+      val sum : Long = v
+	.par
+	.sum
+      sum
+    }
+
+    @GenerateMicroBenchmark
+    def sumOfSquaresSeq_Strict () : Long = {
+      val sum : Long = v
+      .map(d => d * d)
+      .sum
+      sum
+    }
+
+    @GenerateMicroBenchmark
+    def sumOfSquaresPar_Strict () : Long = {
+      val sum : Long = v
+	.par
+	.map(d => d * d)
+	.sum
+      sum
+    }
+
+    @GenerateMicroBenchmark
+    def sumOfSquaresEvenSeq_Strict () : Long = {
+      val res : Long = v
 	.filter(x => x % 2 == 0)
 	.map(x => x * x)
 	.sum
-	res
+      res
+    }
+
+    @GenerateMicroBenchmark
+    def sumOfSquaresEvenPar_Strict () : Long = {
+      val res : Long = v
+	.par
+	.filter(x => x % 2 == 0)
+	.map(x => x * x)
+	.sum
+      res
+    }
+
+    @GenerateMicroBenchmark
+    def cartSeq_Strict () : Long = {
+      val sum : Long = vHi
+	.flatMap(d => vLo.map (dp => dp * d))
+	.sum
+      sum
+    }
+
+    @GenerateMicroBenchmark
+    def cartPar_Strict () : Long = {
+      val sum : Long = vHi
+	.par
+	.flatMap(d => vLo.map (dp => dp * d))
+	.sum
+      sum
+    }
+
+    @GenerateMicroBenchmark
+    def boxedSeq_Strict () : Int = {
+      val res : Int = boxes
+	.filter(_.num % 5 == 0)
+	.filter(_.num % 7 == 0)
+	.size
+      res
+    }
+
+    @GenerateMicroBenchmark
+    def boxedPar_Strict () : Int = {
+      val res : Int = boxes
+	.par
+	.filter(_.num % 5 == 0)
+	.filter(_.num % 7 == 0)
+	.size
+      res
     }
   }
 }
