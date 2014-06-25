@@ -10,9 +10,9 @@ using LambdaMicrobenchmarking;
 
 namespace benchmarks
 {
-    class Box 
+    class Ref 
     {
-      public Box(int num)
+      public Ref(int num)
       {
 	this.Num = num;
       }
@@ -31,7 +31,7 @@ namespace benchmarks
             var v = Enumerable.Range(1, N).Select(x => (long)x % 1000).ToArray();
             var vHi = Enumerable.Range(1, 1000000).Select(x => (long)x).ToArray();
             var vLow = Enumerable.Range(1, 10).Select(x => (long)x).ToArray();
-	    var boxes = Enumerable.Range(1, N).Select(num => new Box(num));
+	    var refs = Enumerable.Range(1, N).Select(num => new Ref(num));
 
             ///////////////////////////
             // Benchmarks definition //
@@ -92,10 +92,10 @@ namespace benchmarks
                                          select x * y).Sum().Compile();
 
 
-	    Func<int> boxedLinq = () => boxes.Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
-	    Func<int> boxedLinqOpt = boxes.AsQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
-	    Func<int> parBoxedLinq = () => boxes.AsParallel().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
-	    Func<int> parBoxedLinqOpt = boxes.AsParallelQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
+	    Func<int> refLinq = () => refs.Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
+	    Func<int> refLinqOpt = refs.AsQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
+	    Func<int> parRefedLinq = () => refs.AsParallel().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
+	    Func<int> parRefedLinqOpt = refs.AsParallelQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
 
             //////////////////////////
             // Benchmarks execution //
@@ -124,10 +124,10 @@ namespace benchmarks
 	      .RunAll();
 
 	    Script<int>.Of(new Tuple<String, Func<int>>[] {
-		Tuple.Create("boxedSeq", boxedLinq),
-		Tuple.Create("boxedSeqOpt",boxedLinqOpt),
-		Tuple.Create("boxedPar", parBoxedLinq),
-		Tuple.Create("boxedParOpt", parBoxedLinqOpt)})
+		Tuple.Create("refSeq", refLinq),
+		Tuple.Create("refSeqOpt",refLinqOpt),
+		Tuple.Create("refPar", parRefedLinq),
+		Tuple.Create("refParOpt", parRefedLinqOpt)})
 	      .RunAll();   
         }
     }

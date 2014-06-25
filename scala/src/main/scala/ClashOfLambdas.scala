@@ -13,7 +13,7 @@ package benchmarks {
 
   import java.util.concurrent.TimeUnit
 
-  class Box(var num: Int = 0)
+  class Ref(var num: Int = 0)
 
   @OutputTimeUnit(TimeUnit.NANOSECONDS)
   @BenchmarkMode(Array(Mode.AverageTime))
@@ -24,7 +24,7 @@ package benchmarks {
     var v : Array[Long] = _
     var vHi : Array[Long] = _
     var vLo : Array[Long] = _
-    var boxes : Array[Box] = _
+    var refs : Array[Ref] = _
 
     @Setup
     def prepare() : Unit = {
@@ -32,7 +32,7 @@ package benchmarks {
       v = (0 until N).map(i => i.toLong % 1000).toArray
       vHi = (0 until 1000000).map(i => i.toLong).toArray
       vLo = (0 until 10).map(i => i.toLong).toArray
-      boxes = Array.fill(N)(new Box)
+      refs = (0 until N).map(i => new Ref(i)).toArray
     }
 
     ////////////////////////////////////////
@@ -254,8 +254,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def boxedSeq () : Int = {
-      val res : Int = boxes
+    def refSeq () : Int = {
+      val res : Int = refs
 	.view
 	.filter(_.num % 5 == 0)
 	.filter(_.num % 7 == 0)
@@ -264,8 +264,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def boxedPar () : Int = {
-      val res : Int = boxes
+    def refPar () : Int = {
+      val res : Int = refs
 	.par
 	.view
 	.filter(_.num % 5 == 0)
@@ -275,9 +275,9 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def boxedSeqOpt () : Int = {
+    def refSeqOpt () : Int = {
       optimize {
-	val res : Int = boxes
+	val res : Int = refs
 	  .filter(_.num % 5 == 0)
 	  .filter(_.num % 7 == 0)
 	  .size
@@ -286,12 +286,12 @@ package benchmarks {
     }
 
     // @GenerateMicroBenchmark
-    // def boxedParOpt () : Int = {
+    // def refParOpt () : Int = {
     //   import scala.collection.par._
     //   import Scheduler.Implicits.global
     //   import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
       
-    //   val res : Int = boxes
+    //   val res : Int = refs
     // 	.toPar
     // 	.filter(_.num % 5 == 0)
     // 	.filter(_.num % 7 == 0)
@@ -371,8 +371,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def boxedSeq_Strict () : Int = {
-      val res : Int = boxes
+    def refSeq_Strict () : Int = {
+      val res : Int = refs
 	.filter(_.num % 5 == 0)
 	.filter(_.num % 7 == 0)
 	.size
@@ -380,8 +380,8 @@ package benchmarks {
     }
 
     @GenerateMicroBenchmark
-    def boxedPar_Strict () : Int = {
-      val res : Int = boxes
+    def refPar_Strict () : Int = {
+      val res : Int = refs
 	.par
 	.filter(_.num % 5 == 0)
 	.filter(_.num % 7 == 0)
