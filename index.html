@@ -45,7 +45,7 @@ Java 8, Scala, C#, F# on Windows and on Linux.</p>
 
 <p>To run the benchmarking suite as is, you will need a system with approximately
 769mb of free space for heap allocation. Regarding execution time, a run on a
-single platform takes approximately 15-20 minutes on an Intel Core i5.</p>
+single platform takes approximately 30-40 minutes on an Intel Core i5.</p>
 
 <ul>
 <li>Java 8 (jvm / <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a>)
@@ -104,7 +104,7 @@ single platform takes approximately 15-20 minutes on an Intel Core i5.</p>
 <li>Follow the <a href="http://fsharp.org/use/linux/">instructions</a> on <a href="http://fsharp.org">fsharp.org</a>
 </li>
 </ul><h2>
-<a name="running-the-microbenchmarks" class="anchor" href="#running-the-microbenchmarks"><span class="octicon octicon-link"></span></a>Running the microbenchmarks</h2>
+<a name="running-the-microbenchmarks-via-a-console-on-linux-o-via-a-powershell-console-on-windows" class="anchor" href="#running-the-microbenchmarks-via-a-console-on-linux-o-via-a-powershell-console-on-windows"><span class="octicon octicon-link"></span></a>Running the microbenchmarks via a console on Linux o via a Powershell console on Windows.</h2>
 
 <ul>
 <li>Compile all tests with <code>make</code>
@@ -118,12 +118,13 @@ bench-java</code>).</li>
 </ul><h2>
 <a name="processing-the-results" class="anchor" href="#processing-the-results"><span class="octicon octicon-link"></span></a>Processing the results</h2>
 
-<p>If you want to process the unified results we offer a gawk script (that also makes use
+<p>If you want to process the unified results we offer a gawk script for linux (that also makes use
 of the dos2unix command to convert windows result file encoding).</p>
 
 <ul>
 <li>Run the benchmark suite with on both windows and linux with <code>make bench &gt;
-results.{windows, linux}</code> (any filename).</li>
+results.{windows, linux}</code> (any filename), or use it with tee to view the results as it runs with <code>make bench | tee results.{windows, linux}</code>
+</li>
 <li>See the unified results for all languages, platforms and benchmarks (the comma
 separated values are benchmark, mean, mean error, sdev) by running
 <code>./process results.linux results.windows &gt; results.processed</code> (make
