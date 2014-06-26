@@ -9,7 +9,7 @@ The results are discussed in our ICOOOLPS'14 workshop paper:
 
 To run the benchmarking suite as is, you will need a system with approximately
 769mb of free space for heap allocation. Regarding execution time, a run on a
-single platform takes approximately 15-20 minutes on an Intel Core i5.
+single platform takes approximately 30-40 minutes on an Intel Core i5.
 
 * Java 8 (jvm / [jmh](http://openjdk.java.net/projects/code-tools/jmh/))
   * sequential
@@ -42,8 +42,8 @@ Setting up on Ubuntu
 * ```sudo apt-get install maven```
 * Follow the [instructions](http://fsharp.org/use/linux/) on [fsharp.org](http://fsharp.org)
 
-Running the microbenchmarks
----------------------------
+Running the microbenchmarks via a console on Linux o via a Powershell console on Windows.
+------------------------------------------------------------------------------------------------------------
 * Compile all tests with ```make```
 * Clean with ```make clean```
 * Compile a specific suite with ```make {java, csharp, fsharp, scala}```
@@ -52,11 +52,11 @@ Running the microbenchmarks
 
 Processing the results
 ----------------------
-If you want to process the unified results we offer a gawk script (that also makes use
+If you want to process the unified results we offer a gawk script for linux (that also makes use
 of the dos2unix command to convert windows result file encoding).
 
 * Run the benchmark suite with on both windows and linux with ```make bench >
-  results.{windows, linux}``` (any filename).
+  results.{windows, linux}``` (any filename), or use it with tee to view the results as it runs with ```make bench | tee results.{windows, linux}```
 * See the unified results for all languages, platforms and benchmarks (the comma
   separated values are benchmark, mean, mean error, sdev) by running
   ```./process results.linux results.windows > results.processed``` (make
