@@ -10,7 +10,7 @@ using LambdaMicrobenchmarking;
 
 namespace benchmarks
 {
-    class Ref 
+    public class Ref 
     {
       public Ref(int num)
       {
