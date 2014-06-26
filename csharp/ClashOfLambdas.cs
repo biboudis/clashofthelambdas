@@ -31,7 +31,7 @@ namespace benchmarks
             var v = Enumerable.Range(1, N).Select(x => (long)x % 1000).ToArray();
             var vHi = Enumerable.Range(1, 1000000).Select(x => (long)x).ToArray();
             var vLow = Enumerable.Range(1, 10).Select(x => (long)x).ToArray();
-	    var refs = Enumerable.Range(1, N).Select(num => new Ref(num));
+	    var refs = Enumerable.Range(1, N).Select(num => new Ref(num)).ToArray();
 
             ///////////////////////////
             // Benchmarks definition //
@@ -66,6 +66,14 @@ namespace benchmarks
                         acc += vHi[d] * vLow[dp];
                 return acc;
             };
+            Func<int> refBaseline = () =>
+            {
+                var count = 0;
+                for (int i = 0; i < refs.Length; i++)
+		  if (refs[i].Num % 5==0 && refs[i].Num % 7==0)
+		    count++;
+                return count;
+            };
             Func<long> sumLinq = () => v.Sum();
             Func<long> sumLinqOpt = v.AsQueryExpr().Sum().Compile();
             Func<long> sumSqLinq = () => v.Select(x => x * x).Sum();
@@ -94,8 +102,8 @@ namespace benchmarks
 
 	    Func<int> refLinq = () => refs.Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
 	    Func<int> refLinqOpt = refs.AsQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
-	    Func<int> parRefedLinq = () => refs.AsParallel().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
-	    Func<int> parRefedLinqOpt = refs.AsParallelQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
+	    Func<int> parRefLinq = () => refs.AsParallel().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
+	    Func<int> parRefLinqOpt = refs.AsParallelQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
 
             //////////////////////////
             // Benchmarks execution //
@@ -124,10 +132,11 @@ namespace benchmarks
 	      .RunAll();
 
 	    Script<int>.Of(new Tuple<String, Func<int>>[] {
+		Tuple.Create("refBaseline", refBaseline),
 		Tuple.Create("refSeq", refLinq),
 		Tuple.Create("refSeqOpt",refLinqOpt),
-		Tuple.Create("refPar", parRefedLinq),
-		Tuple.Create("refParOpt", parRefedLinqOpt)})
+		Tuple.Create("refPar", parRefLinq),
+		Tuple.Create("refParOpt", parRefLinqOpt)})
 	      .RunAll();   
         }
     }

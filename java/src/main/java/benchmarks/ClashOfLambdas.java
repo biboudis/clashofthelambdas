@@ -148,6 +148,16 @@ public class ClashOfLambdas {
     }
 
     @GenerateMicroBenchmark
+    public long refBaseline() {
+	long count = 0;
+	for (int i = 0 ; i < refs.length ; i++) {
+	    if (refs[i].num % 5 == 0 && refs[i].num % 7 == 0)
+		count++;
+	}
+        return count;
+    }
+
+    @GenerateMicroBenchmark
     public long refSeq() {
 	long length = Stream.of(refs)
 	    .filter(box -> box.num % 5 == 0)

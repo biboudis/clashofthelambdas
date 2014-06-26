@@ -66,7 +66,7 @@ package benchmarks {
       var i=0
       var sum=0L
       while (i < v.length) {
-	       if (v(i) % 2 == 0)
+	if (v(i) % 2 == 0)
           sum += v(i) * v(i)
         i += 1
       }
@@ -86,6 +86,19 @@ package benchmarks {
         d += 1
       }
       sum
+    }
+
+
+    @GenerateMicroBenchmark
+    def refBaseline () : Int = {
+      var i=0
+      var count=0
+      while (i < refs.length) {
+	if (refs(i).num % 5 == 0 && refs(i).num % 7 == 0)
+          count += 1
+        i += 1
+      }
+      count
     }
 
     @GenerateMicroBenchmark

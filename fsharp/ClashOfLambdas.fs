@@ -52,6 +52,14 @@ let main argv =
         acc <- vHi.[d] * vHi.[dp] + acc
     acc
 
+  let refBaseline () =
+    let mutable count = 0
+    for i=0 to refs.Length-1 do
+      if refs.[i].Num % 5 = 0 && refs.[i].Num % 7 = 0
+      then
+        count <- count + 1
+    count
+
   let sumLinq () = Seq.sum v
   let sumLinqOpt = v |> Query.ofSeq |> Query.sum |> Query.compile
   let sumSqLinq () = v |> Seq.map (fun x -> x * x) |> Seq.sum
@@ -101,12 +109,13 @@ let main argv =
     ("cartParOpt",  Func<int64>  parallelCartLinqOpt)|] |> fun x -> Script.Of x
 
   let refScript = [|
+    ("refBaseline",  Func<int> refBaseline);
     ("refSeq",  Func<int> refLinq);
     ("refSeqOpt", Func<int> refLinqOpt);
     ("refPar",  Func<int> parallelRefLinq);
     ("refParOpt",  Func<int> parallelRefLinq)|] |> fun x -> Script.Of x
 
-  script.RunAll() |> ignore
+  // script.RunAll() |> ignore
   refScript.RunAll() |> ignore
   
   0 
