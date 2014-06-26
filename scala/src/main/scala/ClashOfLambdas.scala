@@ -298,19 +298,19 @@ package benchmarks {
       }
     }
 
-    // @GenerateMicroBenchmark
-    // def refParOpt () : Int = {
-    //   import scala.collection.par._
-    //   import Scheduler.Implicits.global
-    //   import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
+    @GenerateMicroBenchmark
+    def refParOpt () : Int = {
+      import scala.collection.par._
+      import Scheduler.Implicits.global
+      import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
       
-    //   val res : Int = refs
-    // 	.toPar
-    // 	.filter(_.num % 5 == 0)
-    // 	.filter(_.num % 7 == 0)
-    // 	.size
-    //   res
-    // }
+      val res : Int = refs
+    	.toPar
+    	.filter(_.num % 5 == 0)
+    	.filter(_.num % 7 == 0)
+	.seq.size // the `size` method is not defined on the `Par` wrapper 
+      res
+    }
     
     ///////////////////////////////////////
     // Benchmarks without Views (strict) //

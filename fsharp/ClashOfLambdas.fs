@@ -113,7 +113,7 @@ let main argv =
     ("refSeq",  Func<int> refLinq);
     ("refSeqOpt", Func<int> refLinqOpt);
     ("refPar",  Func<int> parallelRefLinq);
-    ("refParOpt",  Func<int> parallelRefLinq)|] |> fun x -> Script.Of x
+    ("refParOpt",  Func<int> parallelRefLinqOpt)|] |> fun x -> Script.Of x
 
   script.RunAll() |> ignore
   refScript.RunAll() |> ignore
