@@ -42,8 +42,10 @@ Setting up on Ubuntu
 * ```sudo apt-get install maven```
 * Follow the [instructions](http://fsharp.org/use/linux/) on [fsharp.org](http://fsharp.org)
 
-Running the microbenchmarks via a console on Linux o via a Powershell console on Windows.
-------------------------------------------------------------------------------------------------------------
+Running the microbenchmarks 
+---------------------------
+(via a console on Linux o via a Powershell console on Windows)
+
 * Compile all tests with ```make```
 * Clean with ```make clean```
 * Compile a specific suite with ```make {java, csharp, fsharp, scala}```
