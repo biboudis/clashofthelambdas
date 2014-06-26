@@ -16,21 +16,47 @@ function printLang (filename, lang) {
     printBenchOfLang(filename, lang,"sumSeqOpt")
     printBenchOfLang(filename, lang,"sumPar")
     printBenchOfLang(filename, lang,"sumParOpt") 
+
     printBenchOfLang(filename, lang,"sumOfSquaresBaseline")
     printBenchOfLang(filename, lang,"sumOfSquaresSeq")
     printBenchOfLang(filename, lang,"sumOfSquaresSeqOpt") 
     printBenchOfLang(filename, lang,"sumOfSquaresPar")
     printBenchOfLang(filename, lang,"sumOfSquaresParOpt")
+
     printBenchOfLang(filename, lang,"sumOfSquaresEvenBaseline")
     printBenchOfLang(filename, lang,"sumOfSquaresEvenSeq")
     printBenchOfLang(filename, lang,"sumOfSquaresEvenSeqOpt")
     printBenchOfLang(filename, lang,"sumOfSquaresEvenPar")
     printBenchOfLang(filename, lang,"sumOfSquaresEvenParOpt") 
+
     printBenchOfLang(filename, lang,"cartBaseline")
     printBenchOfLang(filename, lang,"cartSeq")
     printBenchOfLang(filename, lang,"cartSeqOpt")
     printBenchOfLang(filename, lang,"cartPar")   
     printBenchOfLang(filename, lang,"cartParOpt")
+
+    printBenchOfLang(filename, lang,"refBaseline")
+    printBenchOfLang(filename, lang,"refSeq")
+    printBenchOfLang(filename, lang,"refSeqOpt")
+    printBenchOfLang(filename, lang,"refPar")   
+    printBenchOfLang(filename, lang,"refParOpt")
+
+    if (lang == "scala") {
+	printBenchOfLang(filename, lang,"sumSeq_Strict")
+	printBenchOfLang(filename, lang,"sumPar_Strict")
+
+	printBenchOfLang(filename, lang,"sumOfSquaresSeq_Strict")
+	printBenchOfLang(filename, lang,"sumOfSquaresPar_Strict")
+
+	printBenchOfLang(filename, lang,"sumOfSquaresEvenSeq_Strict")
+	printBenchOfLang(filename, lang,"sumOfSquaresEvenPar_Strict")
+
+	printBenchOfLang(filename, lang,"cartSeq_Strict")
+	printBenchOfLang(filename, lang,"cartPar_Strict")
+
+	printBenchOfLang(filename, lang,"refSeq_Strict")
+	printBenchOfLang(filename, lang,"refPar_Strict")
+    }
 }
 
 BEGIN {
@@ -52,7 +78,7 @@ BEGIN {
     stats =  mean "," meanerr "," sdev
     results[FILENAME, lang, name] = stats
 }
-/^sum|^cart/ {
+/^sum|^cart|^ref/ {
     name = $1
     mean = $2
     meanerr = $3
