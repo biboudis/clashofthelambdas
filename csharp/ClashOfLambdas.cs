@@ -129,6 +129,7 @@ namespace benchmarks
                 Tuple.Create("cartSeqOpt",cartLinqOpt),
                 Tuple.Create("cartPar", parCartLinq),
 		Tuple.Create("cartParOpt", parCartLinqOpt)})
+          .WithHead()
 	      .RunAll();
 
 	    Script<int>.Of(new Tuple<String, Func<int>>[] {

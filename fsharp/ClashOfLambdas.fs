@@ -115,6 +115,7 @@ let main argv =
     ("refPar",  Func<int> parallelRefLinq);
     ("refParOpt",  Func<int> parallelRefLinqOpt)|] |> fun x -> Script.Of x
 
+  script.WithHead() |> ignore
   script.RunAll() |> ignore
   refScript.RunAll() |> ignore
   
