@@ -44,18 +44,23 @@ function printLang (filename, lang) {
     if (lang == "scala") {
 	printBenchOfLang(filename, lang,"sumSeq_Strict")
 	printBenchOfLang(filename, lang,"sumPar_Strict")
+	printBenchOfLang(filename, lang,"sumSpeedy")
 
 	printBenchOfLang(filename, lang,"sumOfSquaresSeq_Strict")
 	printBenchOfLang(filename, lang,"sumOfSquaresPar_Strict")
+	printBenchOfLang(filename, lang,"sumOfSquaresSpeedy")
 
 	printBenchOfLang(filename, lang,"sumOfSquaresEvenSeq_Strict")
 	printBenchOfLang(filename, lang,"sumOfSquaresEvenPar_Strict")
+	printBenchOfLang(filename, lang,"sumOfSquaresEvenSpeedy")
 
 	printBenchOfLang(filename, lang,"cartSeq_Strict")
 	printBenchOfLang(filename, lang,"cartPar_Strict")
+	printBenchOfLang(filename, lang,"cartParSpeedy")
 
 	printBenchOfLang(filename, lang,"refSeq_Strict")
 	printBenchOfLang(filename, lang,"refPar_Strict")
+	printBenchOfLang(filename, lang,"refSpeedy")
     }
 }
 
