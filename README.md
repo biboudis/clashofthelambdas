@@ -1,6 +1,6 @@
 Clash of the Lambdas
 ====================
-Microbenchmarking collection, functional APIs of the VM multiparadigm languages
+We are microbenchmarking functional collection APIs of the VM multiparadigm languages
 Java 8, Scala, C#, F# on Windows and on Linux.
 
 The results are discussed in our ICOOOLPS'14 workshop paper: 
@@ -70,4 +70,4 @@ Team
 
 **Footnotes:**
 
-1. A small utility that was factored out as a seperate project.
+1. A utility that was factored out as a seperate project.
