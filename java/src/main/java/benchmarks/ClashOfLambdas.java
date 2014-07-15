@@ -30,7 +30,7 @@ public class ClashOfLambdas {
 	refs = IntStream.range(0, N).mapToObj(n -> new ClashOfLambdas.Ref(n)).toArray(size -> new ClashOfLambdas.Ref[size]);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumBaseline() {
         long acc = 0;
 	for (int i =0 ; i < v.length ; i++) {
@@ -39,7 +39,7 @@ public class ClashOfLambdas {
 	return acc;
     }
        
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumOfSquaresBaseline() {
         long acc = 0;
 	for (int i =0 ; i < v.length ; i++) {
@@ -48,7 +48,7 @@ public class ClashOfLambdas {
 	return acc;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long cartBaseline() {
 	long cart = 0;
 	for (int d = 0 ; d < valuesHi.length ; d++) {
@@ -59,7 +59,7 @@ public class ClashOfLambdas {
         return cart;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumOfSquaresEvenBaseline() {
         long acc = 0;
 	for (int i =0 ; i < v.length ; i++) {
@@ -69,7 +69,7 @@ public class ClashOfLambdas {
 	return acc;
     }
     
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumSeq() {
         long sum
                 = LongStream.of(v)
@@ -77,7 +77,7 @@ public class ClashOfLambdas {
         return sum;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumPar() {
         long sum
                 = LongStream.of(v)
@@ -87,7 +87,7 @@ public class ClashOfLambdas {
         return sum;
     }
        
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumOfSquaresSeq() {
         long sum
                 = LongStream.of(v)
@@ -96,7 +96,7 @@ public class ClashOfLambdas {
         return sum;
     }
         
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumOfSquaresPar() {
         long sum
                 = LongStream.of(v)
@@ -106,7 +106,7 @@ public class ClashOfLambdas {
         return sum;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long cartSeq() {
         long cart
                 = LongStream.of(valuesHi)
@@ -115,7 +115,7 @@ public class ClashOfLambdas {
         return cart;
     }
         
-    @GenerateMicroBenchmark
+    @Benchmark
     public long cartPar() {
         long cart
                 = LongStream.of(valuesHi)
@@ -126,7 +126,7 @@ public class ClashOfLambdas {
         return cart;
     }
     
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumOfSquaresEvenSeq() {
         long sum = LongStream.of(v)
 	    .filter(x -> x % 2 == 0)
@@ -136,7 +136,7 @@ public class ClashOfLambdas {
         return sum;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long sumOfSquaresEvenPar() {
         long sum = LongStream.of(v)
 	    .parallel()
@@ -147,7 +147,7 @@ public class ClashOfLambdas {
         return sum;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long refBaseline() {
 	long count = 0;
 	for (int i = 0 ; i < refs.length ; i++) {
@@ -157,7 +157,7 @@ public class ClashOfLambdas {
         return count;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long refSeq() {
 	long length = Stream.of(refs)
 	    .filter(box -> box.num % 5 == 0)
@@ -167,7 +167,7 @@ public class ClashOfLambdas {
 	return length;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public long refPar() {
 	long length = Stream.of(refs)
 	    .parallel()

@@ -3,7 +3,7 @@ import scala.collection.optimizer._
 
 package benchmarks {
 
-  import org.openjdk.jmh.annotations.GenerateMicroBenchmark
+  import org.openjdk.jmh.annotations.Benchmark
   import org.openjdk.jmh.annotations.Scope
   import org.openjdk.jmh.annotations.Setup
   import org.openjdk.jmh.annotations.State
@@ -39,7 +39,7 @@ package benchmarks {
     // Benchmarks with Views (non-strict) //
     ////////////////////////////////////////
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumBaseline () : Long = {
       var i=0
       var sum=0L
@@ -50,7 +50,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresBaseline () : Long = {
       var i=0
       var sum=0L
@@ -61,7 +61,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenBaseline () : Long = {
       var i=0
       var sum=0L
@@ -73,7 +73,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartBaseline () : Long = {
       var d, dp=0
       var sum=0L
@@ -89,7 +89,7 @@ package benchmarks {
     }
 
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refBaseline () : Int = {
       var i=0
       var count=0
@@ -101,7 +101,7 @@ package benchmarks {
       count
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumSeq () : Long = {
       val sum : Long = v
 	.view
@@ -109,7 +109,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumPar () : Long = {
       val sum : Long = v
 	.par
@@ -118,7 +118,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresSeq () : Long = {
       val sum : Long = v
         .view
@@ -127,7 +127,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresPar () : Long = {
       val sum : Long = v
 	.par
@@ -137,7 +137,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartSeq () : Long = {
       val sum : Long = vHi
 	.view
@@ -146,7 +146,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartPar () : Long = {
       val sum : Long = vHi
 	.par
@@ -156,7 +156,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenSeq () : Long = {
       val res : Long = v
 	.view
@@ -166,7 +166,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenPar () : Long = {
       val res : Long = v
 	.par
@@ -177,7 +177,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumSeqOpt () : Long = {
       optimize {
 	val sum : Long = v
@@ -186,7 +186,7 @@ package benchmarks {
       }
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresSeqOpt () : Long = {
       optimize {
 	val sum : Long = v
@@ -196,7 +196,7 @@ package benchmarks {
       }
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartSeqOpt () : Long = {
       optimize {
 	val sum : Long = vHi
@@ -206,7 +206,7 @@ package benchmarks {
       }
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenSeqOpt () : Long = {
       optimize {
 	val res : Long = v
@@ -217,7 +217,7 @@ package benchmarks {
       }
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
@@ -228,7 +228,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
@@ -240,7 +240,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
@@ -252,21 +252,21 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenParOpt () : Long = {
       import scala.collection.par._
       import Scheduler.Implicits.global
       import scala.reflect.ClassTag // https://github.com/scala-blitz/scala-blitz/issues/34
 
       val res : Long = v
-	  .toPar
-	  .filter(x => x % 2 == 0)
-	  .map(x => x * x)
-	  .sum
-	res
+	.toPar
+	.filter(x => x % 2 == 0)
+	.map(x => x * x)
+	.sum
+      res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refSeq () : Int = {
       val res : Int = refs
 	.view
@@ -276,7 +276,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refPar () : Int = {
       val res : Int = refs
 	.par
@@ -287,7 +287,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refSeqOpt () : Int = {
       optimize {
 	val res : Int = refs
@@ -298,7 +298,7 @@ package benchmarks {
       }
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refParOpt () : Int = {
       import scala.collection.par._
       import Scheduler.Implicits.global
@@ -315,14 +315,14 @@ package benchmarks {
     ///////////////////////////////////////
     // Benchmarks without Views (strict) //
     ///////////////////////////////////////
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumSeq_Strict () : Long = {
       val sum : Long = v
 	.sum
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumPar_Strict () : Long = {
       val sum : Long = v
 	.par
@@ -330,15 +330,15 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresSeq_Strict () : Long = {
       val sum : Long = v
-      .map(d => d * d)
-      .sum
+	.map(d => d * d)
+	.sum
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresPar_Strict () : Long = {
       val sum : Long = v
 	.par
@@ -347,7 +347,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenSeq_Strict () : Long = {
       val res : Long = v
 	.filter(x => x % 2 == 0)
@@ -356,7 +356,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def sumOfSquaresEvenPar_Strict () : Long = {
       val res : Long = v
 	.par
@@ -366,7 +366,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartSeq_Strict () : Long = {
       val sum : Long = vHi
 	.flatMap(d => vLo.map (dp => dp * d))
@@ -374,7 +374,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def cartPar_Strict () : Long = {
       val sum : Long = vHi
 	.par
@@ -383,7 +383,7 @@ package benchmarks {
       sum
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refSeq_Strict () : Int = {
       val res : Int = refs
 	.filter(_.num % 5 == 0)
@@ -392,7 +392,7 @@ package benchmarks {
       res
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     def refPar_Strict () : Int = {
       val res : Int = refs
 	.par
