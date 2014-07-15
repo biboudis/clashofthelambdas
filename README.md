@@ -8,7 +8,7 @@ The results are discussed in our ICOOOLPS'14 workshop paper:
 > http://arxiv.org/abs/1406.6631
 
 To run the benchmarking suite as is, you will need a system with approximately
-769mb of free space for heap allocation. Regarding execution time, a run on a
+3GB of free space for heap allocation. Regarding execution time, a run on a
 single platform takes approximately 30-40 minutes on an Intel Core i5.
 
 * Java 8 (jvm / [jmh](http://openjdk.java.net/projects/code-tools/jmh/))
