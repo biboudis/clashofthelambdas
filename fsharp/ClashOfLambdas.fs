@@ -5,6 +5,7 @@ open System.Collections.Generic
 open System.Diagnostics
 open Nessos.LinqOptimizer.FSharp
 open Nessos.LinqOptimizer.Base
+open Nessos.Streams
 open LambdaMicrobenchmarking
 
 type Ref(num : int) =
@@ -82,6 +83,12 @@ let main argv =
   let parallelRefLinq () = refs.AsParallel().Where(fun (ref : Ref) -> ref.Num % 5 = 0).Where(fun (ref : Ref) -> ref.Num % 7 = 0).Count()
   let parallelRefLinqOpt = refs |> PQuery.ofSeq |> PQuery.filter(fun (ref : Ref) -> ref.Num % 5 = 0) |> PQuery.filter(fun (ref : Ref) -> ref.Num % 7 = 0) |> PQuery.length |> PQuery.compile
 
+  let sumStreams() = v |> Stream.ofArray |> Stream.sum
+  let sumSqStreams() = v |> Stream.ofArray |> Stream.map(fun x -> x * x) |> Stream.sum
+  let sumSqEvenStreams() = v |> Stream.ofArray |> Stream.filter (fun x -> x % 2L = 0L) |> Stream.map(fun x -> x * x) |> Stream.sum
+  let cartStreams() = vHi |> Stream.ofArray |> Stream.collect (fun x -> vLow |> Stream.ofArray |> Stream.map (fun y -> x * y) ) |> Stream.sum
+  let refStream () = refs |> Stream.ofArray |> Stream.filter (fun ref -> ref.Num % 5 = 0) |> Stream.filter (fun ref -> ref.Num % 7 = 0) |> Stream.length
+
   //////////////////////////
   // Benchmarks execution //
   //////////////////////////
@@ -115,8 +122,15 @@ let main argv =
     ("refPar",  Func<int> parallelRefLinq);
     ("refParOpt",  Func<int> parallelRefLinqOpt)|] |> fun x -> Script.Of x
 
+  let streamsScript = [|
+    ("sumStreams",  Func<int64> sumStreams);
+    ("sumSqStreams",  Func<int64> sumSqStreams);
+    ("sumSqEvenStreams", Func<int64> sumSqEvenStreams);
+    ("cartStreams",  Func<int64> cartStreams);|] |> fun x -> Script.Of x
+
   script.WithHead() |> ignore
   script.RunAll() |> ignore
   refScript.RunAll() |> ignore
+  streamsScript.RunAll() |> ignore
   
   0 

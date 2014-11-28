@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using Nessos.LinqOptimizer.Base;
 using Nessos.LinqOptimizer.CSharp;
+using Nessos.Streams.CSharp;
 using LambdaMicrobenchmarking;
 
 namespace benchmarks
@@ -105,6 +106,13 @@ namespace benchmarks
 	    Func<int> parRefLinq = () => refs.AsParallel().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
 	    Func<int> parRefLinqOpt = refs.AsParallelQueryExpr().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count().Compile();
 
+        Func<long> sumLinqStreams = () => v.AsStream().Sum();
+        Func<long> sumSqStreams = () => v.AsStream().Select(x => x * x).Sum();
+        Func<long> sumSqEvensStreams = () => v.AsStream().Where(x => x % 2 == 0).Select(x => x * x).Sum();
+        Func<long> cartStreams = () => vHi.AsStream().SelectMany(hi => vLow.AsStream().Select(lo => lo * hi)).Sum();
+        Func<long> refStreams = () => refs.AsStream().Where(box => box.Num % 5 == 0).Where(box => box.Num % 7 == 0).Count();
+
+
             //////////////////////////
             // Benchmarks execution //
             //////////////////////////
@@ -139,6 +147,14 @@ namespace benchmarks
 		Tuple.Create("refPar", parRefLinq),
 		Tuple.Create("refParOpt", parRefLinqOpt)})
 	      .RunAll();   
+
+                  Script<long>.Of(new Tuple<String, Func<long>>[] {
+        Tuple.Create("sumLinqStreams", sumLinqStreams),
+        Tuple.Create("sumSqStreams", sumSqStreams),
+        Tuple.Create("sumSqEvensStreams",sumSqEvensStreams),
+        Tuple.Create("cartStreams", cartStreams),
+        Tuple.Create("refStreams", refStreams)})
+            .RunAll();  
         }
     }
 }
