@@ -1,41 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Clash of the Lambdas : Microbenchmarking collections, via the functional APIs of Java 8, Scala, C#, F#." />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Clash of the Lambdas by biboudis</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Clash of the Lambdas</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>Clash of the Lambdas</h1>
+        <p>Microbenchmarking Stream APIs of Java 8, Scala, C#, F# and optimizing frameworks on Windows and Linux.</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/biboudis/clashofthelambdas">View on GitHub</a>
+        <p class="view"><a href="https://github.com/biboudis/clashofthelambdas">View the Project on GitHub <small>biboudis/clashofthelambdas</small></a></p>
 
-          <h1 id="project_title">Clash of the Lambdas</h1>
-          <h2 id="project_tagline">Microbenchmarking collections, via the functional APIs of Java 8, Scala, C#, F#.</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/biboudis/clashofthelambdas/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/biboudis/clashofthelambdas/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+        <ul>
+          <li><a href="https://github.com/biboudis/clashofthelambdas/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/biboudis/clashofthelambdas/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/biboudis/clashofthelambdas">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
         <h1>
-<a name="clash-of-the-lambdas" class="anchor" href="#clash-of-the-lambdas"><span class="octicon octicon-link"></span></a>Clash of the Lambdas</h1>
+<a id="clash-of-the-lambdas" class="anchor" href="#clash-of-the-lambdas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Clash of the Lambdas</h1>
 
-<p>We are microbenchmarking functional collection APIs of the VM multiparadigm languages
-Java 8, Scala, C#, F# on Windows and on Linux.</p>
+<p>Microbenchmarking Stream APIs of the VM-based, multiparadigm languages:
+Java 8, Scala, C#, F# and optimizing frameworks, on Windows and on Linux.</p>
 
 <p>The results are discussed in our ICOOOLPS'14 workshop paper: </p>
 
@@ -82,8 +79,10 @@ single platform takes approximately 30-40 minutes on an Intel Core i5.</p>
 </li>
 </ul>
 </li>
-</ul><h2>
-<a name="setting-up-on-windows" class="anchor" href="#setting-up-on-windows"><span class="octicon octicon-link"></span></a>Setting up on Windows</h2>
+</ul>
+
+<h2>
+<a id="setting-up-on-windows" class="anchor" href="#setting-up-on-windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up on Windows</h2>
 
 <ul>
 <li>Install <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">JDK8</a>. Create the <code>JAVA_HOME</code> env variable (for maven to work) and add to <code>Path</code> the <code>JAVA_HOME\bin</code> directory</li>
@@ -94,8 +93,10 @@ single platform takes approximately 30-40 minutes on an Intel Core i5.</p>
 <li>Install the C#, F# compilers (if you have Visual Studio 2013 you already have them)</li>
 <li>Update the paths in <code>Makefile</code>
 </li>
-</ul><h2>
-<a name="setting-up-on-ubuntu" class="anchor" href="#setting-up-on-ubuntu"><span class="octicon octicon-link"></span></a>Setting up on Ubuntu</h2>
+</ul>
+
+<h2>
+<a id="setting-up-on-ubuntu" class="anchor" href="#setting-up-on-ubuntu" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up on Ubuntu</h2>
 
 <ul>
 <li>Install/Extract <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">JDK8</a> and update PATH</li>
@@ -103,8 +104,10 @@ single platform takes approximately 30-40 minutes on an Intel Core i5.</p>
 <li><code>sudo apt-get install maven</code></li>
 <li>Follow the <a href="http://fsharp.org/use/linux/">instructions</a> on <a href="http://fsharp.org">fsharp.org</a>
 </li>
-</ul><h2>
-<a name="running-the-microbenchmarks-" class="anchor" href="#running-the-microbenchmarks-"><span class="octicon octicon-link"></span></a>Running the microbenchmarks </h2>
+</ul>
+
+<h2>
+<a id="running-the-microbenchmarks-" class="anchor" href="#running-the-microbenchmarks-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the microbenchmarks </h2>
 
 <p>(via a console on Linux o via a Powershell console on Windows)</p>
 
@@ -117,8 +120,10 @@ single platform takes approximately 30-40 minutes on an Intel Core i5.</p>
 </li>
 <li>Run microbenchmarks with <code>make bench-{java, csharp, fsharp, scala}</code> (e.g., <code>make
 bench-java</code>).</li>
-</ul><h2>
-<a name="processing-the-results" class="anchor" href="#processing-the-results"><span class="octicon octicon-link"></span></a>Processing the results</h2>
+</ul>
+
+<h2>
+<a id="processing-the-results" class="anchor" href="#processing-the-results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Processing the results</h2>
 
 <p>If you want to process the unified results we offer a gawk script for linux (that also makes use
 of the dos2unix command to convert windows result file encoding).</p>
@@ -131,8 +136,10 @@ results.{windows, linux}</code> (any filename), or use it with tee to view the r
 separated values are benchmark, mean, mean error, sdev) by running
 <code>./process results.linux results.windows &gt; results.processed</code> (make
 the script executable first).</li>
-</ul><h2>
-<a name="team" class="anchor" href="#team"><span class="octicon octicon-link"></span></a>Team</h2>
+</ul>
+
+<h2>
+<a id="team" class="anchor" href="#team" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team</h2>
 
 <p><a href="https://twitter.com/biboudis">@biboudis</a>, <a href="https://twitter.com/NickPalladinos">@NickPalladinos</a> and <a href="http://cgi.di.uoa.gr/%7Esmaragd/">Y. Smaragdakis</a></p>
 
@@ -142,17 +149,12 @@ the script executable first).</li>
 <li>A utility that was factored out as a seperate project.</li>
 </ol>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Clash of the Lambdas maintained by <a href="https://github.com/biboudis">biboudis</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/biboudis">biboudis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
-
   </body>
 </html>
