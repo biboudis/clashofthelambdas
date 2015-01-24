@@ -311,6 +311,43 @@ package benchmarks {
 	.seq.size // the `size` method is not defined on the `Par` wrapper 
       res
     }
+
+    // speedy tests
+    @GenerateMicroBenchmark
+    def sumSpeedy(): Long = {
+      import speed._
+      v.sum
+    }
+    @GenerateMicroBenchmark
+    def sumOfSquaresSpeedy(): Long = {
+      import speed._
+      v.map(d ⇒ d * d).sum
+    }
+    @GenerateMicroBenchmark
+    def cartSpeedy(): Long = {
+      import speed._
+      (for {
+        d ← vHi
+        dp ← vLo
+      } yield dp * d).sum
+    }
+    @GenerateMicroBenchmark
+    def sumOfSquaresEvenSpeedy(): Long = {
+      import speed._
+      v.filter(_ % 2 == 0)
+        .map(x ⇒ x * x)
+        .sum
+    }
+    @GenerateMicroBenchmark
+    def refSpeedy(): Int = {
+      import speed._
+      val res: Int = refs
+        .filter(_.num % 5 == 0)
+        .filter(_.num % 7 == 0)
+        .size
+      res
+    }
+
     
     ///////////////////////////////////////
     // Benchmarks without Views (strict) //
